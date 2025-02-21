@@ -1,0 +1,28 @@
+---           
+title: Km - Mile Dönüştürücü
+date: 2022-04-18 19:41:00 UTC
+updated: 2024-04-08 17:19:00 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<input type="text" id="uzunluk" placeholder="Kilometre uzunluğunu girin">
+<input type="button" value="Hesapla" id="hesapla">
+<script>
+/* MİL=0,621.X kilometre mil formülü*/
+function hesapla(){
+var sayi=document.getElementById("uzunluk").value;
+sayi=Number(sayi);
+var mil=0.621*sayi;
+
+document.getElementById("kmresult").innerHTML = (sayi+"km = "+mil.toFixed(2)+"mil 'dir.");
+}
+//hesaplama yapması için hesap butonunu seçiyoruz.
+var hesapBtn=document.getElementById("hesapla");
+//fonksiyonu olaya bağlıyoruz.
+hesapBtn.onclick=hesapla;
+</script>
+
+<div id="kmresult" class="kmresult">1km = 0.621 mil'dir</div>
+<br />1 Kilometre bin metreye eşdeğer uzunluk birimidir. 1Km ise 0.6214 mile eşittir. Km Mile dönüştürücü aracı ile daha kolay bir şekilde km mile dönüştürme işlemi yapabilirsiniz.
