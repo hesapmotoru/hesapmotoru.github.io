@@ -1,0 +1,60 @@
+---
+date: 2022-04-18
+title: Megabits Megabyte Çevirici
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<form method="post">
+<input type="text" name="mbps" id="mbps" placeholder="Mbps" autocomplete="off" />
+<input type="button" onClick="mbps2mbs()" class="button" value="Çevir"/>
+</form>
+<div id="byteresult" class="resultb">
+1 Mbps = 0.125 MB/s
+</div>
+<br />
+
+<script>
+mbps2mbs();function mbps2mbs()
+{
+var mbps = document.getElementById("mbps").value;
+if (isNumber(mbps))
+{
+var mbs = +((mbps / 8).toFixed(9));
+var htmltxt = mbps.toString() + " Mbps = "
+        + mbs.toString() + " MB/s";
+document.getElementById("byteresult").innerHTML = htmltxt;
+}
+else {
+document.getElementById("byteresult").innerHTML = "Lütfen bir sayı girin.";
+}
+return false;
+}
+function isNumber(n) {
+return !isNaN(parseFloat(n)) && isFinite(n);
+}
+window.onload=cck;
+</script>
+
+Günümüzde internet hızının kısaltılmışı olarak ifade edilen Megabits(Mbps)
+ingilizce açılımıyla Mega Bits Per Second yani 1 saniyede aktarılan veriyi
+belirtmektedir. Çoğu zaman Mbps ile MB karıştırılmaktadır. Fakat ikisi değer
+olarak birbirinden farklıdır ve 1 byte = 8 bit'e eşdeğerdir. Örneğin telefonda
+bulunan bir fotoğraf veya müziğin boyutu Megabyte veya MB olarak ifade edilir.
+İnternet hızları ise MB olarak değil Mbit(Mbits) veya Mbps olarak ifade edilir.
+Eğer hızınızın değerini MB olarak öğrenmek istiyorsanız hesaplama aracımızla
+öğrenebilirsiniz. Ya da kısaca kullanmakta olduğunuz Mbps cinsinden hızı 8'e
+bölerek sonuca ulaşabilirsiniz. Böyleklikle aslında bir nevi gerçek internet
+hızınızı bulmuş olursunuz. Örneğin 16Mbits lik bir internet hızıyla saniyede bir
+dosyanın 2MB lık bir kısmını indirebilirsiniz. Diğer bir tabirle 20MB'lık bir
+dosyayı 10 saniyede indiriyorsunuz demektir. Bu sonuçla hızınız ne kadar
+yüksekse büyük boyutlu dosyaları daha kısa sürede indireceğiniz anlamına
+gelmektedir. Özetle internet hızı tabiridinde kullanılan megabit ile dosya bıyutunda kullanılan megabyte aynı değildir. Fakat Megabit'i megabyte çevirdiğimiz takdirdi internettten indirme işlemi yaparken saniyede kaç megabyte dosya indirdiğimizi bulabiliriz.<br /><br />
+Örnek sonuçlar : <br />
+8 Mbps = 1 MB/s <br />
+16 Mbps = 2 MB/s <br />
+24 Mbps = 3 MB/s<br />
+35 Mbps = 4.375 MB/s <br />
+50 Mbps = 6.25 MB/s <br />
+100 Mbps = 12.5 MB/s
