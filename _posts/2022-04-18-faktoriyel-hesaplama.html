@@ -1,0 +1,27 @@
+---
+date: 2022-04-18
+title: Faktoriyel Hesaplama
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<button onclick = "fact1()"> Hesapla </button>
+<p id = "res"></p>
+<script>
+function fact(num) 
+{
+if (num == 0) {
+return 1;
+}
+else {
+return num * fact( num - 1 );
+}
+}
+function fact1()
+{
+var num = document.getElementById("number").value;
+var f = fact(num);
+document.getElementById("res").innerHTML= num + " sayısının faktöriyeli : " + f ;
+}
+</script>
