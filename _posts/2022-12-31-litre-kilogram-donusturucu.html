@@ -1,0 +1,88 @@
+---           
+title: Litre Kilogram Dönüştürücü
+date: 2022-12-31 21:00:00 UTC
+updated: 2024-04-08 17:15:16 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-calculator"></i><a name='more'></a> 
+<style>
+  select, input{width:150px;}
+  
+  </style>
+  <form id="banner" method="post" action="">
+
+        <select width="10" name="size" id="size" onchange="calculateAmount()">
+          <option value="0" disabled selected>--Ürün Seçiniz--</option>
+          <option value="922">Sıvı Yağ</option>
+		  <option value="918">Zeytin Yağı</option>
+          <option value="1032">Süt</option>
+		  <option value="1380">Bal</option>
+		   <option value="1000">Su</option>
+
+        </select> : Ürün
+     <br />
+	
+	      <br />
+      
+        <input width="10" type="number" id="points" name="points" step="1" min="1" max="499" value="5" onchange="calculateAmount()">
+     : Litre (Litre miktarını istediğiniz gibi ayarlayabilirsiniz)
+<br />    <br />
+    <span style="display:none">
+      <td>Gram</td>
+      <td><input width="10" name="tot_amount" id="tot_amount" type="text" readonly></td>
+    </span>
+	
+	
+	 
+      <input width="10" name="kilo" id="kilo" type="text" readonly>
+: Kilogram
+	
+   
+</form>
+  
+    <script>
+	
+		function calculateAmount() {
+
+  var selFrst = parseInt(document.getElementById("size").value);
+  var selScnd = parseInt(document.getElementById("points").value);
+
+  var tot_price;
+
+  if (selFrst == 922) {
+    tot_price = selFrst * selScnd;
+  } else if (selFrst == 918) {
+    tot_price = selFrst * selScnd;
+
+  } else if (selFrst == 1032) {
+    tot_price = selFrst * selScnd;
+
+  }else if (selFrst == 1380) {
+    tot_price = selFrst * selScnd;
+
+  }else if (selFrst == 1000) {
+    tot_price = selFrst * selScnd;
+
+  }
+
+  /*display the result*/
+
+  // gram document.getElementById("tot_amount").value = tot_price;
+  
+  document.getElementById("kilo").value = tot_price/1000;
+}
+	
+	
+		
+		
+    </script>
+<br />
+
+Litre kilogram dönüştürücü aracı ile sıvı ürünlerin kilogram karşılığı hesaplanabilmektedir. Özellikle son zamanlarda oldukça tartışılan ve kafa karıştıran konulardan bir tanesi de litre ve kilogram meselesi. Bilindiği gibi sıvı olan bir çok şeyin ağırlığı litre bazında hesaplanmakta ve satılmakta. Fakat insanlar litre ve kiloyu her üründe aynı, yani eşit ağırlıkta olduğunu sanmaktalar. Fakat litre ve kilogram aynı değildir. Çünkü litre birimi sıvıya göre özgül ağırlığı değişen bir birimdir. Yani su, süt, ve sıvı yağ, zeytin yağı ve balın litre bazındaki özgül ağırlığı birbirinden farklıdır. Örneğin 1 litre su 1000 gram, yani 1 kilograma denk gelmektedir, fakat 1 litre yağ 922 gram'a, 1 litre süt 1032 gr yani 1 kilo 32 grama eşittir, 1 litre bal ise 1380 grama eşittir.
+
+
+
+<i class="fa-solid fa-weight-scale"></i>

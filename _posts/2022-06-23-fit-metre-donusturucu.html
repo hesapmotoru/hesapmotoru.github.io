@@ -1,0 +1,32 @@
+---           
+title: Fit » Metre Dönüştürücü
+date: 2022-06-23 20:43:00 UTC
+updated: 2024-04-08 17:16:41 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-plane"></i><a name='more'></a>
+<p>
+  <label>Fit</label>
+  <input id="inputFeet" type="number" placeholder="Fit" oninput="LengthConverter(this.value)" onchange="LengthConverter(this.value)">
+* Kutuya girilen değer otomatik olarak metre cinsine dönüştürülür. Örneğin 60000</p>
+<p style="color:#007bff"><span id="outputMeters"></span> Metre</p>
+
+<script>
+function LengthConverter(valNum) {
+  document.getElementById("outputMeters").innerHTML= (valNum/3.2808).toFixed(1);;
+  //(valNum/3.2808).toFixed(1);
+}
+</script>
+
+Uçak yolculuklarında pilottan sıkça duyulan bu kadar fitteyiz(feet), şu kadar fitteyiz aslında bir uzunluk ölçü birimidir. <b>Fit (Feet) » Metre Dönüştürücü</b> aracı sayesinde aslında kaç metre yükseklikte olduğumuzu metre cinsinden öğrenebiliriz. 1 Fit (Feet) yaklaşık 0.3 metreye denk gelmektedir.
+<h2 style="font-size:20px">Örnek Dönüşümler</h2>
+1 Fit - 0.3 Metre<br />
+10 Fit - 3 Metre<br />
+100 Fit - 30.5 Metre<br />
+1000 Fit - 304.8 Metre<br />
+10000 Fit - 3048.0 Metre<br />
+
+

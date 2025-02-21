@@ -1,0 +1,40 @@
+---           
+title: Metrekare Alan Hesaplama
+date: 2024-04-09 10:33:00 UTC
+updated: 2024-12-22 18:01:52 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-house"></i><a name='more'></a>
+<label>En</label> <br />
+    <input type="number" id="kisa">
+<br />
+    <label>Boy</label> <br />
+    <input type="number" id="uzun">
+
+ <br />
+    <button id="btn">Hesapla</button>
+    <br />
+   
+    <div id="alan"></div>
+    
+    <script>
+        function Hesapla(){
+            var kk=document.getElementById("kisa").value;
+            var uk=document.getElementById("uzun").value;
+            kk=Number(kk);
+            uk=Number(uk);
+            var dAlan=kk*uk;
+           
+            
+            document.getElementById("alan").innerHTML="Sonuç : "+dAlan+" m²";
+        }
+        
+        var hspBtn=document.getElementById("btn");
+        btn.onclick=Hesapla;
+        
+    </script>
+
+<b>Metrekare (m²) Alan Hesaplama</b> aracının kullanım amacı alan hesaplamasıdır. Gündelik hayatta ise bir evin odasının kaç m² olduğunu hesaplamak için kullanılır.

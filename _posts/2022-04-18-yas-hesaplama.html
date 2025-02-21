@@ -1,0 +1,49 @@
+---           
+title: Yaş Hesaplama
+date: 2022-04-18 20:07:00 UTC
+updated: 2024-04-08 17:18:50 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-person"></i><a name='more'></a>
+
+<script>
+function ageCalculator() {
+    var userinput = document.getElementById("DOB").value;
+    var dob = new Date(userinput);
+    if(userinput==null || userinput=='') {
+      document.getElementById("message").innerHTML = "**Choose a date please!";  
+      return false; 
+    } else {
+    
+    //calculate month difference from current date in time
+    var month_diff = Date.now() - dob.getTime();
+    
+    //convert the calculated difference in date format
+    var age_dt = new Date(month_diff); 
+    
+    //extract year from date    
+    var year = age_dt.getUTCFullYear();
+    
+    //now calculate the age of the user
+    var age = Math.abs(year - 1970);
+    
+    //display the calculated age
+    return document.getElementById("result").innerHTML =  
+             "Şuan  " + age + " yaşındasınız. ";
+    }
+}
+</script>
+
+
+<b> Doğum Tarihinizi Girin: <input type=date id = DOB> </b>
+<span id = "message" style="color:red"> </span> <br><br>  
+
+<!-- Choose a date and enter in input field -->
+ <button type="submit" onclick = "ageCalculator()"> Hesapla </button>
+<h3 style="color:32A80F" id="result"></h3> 
+
+
+<p id="text" style="display:none">Kaç yaşındayım? yaş hesaplama aracı, kaç yaşında olduğunuzu saniye, dakika, saat, gün, ay ve yıl olarak öğrenebilmenizi sağlar.</p>

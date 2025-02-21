@@ -1,0 +1,54 @@
+---           
+title: Dönüm m² Dönüştürücü
+date: 2024-12-22 14:10:00 UTC
+updated: 2024-12-22 14:13:16 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-chart-area"></i><a name='more'></a>
+<!-- Kullanıcıdan Dönüm Sayısını Al -->
+    <label for="donum">Dönüm Sayısı:</label>
+    <input type="number" id="donum" placeholder="Dönüm sayısını girin" step="0.01">
+    <br><br>
+
+    <button onclick="calculateAreaInSquareMeters()">Hesapla</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+        function calculateAreaInSquareMeters() {
+            // Kullanıcıdan dönüm sayısını al
+            var donum = parseFloat(document.getElementById("donum").value);
+
+            // Girişin geçerli olup olmadığını kontrol et
+            if (isNaN(donum) || donum <= 0) {
+                document.getElementById("result").innerHTML = "Lütfen geçerli bir dönüm sayısı girin.";
+                return;}
+
+            // Dönüm sayısını metrekareye çevir
+            var metrekare = donum * 1000;
+
+            // Sonucu ekrana yazdır
+            document.getElementById("result").innerHTML = donum + " dönüm = " + metrekare + " m²";
+        }
+    </script>
+<br /><br />
+
+Eğer dönüm cinsinden verilen bir alanı metrekare (m²) cinsine çevirmek istiyorsanız, Örneğin 5 dönüm tarlam var, kaç metrekare eder diye düşünüyorsanız bu dönüştürücü/hesaplama aracını kullanabilirisiniz.
+<br /><br />
+Dönüm, genellikle tarım ve toprak ölçümleri ile ilgili bir alan ölçü birimidir. Bir dönüm, bir toprak parçasının alanını ifade etmek için kullanılır ve farklı ülkelerde değişik büyüklüklerde olabilir. Ancak, genellikle Türkiye'de kullanılan dönüm, belirli bir alana karşılık gelir.
+<br /><br />
+Türkiye'deki Dönüm Tanımı:<br />
+Türkiye'de 1 dönüm, 1000 metrekare (m²) olarak kabul edilir.
+<br /><br />
+Dönüm ile metrekare arasındaki dönüşüm oldukça basittir. Bir alanın büyüklüğünü dönüm cinsinden biliyorsanız, dönüm sayısını 1000 ile çarparak o alanın metrekare cinsinden değerini bulabilirsiniz.
+<br /><br />
+Örnek:<br />
+Eğer 3 dönüm bir alanınız varsa, bu alanın metrekare cinsinden karşılığı şu şekilde hesaplanır:<br />
+3  dönüm× 1000 = 3000  m²<br /><br />
+Kullanım Alanları:<br />
+- Tarım arazilerinin ölçülmesinde,<br />
+- Arazi alım-satım işlemlerinde,<br />
+- İnşaat projelerinin planlamasında dönüm birimi yaygın olarak kullanılır. 

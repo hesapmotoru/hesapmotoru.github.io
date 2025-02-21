@@ -1,0 +1,44 @@
+---           
+title: Vücut Kitle Endeksi
+date: 2022-06-17 20:23:00 UTC
+updated: 2024-04-08 17:16:51 UTC
+categories:
+  - Sağlık
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-child"></i><a name='more'></a>
+<script language="JavaScript" type="text/javascript">
+<!--
+function hesapla() {
+var kilo = document.KitleForm.kilo.value
+var boy = document.KitleForm.boy.value
+if(kilo > 0 && boy > 0){  
+var sonuc = kilo/(boy/100*boy/100)
+document.KitleForm.endeks.value = sonuc
+if(sonuc < 18.5){
+document.KitleForm.islemsonucu.value = "Zayıfsınız"
+}//www.bilisimogretmeni.com
+if(sonuc > 18.5 && sonuc < 25){
+document.KitleForm.islemsonucu.value = "Gayet Sağlıklı."
+}
+if(sonuc > 25){
+document.KitleForm.islemsonucu.value = "Şişmansınız."
+}
+}//www.bilisimogretmeni.com
+else{
+alert("Böyle kilo,boy olmaz tekrar dene")
+}
+}
+//-->
+</script>
+<form name="KitleForm">
+ <label for=""><input placeholder="kilonuz" type="text" name="kilo" size="10"> Kilo(kg)</label><br />
+ <label for=""><input placeholder="boyunuz" type="text" name="boy" size="10"> Boy(cm) Ör : 185</label><br />
+<input type="button" value="Kontrol Et" onClick="hesapla()"><br />
+ <label for=""><input type="text" name="endeks" size="10"> Vücut Kitle Endeksiniz</label><br />
+ <label for=""><input type="text" name="islemsonucu" size="10"> Sonuç</label><br />
+<input type="reset" value="Temizle" />
+</form>
+<br />
+VKİ, Vücut kitle endeksi hesaplama aracı vücut ağırlığının, uzunluğun metre cinsinden karesine bölerek hesaplama yapar ve bunun sonucunda hangi sınıflandırmada olduğunuz ortaya çıkar. Bir başka sağlık ile ilgili hesaplama aracımız olan <a href="/2022/12/gunluk-kalori-ihtiyaci-hesaplama.html" target="_blank">Günlük Kalori İhtiyacı hesaplama</a> aracımıza da bakabilirsiniz.

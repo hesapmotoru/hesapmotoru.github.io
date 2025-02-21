@@ -1,0 +1,39 @@
+---           
+title: Kaç Gün Kaldı
+date: 2024-12-22 11:03:00 UTC
+updated: 2024-12-22 11:05:19 UTC
+categories:
+  - Zaman
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-calendar-days"></i><a name='more'></a>
+<label for="hedef-tarih">Hedef Tarih Seçin :</label>
+    <input type="date" id="hedef-tarih">
+    <button onclick="hesapla()">Hesapla</button><br />
+    <div id="sonuc"></div>
+
+    <script>
+        function hesapla() {
+    var hedefTarih = new Date(document.getElementById("hedef-tarih").value);
+    var simdikiTarih = new Date();
+
+    var kalanZaman = hedefTarih - simdikiTarih;
+
+    var gun = Math.floor(kalanZaman / (1000 * 60 * 60 * 24));
+    var saat = Math.floor((kalanZaman % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var dakika = Math.floor((kalanZaman % (1000 * 60 * 60)) / (1000 * 60));
+    var saniye = Math.floor((kalanZaman % (1000 * 60)) / 1000);
+
+    var sonuc = document.getElementById("sonuc");
+    sonuc.innerHTML = "Kalan süre: " + gun + " gün, " + saat + " saat, " + dakika + " dakika ve " + saniye + " saniye.";
+}
+    </script>
+<br /><br />
+Bir tarihe kaç gün kaldığını hesaplamak, belirli bir olayı veya hedefi beklerken zamanın nasıl geçtiğini daha iyi anlamamıza yardımcı olabilir. Örneğin, bir tatil, doğum günü veya önemli bir etkinlik için geri sayım yapmak, bu süreci daha heyecan verici hale getirebilir.
+<br /><br />
+Bir belirli güne kaç gün kaldığını hesaplamak için, o günün tarihinden bugünün tarihini çıkartarak aradaki farkı bulabiliriz. Bu fark, gün sayısı olarak karşımıza çıkar. Eğer tarihleri doğru formatta girersek, bu hesaplama oldukça kolaydır.
+<br /><br />
+Bu tür hesaplamalar, genellikle takvimler veya çeşitli hesaplama araçları kullanılarak yapılır. Ayrıca, dijital platformlarda geri sayım yapan uygulamalar da bu hesaplamayı anında sağlar.
+<br /><br />
+Örneğin, bir etkinlik 5 gün sonra gerçekleşecekse, bu süreyi bilmek, hazırlıklara başlamak için önemli bir motivasyon kaynağı olabilir.

@@ -1,0 +1,48 @@
+---           
+title: Fazla Mesai Ücreti
+date: 2024-12-22 11:13:00 UTC
+updated: 2024-12-22 11:14:42 UTC
+categories:
+  - Finans
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-money-bill"></i><a name='more'></a>
+
+
+ <label for="grossSalary">Aylık Brüt Maaş (TL):</label>
+    <input type="number" id="grossSalary" placeholder="Aylık brüt maaşı girin" step="0.01">
+    <br><br>
+
+    <button onclick="calculateOvertimePay()">Fazla Mesai Ücretini Hesapla</button>
+    <h3 id="result"></h3>
+
+    <script>
+        function calculateOvertimePay() {
+            // Kullanıcıdan aylık brüt maaşı al
+            var grossSalary = parseFloat(document.getElementById("grossSalary").value);
+
+            // Girişin geçerli olup olmadığını kontrol et
+            if (isNaN(grossSalary) || grossSalary <= 0) {
+                document.getElementById("result").innerHTML = "Lütfen geçerli bir aylık brüt maaş girin.";
+                return;
+            }
+
+            // Aylık brüt maaşı 225'e bölerek saatlik ücreti hesapla
+            var hourlyRate = grossSalary / 225;
+
+            // Fazla mesai ücreti (1.5 katı)
+            var overtimeRate = hourlyRate * 1.5;
+
+            // Sonucu ekrana yazdır
+            document.getElementById("result").innerHTML = "Fazla Mesai Ücreti: " + overtimeRate.toFixed(2) + " TL/saat";
+        }
+    </script>
+<br />
+Fazla mesai, çalışanların normal çalışma saatlerinin dışında yaptığı iş süresini ifade eder ve genellikle yasal olarak ekstra ödeme gerektirir. Fazla mesai ücreti, çalışanın saatlik ücretinin belirli bir oranı ile hesaplanır. Çoğu ülkede fazla mesai ücreti, normal saatlik ücretin 1.5 katı veya daha yüksek bir oran ile ödenir.
+<br /><br />
+Fazla mesai ücreti hesaplamak için önce çalışan kişinin normal saatlik ücreti hesaplanır. Bu, aylık maaşın toplam çalışma saati ile bölünmesiyle bulunur. Ardından, fazla mesai saati sayısı ile saatlik ücretin 1.5 katı (veya uygulamanın gerektirdiği oran) çarpılarak fazla mesai ücreti bulunur.
+<br /><br />
+Fazla Mesai Ücreti Hesaplama Adımları:<br />
+1. Saatlik Ücret Hesaplama: Aylık brüt maaşı 225'e bölerek saatlik ücreti bulun.<br />
+2. Fazla Mesai Ücreti: Saatlik ücreti 1.5 ile çarparak fazla mesai ücretini hesaplayın.

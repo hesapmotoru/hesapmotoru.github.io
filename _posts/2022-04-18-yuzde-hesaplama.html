@@ -1,0 +1,104 @@
+---           
+title: Yüzde Hesaplama
+date: 2022-04-18 16:21:00 UTC
+updated: 2024-04-08 17:19:13 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa fa-percent"></i><a name='more'></a><div class="percent-calc-box">
+                                        <br />	
+  
+  
+  
+  
+                                        <label for="">
+                                            <span><i>*</i> İşlem    :   </span>
+                                            <select name="drpPercent" id="drpPercent">
+                                                <option value="A">A sayısının %B'si kaçtır?</option>
+                                                <option value="B">A sayısı B sayısının yüzde kaçıdır?</option>
+                                                <option value="C">A sayısından B sayısına değişim oranı yüzde kaçtır?</option>
+                                                <option value="D">A sayısı, %B kadar artırılırsa kaç olur?</option>
+                                                <option value="E">A sayısı, %B kadar azaltılırsa kaç olur?</option>
+                                            </select>
+                                        </label><br />
+                                        <label for="">
+                                            <span><i>*</i> A Sayısı:</span>
+                                            <input id="numberA" type="number" step="any">
+                                            <span>Örn. 1260,50</span>
+                                        </label><br /><div></div>
+                                        <label for="">
+                                            <span><i>*</i> B Sayısı:</span>
+                                            <input id="numberB" type="number" step="any">
+                                            <span>Örn. 110,75</span>
+                                        </label>
+                                        <div class="percent-calc-buttons">
+                                            <button type="submit" class="calc-button">HESAPLA</button>
+                                            <button type="reset" class="clear-button">TEMİZLE</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="result"></div>
+
+
+ <script type="text/javascript">
+
+
+        $(".calc-button").on("click", function () {
+            var isNumericA = $("#numberA").val() && $("#numberA").val() != 0;
+            var isNumericB = $("#numberB").val() && $("#numberB").val() != 0;
+            if (isNumericA && isNumericB) {
+                $("div#result").html("<div class=\"info-bar success\"> <span> Hesaplama işlemi başarıyla tamamlandı. </span> </div>"
+                    + "<div class=\"percent-calc-content\">"
+                    + "<h2 class=\"percent-title\"> HESAPLAMA SONUÇLARI</h2>"
+                    + "<div class=\"percent-calc-box\">"
+                    + "<span class=\"result-calc\">"
+                    + percentCalculationResult($("#drpPercent").val(), $("#numberA").val(), $("#numberB").val())
+                    + "</span></div></div>"
+                );
+                return false;
+            }
+            else if (!isNumericA)
+                $("div#result").html("<div class=\"info-bar error\"> <span> Lütfen sıfırdan farklı geçerli bir A sayısı giriniz. </span> </div>");
+            else if (!isNumericB)
+                $("div#result").html("<div class=\"info-bar error\"> <span> Lütfen sıfırdan farklı geçerli bir B sayısı giriniz. </span> </div>");
+        });
+
+        $(".clear-button").on("click", function () {
+            $("#numberA").val("");
+            $("#numberB").val("");
+        });
+
+        function percentCalculationResult(selected, numA, numB) {
+
+            var result = "";
+
+            switch (selected) {
+                case "A":
+                    result = numA + " Sayısının %" + numB + ": <strong>" + parseFloat((numA * numB / 100).toFixed(12)) + "</strong>";
+                    break;
+                case "B":
+                    result = numA + " Sayısı " + numB + " Sayısının: <strong>%" + parseFloat((numA / numB * 100).toFixed(12)) + "</strong>";
+                    break;
+                case "C":
+                    result = numA + " Sayısından " + numB + " Sayısına Değişim: <strong>%" + parseFloat((Math.abs(numB - numA) / numA * 100).toFixed(12)) + (numB - numA > 0 ? " artış" : numB - numA == 0 ? "" : " azalış") + "</strong>";
+                    break;
+                case "D":
+                    result = numA + " Sayısı %" + numB + " Artırıldığında: <strong>" + parseFloat((parseFloat(numA) + numA * numB / 100).toFixed(12)) + " olur </strong>";
+                    break;
+                case "E":
+                    result = numA + " Sayısı %" + numB + " Azaltıldığında: <strong>" + parseFloat((parseFloat(numA) - numA * numB / 100).toFixed(12)) + " olur </strong>";
+                    break;
+            }
+
+            return result;
+        }
+
+    </script>
+
+
+<br /><p id="text" style="display:none">Yüzde hesaplama aracı ile herhangi bir sayısının yüzdesini almak veya herhangi bir sayının diğer sayının yüzde kaçını oluşturduğunu hesaplamaya yarar.</p>
+
+
+

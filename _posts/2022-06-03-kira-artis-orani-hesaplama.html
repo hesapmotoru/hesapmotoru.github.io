@@ -1,0 +1,36 @@
+---           
+title: Kira Artış Oranı Hesaplama
+date: 2022-06-03 21:30:00 UTC
+updated: 2024-04-08 17:17:13 UTC
+categories:
+  - Finans
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-house"></i><a name='more'></a>
+
+<form name="genelForm" id="genelForm" method="post">
+<label for=""><input type="text" name="mucret" id="mucret" size="10" value="2500"/> TL Mevcut Kira (*Örnektir, mevcut kiranızı girin)</label><br />
+<label for=""><input type="text" name="ayuzde" id="ayuzde" size="10" value="39.33"/> TÜFE Kira Artış Oran Yüzdesi - *%39,33 Mayıs 2022 Tüik Verisi (Farklı bir sayı girebilirsiniz)</label><br />
+  <label for=""><input type="text" name="eucret" id="eucret" size="10"/> Yapılacak Olan Zam Miktarı</label> <br />
+<!--<input type="text" name="toplam" id="toplam" size="10"/> Yeni Kira Ücreti<br />-->
+Yeni Kira Ücreti : <span style="font-weight: bold;" id="sonuc"></span> <span>TL</span> 
+</form>
+<button onclick="kiraHesapla()">Hesapla</button>
+
+<script type="text/javascript">
+    function kiraHesapla() {
+    var mevcut_ucret = document.getElementById("mucret").value;
+    var artis_yuzde = document.getElementById("ayuzde").value;
+    var eklenecek_ucret = mevcut_ucret * artis_yuzde / 100;
+    var toplam = parseInt(mevcut_ucret) + parseInt(eklenecek_ucret);
+    document.genelForm.ayuzde.value = artis_yuzde; 
+    document.genelForm.eucret.value = eklenecek_ucret;
+   // document.genelForm.toplam.value = toplam; 
+    document.getElementById('sonuc').innerHTML=toplam;
+    <!--?-->
+    }
+    </script>
+<br /><br />
+<b>Kira artış oranı hesaplama aracı</b> ile kiraya o ayki Tüfe kira artış oranı üzerinden ne kadar zam yapılacağı öğrenilebilir. Kullanımı :  mevcut kira girilir, sonrasındaki Tüik'in açıkladığı aylık kira artış oranı veya belirlenen herhangi bir yüzdelik değer girilerek ne kadar artış olacağı ve bu artış ile birlikte yeni kira ücretinin ne kadar olacağı bulunur.
+<br /><br />

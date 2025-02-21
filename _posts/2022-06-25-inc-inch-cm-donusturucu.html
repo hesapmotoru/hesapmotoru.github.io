@@ -1,0 +1,38 @@
+---           
+title: İnç Inch » CM Dönüştürücü
+date: 2022-06-25 09:49:00 UTC
+updated: 2024-04-08 17:16:30 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:year/:month/:title.html
+---
+<i class="fa-solid fa-ruler"></i><a name='more'></a>
+<p>
+  <label>İnç</label>
+  <input id="inputInches" type="number" placeholder="inç" oninput="LengthConverter(this.value)" onchange="LengthConverter(this.value)">
+* Kutuya herhangi bir değer girin sonuç altta görüntülenir.</p>
+<p style="color:#007bff"><span id="outputcm"></span> CM</p>
+
+<script>
+function LengthConverter(valNum) {
+  document.getElementById("outputcm").innerHTML=(valNum/0.39370).toFixed(1);
+}
+</script>
+
+İnç ölçü birimi genellikle monitör, tv, akıllı telefon, tablet gibi ekranların ölçüsü için kullanılan bir ölçü birimidir. 1 inç = 2.54 santimetre'dir. İnç » CM (Santimetre) dönüştürücü aracı sayesinde ekranların inç olarak verilmiş ölçülerini hızlı bir şekilde CM'ye dönüştürebilirsiniz.
+
+<h2 style="font-size:20px">Örnek Dönüşümler</h2>
+1 inç = 2.5 CM <br />
+5 inç = 12.7 CM <br />
+4.7 inç = 11.9 CM <br />
+6 inç = 15.2 CM <br />
+7 inç = 17.8 CM <br />
+19 inç = 48.3 CM <br />
+25 inç = 63.5 CM <br />
+27 inç = 68.6 CM <br />
+40 inç =  101.6 CM <br />
+50 inç = 127 CM
+
+
+
