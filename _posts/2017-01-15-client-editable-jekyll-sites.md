@@ -4,7 +4,6 @@ title: Client editable Jekyll sites
 video_id: _iH8f5alzWA
 description: Have non-technical people update Jekyll sites
 categories:
-  - deployment
 resources:
   - name: Source code
     link: https://github.com/CloudCannon/creative-jekyll-theme/
