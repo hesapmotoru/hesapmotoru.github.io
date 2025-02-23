@@ -1,0 +1,55 @@
+---           
+title: Burç Hesaplama
+date: 2022-06-17 19:57:00 UTC
+updated: 2024-04-08 17:17:01 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:title
+---
+  <label for="birthdate">Doğum Tarihinizi Seçin:</label>
+    <input type="date" id="birthdate">
+    <br>
+    <button onclick="calculateSign()">Burcumu Öğren</button>
+    <h3 id="result"></h3>
+
+    <script>
+        function calculateSign() {
+            const date = new Date(document.getElementById("birthdate").value);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            let sign = "";
+
+            if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) sign = "Kova";
+            else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) sign = "Balık";
+            else if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) sign = "Koç";
+            else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) sign = "Boğa";
+            else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) sign = "İkizler";
+            else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) sign = "Yengeç";
+            else if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) sign = "Aslan";
+            else if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) sign = "Başak";
+            else if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) sign = "Terazi";
+            else if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) sign = "Akrep";
+            else if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) sign = "Yay";
+            else if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) sign = "Oğlak";
+
+            document.getElementById("result").textContent = `Burcunuz: ${sign}`;
+        }
+    </script>
+<br/><br/>
+Burçlar, kişiliğimiz, ilişkilerimiz ve hayatımız üzerindeki etkileriyle sıkça konuşulan bir konudur. Doğduğumuz tarih, hangi burca ait olduğumuzu belirler ve bu da kişisel özelliklerimizle ilgili ipuçları sunabilir.
+<br/><br/>
+Sitemizde sunduğumuz Burç Hesaplama Uygulaması sayesinde, doğum tarihinizi girerek kolayca burcunuzu öğrenebilirsiniz. Bu uygulama, kullanıcılara burçlarının ne olduğunu hızlı ve pratik bir şekilde öğrenme imkanı tanır.
+<br/><br/>
+Uygulamanın Özellikleri:<br/>
+Kullanıcı Dostu Arayüz: Kolay ve anlaşılır bir tasarıma sahip olan uygulamamız, her yaştan kullanıcıya hitap eder.<br/>
+Hızlı Hesaplama: Doğum tarihinizi girdikten sonra, sadece bir tıklama ile burcunuzu öğrenin.<br/>
+Eğlenceli ve Bilgilendirici: Burçlar hakkında bilgi edinmek ve bu bilgiler ışığında kendinizi daha iyi tanımak için harika bir fırsat.<br/>
+Nasıl Kullanılır?<br/>
+Doğum Tarihinizi Seçin: Uygulamanın takvim bölümünden doğum tarihinizi seçin.<br/>
+Butona Tıklayın: "Burcumu Öğren" butonuna tıklayarak burcunuzu hesaplayın.<br/>
+Sonucu Görüntüleyin: Sonuç alanında burcunuzun ne olduğunu öğrenin.<br/>
+Neden Burç Hesaplamak Önemli?<br/>
+Burç hesaplama, sadece eğlenceli bir aktivite değil, aynı zamanda kendimizi anlama yolunda bir adım atmamıza yardımcı olabilir. Burçlarımız, kişiliğimizin belirli yönlerini açığa çıkarabilir ve ilişkilerimizde nasıl davrandığımızı etkileyebilir.
+<br/><br/>
+Siz de burçlarınızı öğrenmek ve onlardan ilham almak için uygulamamızı hemen deneyin!
