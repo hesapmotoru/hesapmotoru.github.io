@@ -1,6 +1,4 @@
-- name: Tutorials
+- name: Anasayfa
   link: /
-- name: Videos
-  link: /videos/
-- name: FAQ
-  link: /faq/
+- name: İletişim
+  link: /iletisim
