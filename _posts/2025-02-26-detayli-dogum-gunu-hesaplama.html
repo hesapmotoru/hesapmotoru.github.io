@@ -1,0 +1,164 @@
+---           
+title: Detaylı Doğum Günü Hesaplama
+date: 2025-02-26 10:24:00 UTC
+updated: 2025-02-26 10:24:00 UTC
+categories:
+  - Zaman
+type: Document
+permalink: /:title
+---
+<label for="birthday">Doğum Tarihinizi Girin:</label>
+    <input type="date" id="birthday">
+    <button id="calculate">Hesapla</button>
+  
+    
+    <div id="results"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('calculate').addEventListener('click', function() {
+            const birthdayInput = document.getElementById('birthday').value;
+            if (!birthdayInput) {
+                alert('Lütfen bir doğum tarihi girin.');
+                return;
+            }
+
+            const birthday = new Date(birthdayInput);
+            const today = new Date();
+            const dayOfWeek = birthday.toLocaleString('tr-TR', { weekday: 'long' });
+            const ageDetails = calculateAge(birthday);
+            const nextBirthdayDetails = calculateNextBirthday(birthday);
+            const zodiacDetails = getZodiacSign(birthday);
+            const generationDetails = getGeneration(birthday);
+
+            const results = document.getElementById('results');
+            results.innerHTML = `
+                <div><strong>Doğduğunuz Gün:</strong> ${dayOfWeek}</div>
+                <div><strong>Yaşınız:</strong> ${ageDetails.years} yıl, ${ageDetails.months} ay, ${ageDetails.days} gün</div>
+                <div><strong>Burcunuz:</strong> ${zodiacDetails.sign} - ${zodiacDetails.description}</div>
+                <div><strong>Kuşağınız:</strong> ${generationDetails.name} - ${generationDetails.characteristics}</div>
+                <div><strong>Bir sonraki doğum gününüze kalan gün:</strong> ${nextBirthdayDetails.days} gün</div>
+                <div><strong>Hayatta kaldığınız süre:</strong> ${ageDetails.totalDays} gün, ${ageDetails.totalHours} saat, ${ageDetails.totalWeeks} hafta, ${ageDetails.totalMonths} ay, ${ageDetails.years} yıl</div>
+            `;
+            results.style.display = 'block'; // Sonuçları göster
+          
+        });
+
+    
+
+        function calculateAge(birthday) {
+            const today = new Date();
+            let age = today.getFullYear() - birthday.getFullYear();
+            const monthDiff = today.getMonth() - birthday.getMonth();
+            const dayDiff = today.getDate() - birthday.getDate();
+
+            if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                age--;
+            }
+
+            const years = age;
+            const months = (monthDiff + 12) % 12; // Toplam ayı hesaplarken düzeltme
+            const days = (dayDiff + (dayDiff < 0 ? new Date(today.getFullYear(), today.getMonth(), 0).getDate() : 0)) % new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            const totalDays = Math.floor((today - birthday) / (1000 * 60 * 60 * 24));
+            const totalMonths = (years * 12) + months;
+            const totalWeeks = Math.floor(totalDays / 7);
+            const totalHours = totalDays * 24;
+
+            return { years, months, days, totalDays, totalWeeks, totalHours, totalMonths };
+        }
+
+        function calculateNextBirthday(birthday) {
+            const today = new Date();
+            const nextBirthday = new Date(today.getFullYear(), birthday.getMonth(), birthday.getDate());
+            if (nextBirthday <= today) {
+                nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
+            }
+            const daysUntilBirthday = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+            return { days: daysUntilBirthday };
+        }
+
+        function getZodiacSign(birthday) {
+            const month = birthday.getMonth() + 1; // Ay 0-11 arası olduğu için 1 ekliyoruz
+            const day = birthday.getDate();
+            let sign = '';
+            let description = '';
+
+            if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) {
+                sign = 'Koç';
+                description = 'Cesur, lider ruhlu, girişken.';
+            } else if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) {
+                sign = 'Boğa';
+                description = 'Kararlı, sabırlı, pratik.';
+            } else if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) {
+                sign = 'İkizler';
+                description = 'Zeki, meraklı, uyumlu.';
+            } else if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) {
+                sign = 'Yengeç';
+                description = 'Duygusal, koruyucu, sezgisel.';
+            } else if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) {
+                sign = 'Aslan';
+                description = 'Cömert, cesur, lider.';
+            } else if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) {
+                sign = 'Başak';
+                description = 'Titiz, çalışkan, analitik.';
+            } else if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) {
+                sign = 'Terazi';
+                description = 'Dengeli, adil, estetik.';
+            } else if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) {
+                sign = 'Akrep';
+                description = 'Tutkulu, kararlı, derin.';
+            } else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
+                sign = 'Yay';
+                description = 'Macera sever, iyimser, özgür ruhlu.';
+            } else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
+                sign = 'Oğlak';
+                description = 'Disiplinli, kararlı, sorumlu.';
+            } else if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) {
+                sign = 'Kova';
+                description = 'Bağımsız, yenilikçi, insani.';
+            } else if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) {
+                sign = 'Balık';
+                description = 'Duyarlı, hayalperest, sezgisel.';
+            }
+
+            return { sign, description };
+        }
+
+        function getGeneration(birthday) {
+            const year = birthday.getFullYear();
+            let generation = {};
+            if (year >= 1981 && year <= 1996) {
+                generation = { name: 'Y Kuşağı', characteristics: 'Teknolojiye aşina, yenilikçi.' };
+            } else if (year >= 1965 && year <= 1980) {
+                generation = { name: 'X Kuşağı', characteristics: 'Bağımsız, çalışkan.' };
+            } else if (year >= 1997) {
+                generation = { name: 'Z Kuşağı', characteristics: 'Dijital yerlisi, sosyal medya bağımlısı.' };
+            } else {
+                generation = { name: 'Baby Boomer', characteristics: 'Geleneksel değerler, istikrarlı.' };
+            }
+            return generation;
+        }
+    </script>
+
+<br /><br />
+Doğum Günü Hesaplama Uygulaması<br />
+Bu uygulama, doğum tarihinizi girdiğinizde çeşitli bilgiler sunarak doğum gününüzü daha özel hale getirir. Aşağıdaki bilgileri elde edeceksiniz:<br /><br />
+
+Doğduğunuz Gün: Hangi gün doğduğunuzu öğrenin. Bu bilgi, doğduğunuz günün adını ve tarihini içerecek.<br /><br />
+
+Yaşınız: Tam olarak kaç yıl, ay ve gün yaşadığınızı hesaplayın. Bu sayede hayatınız boyunca ne kadar süre yaşadığınızı görebilirsiniz.<br /><br />
+
+Burcunuz ve Açıklaması: Doğduğunuz tarihe göre burcunuzu ve burcunuzun özelliklerini öğrenin. Her burcun kendine özgü karakteristikleri vardır.<br /><br />
+
+Kuşağınız: Doğum tarihiniz üzerinden hangi kuşakta (X, Y veya Z) yer aldığınızı ve bu kuşağın genel özelliklerini keşfedin. Kuşaklar, yaşadıkları dönemin etkileriyle şekillenir.<br /><br />
+
+Bir Sonraki Doğum Gününe Kalan Gün: Bir sonraki doğum gününüze ne kadar gün kaldığını öğrenin. Bu, kutlamalarınızı planlamak için harika bir bilgi.<br /><br />
+
+Hayatta Kaldığınız Süre: Doğduğunuz günden bugüne kadar geçen süreyi (gün, saat, hafta, ay ve yıl olarak) gösterir. Bu bilgi, yaşam sürenizi daha iyi anlamanızı sağlar.<br /><br />
+
+Kullanım Talimatları<br />
+Doğum Tarihi Girin: Uygulama arayüzünde bulunan tarih seçiciyi kullanarak doğum tarihinizi seçin.<br /><br />
+
+Hesapla Butonuna Tıklayın: Tarihi girdikten sonra "Hesapla" butonuna basarak sonuçları görün.<br /><br />
+
+Sonuçları İnceleyin: Hesaplamalar yapıldıktan sonra aşağıda gösterilen sonuçları inceleyin.<br /><br />
