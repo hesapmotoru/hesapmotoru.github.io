@@ -1,0 +1,86 @@
+---
+title: Kilogram Litre (kg lt) Dönüştürücü
+date: '2025-02-26 20:20:25 Europe/Istanbul'
+updated: '2025-02-26 20:20:25 Europe/Istanbul'
+categories:
+  - Dönüştürücü
+type: Document
+permalink: /:title
+---
+<label for="kg">Kilogram (kg):</label>
+    <input type="number" id="kg" placeholder="Kg değeri girin">
+    <br>
+    <label for="substance">Madde Seçin:</label>
+    <select id="substance" onchange="setDensity()">
+        <option value="1">Su (1 kg/L)</option>
+        <option value="0.92">Sıvı Yağ (0.92 kg/L)</option>
+        <option value="0.91">Zeytin Yağı (0.91 kg/L)</option>
+        <option value="1.03">Süt (1.03 kg/L)</option>
+        <option value="1.42">Bal (1.42 kg/L)</option>
+    </select>
+    <br>
+    <button onclick="convert()">Dönüştür</button>
+    <p id="result"></p>
+    
+    <script>
+        function setDensity() {
+            document.getElementById('density').value = document.getElementById('substance').value;
+        }
+        
+        function convert() {
+            let kg = parseFloat(document.getElementById('kg').value);
+            let density = parseFloat(document.getElementById('substance').value);
+            
+            if (!kg || density <= 0) {
+                document.getElementById('result').innerText = "Lütfen geçerli bir kg değeri girin.";
+                return;
+            }
+            
+            let liters = kg / density;
+            document.getElementById('result').innerText = `Sonuç: ${liters.toFixed(2)} L`;
+        }
+    </script>
+Kg'den litreye dönüşüm, yoğunluğu bilinen sıvılar için oldukça yaygın bir hesaplamadır. Farklı sıvıların yoğunlukları değiştiği için bu hesaplamada her sıvıya özel bir dönüşüm oranı kullanılır. Bu uygulama sayesinde belirli sıvılar için kilogram cinsinden girilen değerlerin litre karşılığı hesaplanabilir.<br/><br/>
+
+Uygulamanın Amacı<br/>
+Bu uygulama, kullanıcıların aşağıdaki sıvılar için kg'den litreye dönüşüm yapmasını sağlar:<br/><br/>
+
+Su (Yoğunluk: 1 kg/L)<br/><br/>
+
+Sıvı Yağ (Yoğunluk: 0.92 kg/L)<br/><br/>
+
+Zeytin Yağı (Yoğunluk: 0.91 kg/L)<br/><br/>
+
+Süt (Yoğunluk: 1.03 kg/L)<br/><br/>
+
+Bal (Yoğunluk: 1.42 kg/L)<br/><br/>
+
+Kullanım<br/><br/>
+
+Kullanıcı, kilogram cinsinden bir değer girer.<br/><br/>
+
+Dönüştürmek istediği sıvıyı seçer.<br/><br/>
+
+"Dönüştür" butonuna basarak sonucu alır.<br/><br/>
+
+Sonuç, litre cinsinden ekranda görüntülenir.<br/><br/>
+
+Teknik Detaylar<br/><br/>
+
+HTML kullanılarak kullanıcı arayüzü oluşturulmuştur.<br/><br/>
+
+JavaScript ile kg’den litreye dönüşüm hesaplanmaktadır.<br/><br/>
+
+Seçilen sıvıya göre yoğunluk değeri otomatik olarak belirlenmektedir.<br/><br/>
+
+Girilen değer geçerli değilse kullanıcıya uyarı mesajı gösterilmektedir.<br/><br/>
+
+Örnek Hesaplama<br/><br/>
+
+Eğer kullanıcı 2 kg bal için hesaplama yaparsa:<br/><br/>
+
+Yoğunluk: 1.42 kg/L<br/><br/>
+
+Litre: 2 / 1.42 = 1.41 L<br/><br/>
+
+Bu uygulama, özellikle mutfakta veya sıvı bazlı ticari işlemlerde kullanışlıdır. Kullanıcıların belirli sıvılar için doğru dönüşüm yapmasına yardımcı olur.
