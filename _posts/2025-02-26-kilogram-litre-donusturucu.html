@@ -8,38 +8,35 @@ type: Document
 permalink: /:title
 ---
 <label for="kg">Kilogram (kg):</label>
-    <input type="number" id="kg" placeholder="Kg değeri girin">
-    <br>
-    <label for="substance">Madde Seçin:</label>
-    <select id="substance" onchange="setDensity()">
-        <option value="1">Su (1 kg/L)</option>
-        <option value="0.92">Sıvı Yağ (0.92 kg/L)</option>
-        <option value="0.91">Zeytin Yağı (0.91 kg/L)</option>
-        <option value="1.03">Süt (1.03 kg/L)</option>
-        <option value="1.42">Bal (1.42 kg/L)</option>
-    </select>
-    <br>
-    <button onclick="convert()">Dönüştür</button>
-    <p id="result"></p>
-    
-    <script>
-        function setDensity() {
-            document.getElementById('density').value = document.getElementById('substance').value;
-        }
-        
-        function convert() {
-            let kg = parseFloat(document.getElementById('kg').value);
-            let density = parseFloat(document.getElementById('substance').value);
-            
-            if (!kg || density <= 0) {
-                document.getElementById('result').innerText = "Lütfen geçerli bir kg değeri girin.";
-                return;
-            }
-            
-            let liters = kg / density;
-            document.getElementById('result').innerText = `Sonuç: ${liters.toFixed(2)} L`;
-        }
-    </script>
+<input type="number" id="kg" placeholder="Kg değeri girin">
+<label for="substance">Madde Seçin:</label>
+<select id="substance" onchange="setDensity()">
+<option value="1">Su (1 kg/L)</option>
+<option value="0.92">Sıvı Yağ (0.92 kg/L)</option>
+<option value="0.91">Zeytin Yağı (0.91 kg/L)</option>
+<option value="1.03">Süt (1.03 kg/L)</option>
+<option value="1.42">Bal (1.42 kg/L)</option>
+</select>
+<br>
+<button onclick="convert()">Dönüştür</button>
+<p id="result"></p>
+
+<script>
+function setDensity() {
+document.getElementById('density').value = document.getElementById('substance').value;
+}
+function convert() {
+let kg = parseFloat(document.getElementById('kg').value);
+let density = parseFloat(document.getElementById('substance').value);
+if (!kg || density <= 0) {
+document.getElementById('result').innerText = "Lütfen geçerli bir kg değeri girin.";
+return;
+}
+let liters = kg / density;
+document.getElementById('result').innerText = `Sonuç: ${liters.toFixed(2)} L`;
+}
+</script>
+
 Kg'den litreye dönüşüm, yoğunluğu bilinen sıvılar için oldukça yaygın bir hesaplamadır. Farklı sıvıların yoğunlukları değiştiği için bu hesaplamada her sıvıya özel bir dönüşüm oranı kullanılır. Bu uygulama sayesinde belirli sıvılar için kilogram cinsinden girilen değerlerin litre karşılığı hesaplanabilir.<br/><br/>
 
 Uygulamanın Amacı<br/>
