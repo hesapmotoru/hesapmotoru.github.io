@@ -1,0 +1,101 @@
+---
+title: Araç Yakıt Tüketimi Hesaplama
+date: '2025-03-01 11:33:04 Europe/Istanbul'
+updated: '2025-02-01 11:33:04 Europe/Istanbul'
+categories:
+  - Finans
+type: Document
+permalink: /:title
+---
+<label>Gidilen Mesafe (km):</label>
+<input type="number" id="mesafe" placeholder="Örneğin: 500">
+<br>
+<label>Tüketilen Yakıt (litre):</label>
+<input type="number" id="yakıt" placeholder="Örneğin: 40">
+<br>
+<label>Yakıt Fiyatı (TL/Litre):</label>
+<input type="number" id="fiyat" placeholder="Örneğin: 35">
+<br>
+<button onclick="hesapla()">Hesapla</button>
+<h3 id="sonuc"></h3>
+    
+<script>
+function hesapla() {
+let mesafe = parseFloat(document.getElementById('mesafe').value);
+let yakıt = parseFloat(document.getElementById('yakıt').value);
+let fiyat = parseFloat(document.getElementById('fiyat').value);
+if (isNaN(mesafe) || isNaN(yakıt) || isNaN(fiyat) || mesafe <= 0 || yakıt <= 0 || fiyat <= 0) {
+document.getElementById('sonuc').innerHTML = "Lütfen geçerli değerler girin.";
+return;
+}
+let tuketim100km = (yakıt / mesafe) * 100;
+let tuketim1km = yakıt / mesafe;
+let maliyet1km = (yakıt * fiyat) / mesafe;
+let toplamMaliyet = yakıt * fiyat;
+document.getElementById('sonuc').innerHTML = `100 km başına tüketim: <b>${tuketim100km.toFixed(2)}</b> litre <br>
+1 km başına tüketim: <b>${tuketim1km.toFixed(2)}</b> litre <br>
+1 km başına maliyet: <b>${maliyet1km.toFixed(2)}</b> TL <br>
+Toplam Yakıt Maliyeti: <b>${toplamMaliyet.toFixed(2)}</b> TL`;
+}
+</script>
+Araç Yakıt Tüketimi Hesaplama Uygulaması<br />
+<br /><br />
+Günümüzde araç kullanıcıları yakıt tüketimlerini kontrol etmek ve maliyetlerini optimize etmek için çeşitli yöntemler kullanmaktadır. Bu nedenle, bir araç yakıt tüketimi hesaplama uygulaması, sürücülere önemli bilgiler sağlayarak yakıt kullanımını daha verimli hale getirmelerine yardımcı olabilir.
+<br /><br />
+Uygulamanın Amacı
+<br />
+Bu uygulama, kullanıcının belirttiği mesafe, tüketilen yakıt miktarı ve yakıt fiyatı verilerini kullanarak:
+<br />
+100 km başına tüketimi (L/100km)
+<br />
+1 km başına tüketimi (L/km)
+<br />
+1 km başına yakıt maliyetini (TL/km)
+<br />
+Toplam yakıt maliyetini (TL)
+<br />
+gibi değerleri hesaplamaktadır.
+<br />
+Kullanım Alanları
+<br />
+Bu hesaplama aracı, özellikle şu durumlarda kullanışlı olabilir:
+<br />
+Aracın yakıt tüketim verimliliğini analiz etmek
+<br />
+Farklı yakıt fiyatlarına göre maliyet hesaplaması yapmak
+<br />
+Uzun mesafeli yolculuklar için yakıt maliyetini önceden planlamak
+<br />
+Araç bakımına yönelik yakıt tüketimini optimize etmek
+<br />
+Uygulamanın Çalışma Mantığı
+<br />
+Kullanıcı, aşağıdaki üç temel bilgiyi girerek hesaplama yapabilir:
+<br />
+Gidilen mesafe (km): Aracın kat ettiği toplam mesafe.
+<br />
+Tüketilen yakıt (litre): Bu mesafe boyunca harcanan toplam yakıt miktarı.
+<br />
+Yakıt fiyatı (TL/litre): Güncel yakıt birim fiyatı.
+<br />
+Uygulama, bu verileri kullanarak aşağıdaki hesaplamaları gerçekleştirir:
+<br />
+100 km başına tüketim:
+<br />
+1 km başına tüketim:
+<br />
+1 km başına maliyet:
+<br />
+Toplam Yakıt Maliyeti:
+<br />
+Örnek Kullanım
+<br />
+Örneğin, bir sürücü 500 km yol kat etmiş, 40 litre yakıt tüketmiş ve yakıt fiyatı 35 TL/litre ise, aşağıdaki sonuçları elde eder:
+<br />
+100 km başına tüketim: 8.00 litre
+<br />
+1 km başına tüketim: 0.08 litre
+<br />
+1 km başına maliyet: 2.80 TL
+<br />
+Toplam yakıt maliyeti: 1400 TL
