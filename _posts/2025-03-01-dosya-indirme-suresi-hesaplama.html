@@ -1,0 +1,54 @@
+---
+title: Dosya İndirme Süresi Hesaplama
+date: '2025-03-01 11:33:04 Europe/Istanbul'
+updated: '2025-03-01 11:33:04 Europe/Istanbul'
+categories:
+  - Bilgisayar
+type: Document
+permalink: /:title
+---
+<label>Dosya Boyutu: </label>
+<input type="number" id="fileSize" placeholder="Örn: 100">
+<select id="unit">
+<option value="1">MB</option>
+<option value="1024">GB</option>
+<option value="1048576">TB</option>
+</select>
+<br>
+<label>İnternet Hızı (Mbps): </label>
+<input type="number" id="internetSpeed" placeholder="Örn: 10">
+<br>
+<button onclick="calculateDownloadTime()">Hesapla</button>
+<div class="result" id="result"></div>
+<script>
+function calculateDownloadTime() {
+let fileSize = parseFloat(document.getElementById('fileSize').value);
+let unit = parseFloat(document.getElementById('unit').value);
+let internetSpeed = parseFloat(document.getElementById('internetSpeed').value);
+if (isNaN(fileSize) || isNaN(internetSpeed) || fileSize <= 0 || internetSpeed <= 0) {
+document.getElementById('result').innerText = "Lütfen geçerli değerler girin!";
+return;
+}
+let fileSizeMB = fileSize * unit; // Seçilen birime göre MB'ye çevirme
+let downloadTimeSeconds = (fileSizeMB * 8) / internetSpeed; // MB'yi Mbps'ye çevirerek süreyi hesapla
+let minutes = Math.floor(downloadTimeSeconds / 60);
+let seconds = Math.round(downloadTimeSeconds % 60);
+let resultText = `Tahmini indirme süresi: ${minutes} dakika ${seconds} saniye`;
+document.getElementById('result').innerText = resultText;
+}
+</script>
+<br /><br />
+Dosya İndirme Süresi Hesaplayıcı<br />
+Bu araç, belirttiğiniz dosya boyutu ve internet hızına göre tahmini indirme süresini hesaplar.
+<br /><br />
+Özellikler:<br />
+✔ Dosya boyutunu MB, GB veya TB cinsinden seçebilirsiniz.<br />
+✔ İnternet hızınızı Mbps cinsinden girebilirsiniz.<br />
+✔ Hızlı hesaplama ile dakikalar ve saniyeler içinde sonuç alın.<br />
+<br /><br />
+Nasıl Kullanılır?<br />
+Dosya boyutunu girin ve MB, GB veya TB birimlerinden birini seçin.<br />
+İnternet hızınızı Mbps cinsinden girin.<br />
+Hesapla butonuna tıklayın.<br />
+Tahmini indirme süresi dakika ve saniye olarak görüntülenecektir.<br />
+Uygulamamız, dosya boyutunu MB cinsine dönüştürerek ve internet hızına göre süreyi hesaplayarak kesin tahmini sunar. 
