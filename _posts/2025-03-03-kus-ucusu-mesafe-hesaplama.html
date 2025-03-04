@@ -1,0 +1,103 @@
+---
+title: Kuş Uçuşu Mesafe Hesaplama
+date: '2025-03-03 21:12:04 Europe/Istanbul'
+updated: '2025-03-03 21:12:04 Europe/Istanbul'
+categories:
+  - Matematik
+type: Document
+permalink: /:title
+---
+<script>
+const cities = {
+"Adana": { lat: 37.0, lon: 35.3213 }, "Adıyaman": { lat: 37.7648, lon: 38.2786 },
+"Afyonkarahisar": { lat: 38.7569, lon: 30.5433 }, "Ağrı": { lat: 39.7191, lon: 43.0519 },
+"Aksaray": { lat: 38.4192, lon: 34.0242 }, "Amasya": { lat: 40.6499, lon: 35.8353 },
+"Ankara": { lat: 39.9208, lon: 32.8541 }, "Antalya": { lat: 36.8969, lon: 30.7133 },
+"Artvin": { lat: 41.1828, lon: 41.8183 }, "Aydın": { lat: 37.8450, lon: 27.8396 },
+"Balıkesir": { lat: 39.6484, lon: 27.8826 }, "Bilecik": { lat: 40.1500, lon: 29.9833 },
+"Bingöl": { lat: 38.8853, lon: 40.4983 }, "Bitlis": { lat: 38.4015, lon: 42.1078 },
+"Bolu": { lat: 40.7395, lon: 31.6112 }, "Burdur": { lat: 37.7167, lon: 30.2833 },
+"Bursa": { lat: 40.1826, lon: 29.0669 }, "Çanakkale": { lat: 40.1467, lon: 26.4086 },
+"Çankırı": { lat: 40.6013, lon: 33.6134 }, "Çorum": { lat: 40.5710, lon: 34.9531 },
+"Denizli": { lat: 37.4663, lon: 29.0861 }, "Diyarbakır": { lat: 37.9093, lon: 40.2350 },
+"Edirne": { lat: 41.6764, lon: 26.5555 }, "Elazığ": { lat: 38.6745, lon: 39.2268 },
+"Erzincan": { lat: 39.7543, lon: 39.2395 }, "Erzurum": { lat: 39.9334, lon: 41.2764 },
+"Eskişehir": { lat: 39.7766, lon: 30.5206 }, "Gaziantep": { lat: 37.0662, lon: 37.3833 },
+"Giresun": { lat: 40.9126, lon: 38.3924 }, "Gümüşhane": { lat: 40.4655, lon: 39.4695 },
+"Hakkari": { lat: 37.5734, lon: 43.7314 }, "Hatay": { lat: 36.3620, lon: 36.4192 },
+"Iğdır": { lat: 40.4574, lon: 44.0016 }, "Isparta": { lat: 37.7495, lon: 30.5553 },
+"İstanbul": { lat: 41.0082, lon: 28.9784 }, "İzmir": { lat: 38.4192, lon: 27.1287 },
+"Kars": { lat: 40.6055, lon: 40.6075 }, "Kastamonu": { lat: 41.3888, lon: 33.7820 },
+"Kayseri": { lat: 38.7315, lon: 35.4784 }, "Kırıkkale": { lat: 39.8451, lon: 33.5153 },
+"Kırklareli": { lat: 41.7352, lon: 27.2262 }, "Kırşehir": { lat: 39.1445, lon: 34.1656 },
+"Konya": { lat: 37.8734, lon: 32.4846 }, "Kütahya": { lat: 39.4160, lon: 29.9781 },
+"Malatya": { lat: 38.4192, lon: 38.3094 }, "Manisa": { lat: 38.6288, lon: 27.4289 },
+"Mardin": { lat: 37.3185, lon: 40.7438 }, "Mersin": { lat: 36.8030, lon: 34.6338 },
+"Muğla": { lat: 37.2153, lon: 28.3634 }, "Muş": { lat: 38.9472, lon: 41.7308 },
+"Nevşehir": { lat: 38.6243, lon: 34.6851 }, "Niğde": { lat: 37.9647, lon: 34.6966 },
+"Ordu": { lat: 40.9833, lon: 37.8662 }, "Osmaniye": { lat: 37.0747, lon: 36.2497 },
+"Rize": { lat: 41.0201, lon: 40.6070 }, "Sakarya": { lat: 40.7074, lon: 30.6655 },
+"Samsun": { lat: 41.2865, lon: 36.33 }, "Siirt": { lat: 37.9330, lon: 41.9461 },
+"Sinop": { lat: 42.0067, lon: 35.1544 }, "Sivas": { lat: 39.7483, lon: 37.0172 },
+"Tekirdağ": { lat: 40.9786, lon: 27.5106 }, "Tokat": { lat: 40.3141, lon: 36.5582 },
+"Trabzon": { lat: 41.0034, lon: 39.7333 }, "Tunceli": { lat: 39.0583, lon: 39.5252 },
+"Şanlıurfa": { lat: 37.1612, lon: 38.7969 }, "Uşak": { lat: 38.6820, lon: 29.4082 },
+"Van": { lat: 38.4192, lon: 43.3663 }, "Yalova": { lat: 40.6323, lon: 29.2703 },
+"Yozgat": { lat: 39.8202, lon: 34.8102 }, "Zonguldak": { lat: 41.4543, lon: 31.7986 }
+};
+function toRadians(degrees) {
+return degrees * (Math.PI / 180);
+}
+function calculateHaversine(lat1, lon1, lat2, lon2) {
+const R = 6371;
+const dLat = toRadians(lat2 - lat1);
+const dLon = toRadians(lon2 - lon1);
+const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+Math.sin(dLon / 2) * Math.sin(dLon / 2);
+return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+function calculateDistance() {
+let city1 = document.getElementById("city1").value;
+let city2 = document.getElementById("city2").value;
+if (city1 === city2) {
+document.getElementById("result").innerText = "İki konum aynı! Mesafe: 0 km";
+return;
+}
+let distance = calculateHaversine(cities[city1].lat, cities[city1].lon, cities[city2].lat, cities[city2].lon).toFixed(2);
+document.getElementById("result").innerText = `Kuş uçuşu mesafe: ${distance} km`;
+}
+window.onload = function() {
+let selectElements = document.querySelectorAll("select");
+selectElements.forEach(select => {
+for (let city in cities) {
+let option = document.createElement("option");
+option.value = city;
+option.textContent = city;
+select.appendChild(option);
+}
+});
+}
+</script>
+<label for="city1">Başlangıç Şehri:</label>
+<select id="city1"></select>
+<label for="city2">Varış Şehri:</label>
+<select id="city2"></select>
+<button onclick="calculateDistance()">Mesafeyi Hesapla</button>
+<p id="result"></p>
+<br />
+Kuş Uçuşu Mesafe Hesaplama Uygulaması<br />
+Türkiye'nin güzelliklerini keşfetmek için yola çıkarken, şehirler arasındaki mesafeleri bilmek önemlidir. Kuş uçuşu mesafe hesaplama uygulamamız, iki şehir arasındaki doğrudan mesafeyi hızlı ve pratik bir şekilde öğrenmenizi sağlar.
+<br /><br />
+Uygulamanın Özellikleri:<br />
+Hızlı ve Kolay Kullanım: Kullanıcı dostu arayüzü sayesinde sadece başlangıç ve varış şehirlerini seçerek mesafeyi anında hesaplayabilirsiniz.<br />
+Geniş Şehir Veritabanı: Türkiye'deki 81 il için coğrafi koordinat bilgileri ile desteklenen uygulamamız, her şehir arasında doğru mesafeyi sunar.<br />
+Kuş Uçuşu Mesafesi: Uygulama, karayolu mesafesinden farklı olarak, kuş uçuşu mesafesini hesaplar; bu da hava yolu seyahatleri planlarken faydalıdır.<br /><br />
+Nasıl Kullanılır?
+Başlangıç Şehrini Seçin: Açılır menüden gitmek istediğiniz şehri seçin.<br />
+Varış Şehrini Seçin: Diğer açılır menüden varış noktanızı belirleyin.<br />
+Mesafeyi Hesapla: "Mesafeyi Hesapla" butonuna tıklayın ve şehirler arasındaki kuş uçuşu mesafesini öğrenin!<br /><br />
+Uygulamanın Avantajları<br />
+Kuş uçuşu mesafe hesaplama uygulamamız, seyahat planlarınızı kolaylaştırmanın yanı sıra, gezi rotalarınızı optimize etmenize de yardımcı olur. İster tatil için ister iş seyahati için yola çıkıyor olun, doğru mesafeyi bilmek size zaman ve maliyet tasarrufu sağlayabilir.
+<br />
+Hızlı mesafe hesaplamaları ile seyahatlerinizi daha iyi planlayabilir, hangi şehirler arasında daha kısa mesafelerle ulaşım sağlayabileceğinizi keşfedebilirsiniz.
