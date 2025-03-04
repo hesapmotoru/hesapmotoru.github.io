@@ -1,0 +1,126 @@
+---
+title: Para Değer Kaybı Hesaplama
+date: '2025-03-03 22:12:04 Europe/Istanbul'
+updated: '2025-03-03 22:12:04 Europe/Istanbul'
+categories:
+  - Finans
+type: Document
+permalink: /:title
+---
+<label for="salary">Başlangıç Ücreti/Maaş:</label><br />
+<input type="number" id="salary" placeholder="Ücret/Maaş giriniz" required><br />
+<h3>12 Aylık Enflasyon Oranları (%) (Örnek olarak herhangi bir değer girebilirsiniz.)</h3>
+<div id="inflationInputs"></div><br />
+<button onclick="calculatePurchasingPower()">Hesapla</button>
+<h3>Sonuçlar</h3>
+<div id="results" class="result-box"></div>
+<h3>Toplam Enflasyon Etkisi</h3>
+<div class="result-box">
+<p id="totalInflation6"></p>
+<p id="totalInflation12"></p>
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+let container = document.getElementById("inflationInputs");
+for (let i = 1; i <= 12; i++) {
+let label = document.createElement("label");
+label.textContent = i + ". Ay:";
+let input = document.createElement("input");
+input.type = "number";
+input.id = "inflation" + i;
+input.placeholder = "Enflasyon (%)";
+container.appendChild(label);
+container.appendChild(input);
+}
+});
+function calculatePurchasingPower() {
+let initialSalary = parseFloat(document.getElementById("salary").value);
+let salary = initialSalary;
+let resultsList = document.getElementById("results");
+let totalInflation6 = 0;
+let totalInflation12 = 0;
+let valueLoss6 = 0;
+let valueLoss12 = 0;
+let adjustedSalary6 = initialSalary;
+let adjustedSalary12 = initialSalary;
+resultsList.innerHTML = "";
+if (isNaN(initialSalary) || initialSalary <= 0) {
+alert("Lütfen geçerli bir maaş girin.");
+return;
+}
+for (let i = 1; i <= 12; i++) {
+let inflationRate = parseFloat(document.getElementById("inflation" + i).value);
+if (isNaN(inflationRate)) {
+alert(i + ". ay için geçerli bir enflasyon oranı girin.");
+return;
+}
+let previousSalary = salary;
+salary /= (1 + inflationRate / 100);
+let adjustedSalary = initialSalary * (1 + inflationRate / 100);
+let valueLoss = previousSalary - salary;
+let listItem = document.createElement("div");
+listItem.className = "result-item";
+listItem.textContent = `${i}. Ay: ${salary.toFixed(2)} TL | Başlangıç değerinde olması için: ${adjustedSalary.toFixed(2)} TL | Alım Gücü Kaybı: ${valueLoss.toFixed(2)} TL`;
+resultsList.appendChild(listItem);
+if (i > 6) {
+totalInflation6 += inflationRate;
+valueLoss6 += valueLoss;
+adjustedSalary6 *= (1 + inflationRate / 100);
+}
+totalInflation12 += inflationRate;
+valueLoss12 += valueLoss;
+adjustedSalary12 *= (1 + inflationRate / 100);
+}
+document.getElementById("totalInflation6").textContent = `Son 6 Aylık Toplam Enflasyon: %${totalInflation6.toFixed(2)} | Alım Gücü Kaybı: ${valueLoss6.toFixed(2)} TL | Olması Gereken Ücret: ${adjustedSalary6.toFixed(2)} TL`;
+document.getElementById("totalInflation12").textContent = `Son 12 Aylık Toplam Enflasyon: %${totalInflation12.toFixed(2)} | Alım Gücü Kaybı: ${valueLoss12.toFixed(2)} TL | Olması Gereken Ücret: ${adjustedSalary12.toFixed(2)} TL`;
+}
+</script>
+<br />
+Para Değer Kaybı Hesaplama | Maaşınızın Enflasyon Karşısındaki Gücünü Öğrenin<br />
+Enflasyon Karşısında Maaşınızın Gerçek Değerini Koruyor Musunuz?<br />
+Ekonomik dalgalanmalar ve enflasyon oranlarındaki artış, bireylerin maaşlarının alım gücünü doğrudan etkileyen en önemli faktörlerden biridir. Zaman içinde paranızın değer kaybedip kaybetmediğini anlamak için enflasyon hesaplaması yapmak kritik bir adımdır. Para Değer Kaybı Hesaplama aracı, maaşınızın yıllık bazda ne kadar değer kaybettiğini, enflasyona karşı nasıl şekillendiğini ve gerçek alım gücünüzün ne durumda olduğunu analiz etmenize yardımcı olur.
+<br /><br />
+Para Değer Kaybı Nedir?<br />
+Para değer kaybı, enflasyon nedeniyle paranın zaman içinde satın alma gücünü kaybetmesi anlamına gelir. Örneğin, geçen yıl 100 TL ile satın alabildiğiniz bir ürün, enflasyonun yükselmesiyle birlikte bugün 120 TL olabilir. Bu durumda, maaşınız aynı kalsa bile satın alma gücünüz düşer.
+<br /><br />
+Ekonomik istikrarsızlık, döviz kuru değişimleri ve enflasyon artışı, bireylerin maaşlarının gerçekte ne kadar değer kaybettiğini anlamalarını zorlaştırır. Para Değer Kaybı Hesaplama aracı, bu belirsizliği ortadan kaldırarak maaşınızın hangi oranda değer kaybettiğini ve güncel ekonomik duruma göre ne kadar olması gerektiğini ortaya koyar.
+<br /><br />
+Para Değer Kaybı Hesaplama Aracı ile Neler Yapabilirsiniz?<br />
+✅ Enflasyon Verilerine Göre Maaşınızın Alım Gücü Kaybını Öğrenin: Manuel olarak 12 aylık enflasyon oranlarını girerek maaşınızın ne kadar değer kaybettiğini görebilirsiniz.
+<br />
+✅ Maaşınızın Gerçek Değerini Görün: Maaşınızın günümüz koşullarında eski alım gücüne ulaşabilmesi için ne kadar olması gerektiğini hesaplayabilirsiniz.
+<br />
+✅ Son 6 ve 12 Aylık Enflasyon Toplamını Öğrenin: Girilen verilere göre son 6 ve 12 aylık enflasyonun toplam etkisini analiz edebilirsiniz.
+<br />
+✅ Alım Gücü Kaybınızı Parasal Olarak Görselleştirin: Maaşınızın yıllık bazda ne kadar değer kaybettiğini TL cinsinden net olarak hesaplayabilirsiniz.
+<br />
+✅ Asgari Ücret ile Karşılaştırma Yapın: Güncel asgari ücret verilerine göre maaşınızın enflasyon karşısındaki duruşunu değerlendirebilirsiniz.
+<br />
+Maaşınız Enflasyona Karşı Ne Kadar Değer Kaybetti?<br />
+Aşağıda basit bir örnekle hesaplama yapalım:
+<br /><br />
+Başlangıç Maaşı: 20.000 TL<br />
+Aylık Enflasyon Oranları (%): 3, 2, 2.5, 4, 3.5, 3, 4, 2.8, 3.2, 2.7, 3.1, 3.3<br />
+12 Ay Sonunda Maaşın Gerçek Değeri: 16.500 TL (Yaklaşık)<br />
+Olması Gereken Maaş: 24.000 TL (Enflasyon oranına uyum sağlayabilmesi için)<br />
+Son 6 Aylık Alım Gücü Kaybı: 3.000 TL<br />
+Son 12 Aylık Alım Gücü Kaybı: 7.500 TL<br />
+Bu veriler ışığında, maaşınızın reel olarak azaldığını ve güncel ekonomik koşullara uyum sağlayabilmesi için zam almanız gerektiğini görebilirsiniz.
+<br /><br />
+Enflasyon ve Alım Gücü Arasındaki İlişki<br />
+Enflasyon, bir ülkenin genel fiyat seviyesindeki sürekli artışı ifade eder. Eğer maaşınız enflasyon oranında artmazsa, zaman içinde aynı ürün ve hizmetlere erişiminiz zorlaşır. Bu nedenle, özellikle uzun vadeli finansal planlamalar yaparken enflasyon oranlarına göre maaş düzenlemeleri büyük önem taşır.
+<br />
+Örneğin, Türkiye’de yıllık enflasyon %40 seviyesinde ise ve maaşınıza yalnızca %20 zam yapıldıysa, aslında maaşınız %20 oranında değer kaybetmiştir. Bu nedenle, maaşınızın enflasyona karşı korunması için doğru hesaplamalar yapmanız gerekir.
+<br />
+Gerçek Hayattan Basit Bir Örnek: Alım Gücünüzü Kendiniz Takip Edin!<br />
+Enflasyonun maaşınıza etkisini daha iyi anlamak için küçük ama etkili bir yöntem deneyebilirsiniz:
+<br /><br />
+📌 Her ay maaşınızdan 100 TL kenara koyun.<br />
+📌 Bu 100 TL ile düzenli olarak aynı ürünü satın almaya çalışın.<br />
+📌 Her ay bu 100 TL ile kaç adet alabildiğinizi not edin.<br />
+<br />
+Örneğin, şu an 100 TL ile 5 litre süt alabiliyorsanız, 6 ay sonra aynı miktarla sadece 4 litre süt alabiliyor olabilirsiniz. Bu da paranızın alım gücünün düştüğünü ve maaşınızın değer kaybettiğini gösterir.
+<br />
+Bu yöntemi kullanarak kendi maaşınızın ve tasarruflarınızın zaman içinde nasıl değiştiğini gözlemleyebilir, ekonomik dalgalanmalar karşısında daha bilinçli finansal kararlar alabilirsiniz.
