@@ -1,0 +1,53 @@
+---
+title: İdeal Kilo Hesaplama
+date: '2025-03-03 22:32:04 Europe/Istanbul'
+updated: '2025-03-03 22:32:04 Europe/Istanbul'
+categories:
+  - Sağlık
+type: Document
+permalink: /:title
+---
+<label for="boy">Boy (cm):</label>
+<input type="number" id="boy" placeholder="Boyunuzu girin (cm)">
+<label for="kilo">Kilo (kg):</label>
+<input type="number" id="kilo" placeholder="Kilonuzu girin (kg)">
+<button onclick="hesapla()">Hesapla</button>
+<h2 id="sonuc"></h2>
+<script>
+function hesapla() {
+const boy = document.getElementById('boy').value;
+const kilo = document.getElementById('kilo').value;
+if (!boy || !kilo) {
+alert('Lütfen boy ve kilo değerlerinizi girin.');
+return;
+}
+// İdeal kilo hesaplama formülü: (boy - 100) - ((boy - 100) * 0.1)
+const idealKilo = (boy - 100) - ((boy - 100) * 0.1);
+// Sonucu ekrana yazdır
+document.getElementById('sonuc').innerText = `İdeal kilonuz: ${idealKilo.toFixed(2)} kg`;
+}
+</script>
+<br />
+İdeal Kilo Hesaplama<br />
+Uygulamanın Amacı<br />
+İdeal kilo, vücut sağlığını korumak ve ideal fiziksel durumu sürdürmek için önemlidir. Bu uygulama, kullanıcıların boylarına ve kilolarına göre ideal kilolarını hesaplamalarına yardımcı olur. Sağlıklı bir yaşam sürmek ve vücut kitle indeksi (BMI) gibi faktörleri göz önünde bulundurarak, ideal kilonuzun ne olması gerektiğini öğrenmek için bu uygulamayı kullanabilirsiniz.
+<br />
+Kullanım Talimatları<br />
+Boy ve Kilo Girişi: Uygulamanın ana ekranında, boyunuzu (cm) ve kilonuzu (kg) girin. Bu alanları doldurmak zorunludur.<br />
+
+Hesapla Butonuna Tıklayın: Girdiğiniz boy ve kilo bilgilerini kontrol ettikten sonra "Hesapla" butonuna tıklayın.<br />
+
+Sonucu Görüntüleyin: Uygulama, girilen verilere dayanarak ideal kilonuzu hesaplayacak ve sonucu ekranın altında görüntüleyecektir.<br />
+
+İdeal Kilo Hesaplama Yöntemi<br />
+İdeal kilo, genellikle boy ve vücut tipine göre hesaplanır. Bu uygulama, basit bir formül kullanarak ideal kiloyu belirler:<br />
+
+Ideal Kilo=(Boy−100)−((Boy−100)×0.1)<br />
+
+Bu formül, boyunuzu (cm) dikkate alarak bir referans değeri belirler. Ancak, ideal kilo kişiden kişiye değişebilir ve genetik, yaşam tarzı, kas kütlesi gibi faktörlere bağlı olarak farklılık gösterebilir.<br />
+
+Sağlıklı Bir Yaşam İçin Öneriler<br />
+Dengeli Beslenme: İdeal kilonuzu korumak için dengeli ve sağlıklı beslenmeye özen gösterin.<br />
+Düzenli Egzersiz: Haftada en az 150 dakika orta düzeyde fiziksel aktivite yapmayı hedefleyin.<br />
+Su Tüketimi: Yeterli su içmek, vücudun düzgün çalışmasına yardımcı olur.<br />
+Düzenli Kontrol: Kilonuzu düzenli olarak kontrol edin ve sağlığınızı takip edin.<br />
