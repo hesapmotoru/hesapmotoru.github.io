@@ -1,0 +1,70 @@
+---           
+title: Resim Depolama Hesaplama
+date: '2025-06-08 06:15:04 Europe/Istanbul'
+updated: '2025-06-08 06:15:04 Europe/Istanbul'
+categories:
+  - Bilgisayar
+type: Document
+permalink: /:title
+---
+<label for="resimBoyutu">1 Resmin Boyutu (MB):</label>
+  <input type="number" id="resimBoyutu" placeholder="Örn: 3" step="0.1">
+
+  <label for="toplamAlan">Toplam Depolama Alanı (GB):</label>
+  <input type="number" id="toplamAlan" placeholder="Örn: 32" step="0.1">
+
+  <button onclick="hesapla()">Hesapla</button>
+
+  <div id="sonuc"></div>
+
+  <script>
+    function hesapla() {
+      const resimBoyutu = parseFloat(document.getElementById("resimBoyutu").value);
+      const toplamAlan = parseFloat(document.getElementById("toplamAlan").value);
+
+      if (isNaN(resimBoyutu) || isNaN(toplamAlan) || resimBoyutu <= 0 || toplamAlan <= 0) {
+        document.getElementById("sonuc").innerText = "Lütfen geçerli değerler giriniz.";
+        return;
+      }
+
+      const toplamMB = toplamAlan * 1024;
+      const adet = Math.floor(toplamMB / resimBoyutu);
+
+      document.getElementById("sonuc").innerText = `Yaklaşık ${adet.toLocaleString("tr-TR")} adet resim sığar.`;
+    }
+  </script>
+<br />
+Depolama alanınıza kaç adet resim sığacağını hiç merak ettiniz mi? Bu **resim depolama hesaplama** uygulaması sayesinde artık kolayca öğrenebilirsiniz.
+<br /><br />
+Ne İşe Yarar?
+<br />
+Bu araç, bir fotoğrafın ortalama boyutunu ve toplam kullanılabilir depolama alanını girerek yaklaşık kaç adet resim saklayabileceğinizi hesaplar. Özellikle:
+<br />
+- 📱 Telefon, tablet veya USB bellek satın alırken<br />
+- 💽 Harici disk planlaması yaparken<br />
+- 📸 Fotoğraf makineleriyle çekim kapasitesini ölçerken<br />
+
+kullanışlı bir araçtır.
+<br /><br />
+Nasıl Kullanılır?
+<br />
+1. Bir resmin ortalama boyutunu MB cinsinden girin (örneğin 3 MB).<br />
+2. Depolama kapasitenizi GB olarak yazın (örneğin 32 GB).<br />
+3. "Hesapla" butonuna tıklayın.<br />
+4. Araç, kaç adet resmin bu alana sığabileceğini gösterir.<br />
+<br /><br />
+Avantajları
+<br />
+- ✅ Ücretsiz ve hızlı<br />
+- ✅ Tarayıcı üzerinde çalışır, veri göndermez<br />
+- ✅ Mobil uyumlu tasarım<br />
+<br />
+Sık Sorulan Sorular
+<br />
+**Bir resim ortalama kaç MB olur?**  <br />
+JPEG formatında ortalama bir fotoğraf genellikle 2–5 MB aralığındadır.<br />
+<br />
+**RAW fotoğraflar için geçerli mi?**  <br />
+RAW fotoğraflar genellikle 20–40 MB arasında olduğundan farklı boyut girerek ona göre hesap yapabilirsiniz.
+<br />
+Resim saklama hesaplayıcısını kullanarak **daha verimli dijital arşivleme** yapabilir, depolama alanınızı planlayabilirsiniz.
