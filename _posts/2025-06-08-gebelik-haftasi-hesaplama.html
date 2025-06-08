@@ -1,0 +1,67 @@
+---           
+title: Gebelik Haftası Hesaplama
+date: '2025-06-08 05:10:04 Europe/Istanbul'
+updated: '2025-06-08 05:10:04 Europe/Istanbul'
+categories:
+  - Sağlık
+type: Document
+permalink: /:title
+---
+<label for="lmp">Son Adet Tarihi:</label><br>
+<input type="date" id="lmp"><br>
+
+<button onclick="calculatePregnancy()">Hesapla</button>
+
+<div class="result" id="result"></div>
+
+<script>
+function calculatePregnancy() {
+  const lmp = new Date(document.getElementById("lmp").value);
+  const today = new Date();
+
+  if (!document.getElementById("lmp").value) {
+    document.getElementById("result").innerText = "Lütfen son adet tarihini girin.";
+    return;
+  }
+
+  const diffTime = today - lmp;
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays < 0 || diffDays > 300) {
+    document.getElementById("result").innerText = "Geçerli bir tarih girin (en fazla 300 gün önce).";
+    return;
+  }
+
+  const weeks = Math.floor(diffDays / 7);
+  const days = diffDays % 7;
+
+  const estimatedDueDate = new Date(lmp);
+  estimatedDueDate.setDate(estimatedDueDate.getDate() + 280);
+
+  const formattedDueDate = estimatedDueDate.toLocaleDateString("tr-TR");
+
+  document.getElementById("result").innerText =
+    `Gebelik süresi: ${weeks} hafta ${days} gün\nTahmini doğum tarihi: ${formattedDueDate}`;
+}
+</script>
+<br />
+Gebelik Haftası Hesaplama Nedir?
+<br />
+Gebelik haftası, bebeğin gelişim sürecini takip etmek ve önemli kontrolleri zamanında yapmak için temel bir ölçüdür. Genellikle son adet tarihine (SAT) göre hesaplanır ve toplamda 40 hafta (280 gün) süren bir dönemi kapsar.
+<br /><br />
+Nasıl Hesaplanır?
+<br />
+Son adet tarihinin ilk gününden itibaren geçen süre baz alınarak gebelik haftası belirlenir. Bu yöntem, gebeliğin en erken dönemlerinden itibaren kullanılabilen en güvenilir hesaplama yöntemlerinden biridir.
+<br /><br />
+Tahmini Doğum Tarihi
+<br />
+Gebelik hesaplayıcılar aynı zamanda tahmini doğum tarihini de verir. Bu tarih kesin olmamakla birlikte, doğumun gerçekleşeceği zaman aralığını tahmin etmek için kullanılır.
+<br /><br />
+Neden Önemlidir?
+<br />
+- Bebeğin gelişim evrelerini takip etmek<br />
+- Doğru zamanlı test ve taramaları planlamak<br />
+- Annelik sürecine bilinçli hazırlanmak<br />
+<br />
+Sen de son adet tarihini girerek gebelik haftanı ve tahmini doğum tarihini hemen öğrenebilirsin.
+
