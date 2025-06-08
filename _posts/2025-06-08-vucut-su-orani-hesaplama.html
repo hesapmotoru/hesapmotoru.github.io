@@ -1,0 +1,70 @@
+---           
+title: Vücut Su Oranı Hesaplama
+date: '2025-06-08 03:10:04 Europe/Istanbul'
+updated: '2025-06-08 03:10:04 Europe/Istanbul'
+categories:
+  - Sağlık
+type: Document
+permalink: /:title
+---
+<label for="gender">Cinsiyet:</label><br>
+<select id="gender">
+  <option value="male">Erkek</option>
+  <option value="female">Kadın</option>
+</select><br>
+
+<label for="weight">Kilo (kg):</label><br>
+<input type="number" id="weight"><br>
+
+<label for="height">Boy (cm):</label><br>
+<input type="number" id="height"><br>
+
+<label for="age">Yaş:</label><br>
+<input type="number" id="age"><br>
+
+<button onclick="calculateWater()">Hesapla</button>
+
+<div class="result" id="result"></div>
+
+<script>
+function calculateWater() {
+  const gender = document.getElementById("gender").value;
+  const weight = parseFloat(document.getElementById("weight").value);
+  const height = parseFloat(document.getElementById("height").value);
+  const age = parseInt(document.getElementById("age").value);
+
+  if (!weight || !height || !age) {
+    document.getElementById("result").innerText = "Lütfen tüm alanları doldurun.";
+    return;
+  }
+
+  let totalBodyWater;
+
+  if (gender === "male") {
+    totalBodyWater = 2.447 - 0.09156 * age + 0.1074 * height + 0.3362 * weight;
+  } else {
+    totalBodyWater = -2.097 + 0.1069 * height + 0.2466 * weight;
+  }
+
+  const waterPercentage = (totalBodyWater * 100) / weight;
+
+  document.getElementById("result").innerText =
+    "Vücut su oranınız: " + waterPercentage.toFixed(2) + "%";
+}
+</script>
+<br/>
+Vücut Su Oranı Nedir?
+<br/>
+Vücut su oranı, toplam vücut ağırlığınızın ne kadarının sudan oluştuğunu gösterir. Yetişkin bir bireyin vücudu yaklaşık %50–70 oranında sudan oluşur. Bu oran, yaş, cinsiyet, kas kütlesi ve genel sağlık durumu gibi faktörlere göre değişir.
+<br/><br/>
+Vücut Su Oranı Nasıl Hesaplanır?
+<br/>
+Vücut su oranı hesaplaması için Watson formülü kullanılmaktadır. Bu yöntemde kilo, boy, yaş ve cinsiyet gibi değerler temel alınır. Bu formül, tıbbi olmayan kullanıcılar için pratik ve tahmini bir sonuç verir.
+<br/><br/>
+Neden Önemlidir?
+<br/>
+- **Düşük su oranı**, dehidrasyon, yorgunluk ve böbrek sorunları gibi riskleri artırabilir.<br/>
+- **Yüksek su oranı**, sağlıklı bir metabolizma ve iyi bir kas oranı ile ilişkilidir.<br/>
+- Sporcular, diyet yapanlar ve sağlıklı yaşam hedefleyenler için su oranı takibi oldukça önemlidir.<br/>
+<br/>
+Hemen vücut su oranınızı hesaplayarak sağlığınız hakkında önemli bir adım atın!
