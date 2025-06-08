@@ -1,0 +1,100 @@
+---           
+title:  Elektrikli Araba Şarj Maliyet Hesaplama
+date: '2025-06-08 07:10:04 Europe/Istanbul'
+updated: '2025-06-08 07:10:04 Europe/Istanbul'
+categories:
+  - Finans
+type: Document
+permalink: /:title
+---
+<label>Tüketim (kWh / 100 km):</label>
+<input type="number" id="consumption" placeholder="Örn: 15" step="0.1">
+
+<label>Mesafe (km):</label>
+<input type="number" id="distance" placeholder="Örn: 200" step="1">
+
+<label>Elektrik Fiyatı (₺ / kWh):</label>
+<input type="number" id="price" placeholder="Örn: 1.5" step="0.01">
+
+<button onclick="calculate()">Hesapla</button>
+
+<div class="result" id="output"></div>
+</div>
+
+<script>
+function calculate() {
+  const consumption = parseFloat(document.getElementById("consumption").value);
+  const distance = parseFloat(document.getElementById("distance").value);
+  const price = parseFloat(document.getElementById("price").value);
+
+  if (isNaN(consumption) || isNaN(distance) || isNaN(price)) {
+    document.getElementById("output").innerHTML = "Lütfen tüm alanları doğru girin.";
+    return;
+  }
+
+  const totalKWh = (consumption / 100) * distance;
+  const totalCost = totalKWh * price;
+
+  document.getElementById("output").innerHTML = `
+    Toplam Tüketim: ${totalKWh.toFixed(2)} kWh<br>
+    Tahmini Maliyet: ₺${totalCost.toFixed(2)}
+  `;
+}
+</script>
+<br />
+🔋 Elektrikli Araba Şarj Maliyet Hesaplama Aracı
+<br />
+Elektrikli arabalar, çevreci yapıları ve düşük işletme maliyetleriyle giderek daha fazla tercih ediliyor. Ancak kullanıcıların sıkça merak ettiği konulardan biri de şarj maliyetlerinin ne kadar olduğudur.
+<br />
+Bu araç sayesinde elektrikli arabanızın şarj maliyetini kolayca hesaplayabilirsiniz. Sadece birkaç temel bilgiyi girmeniz yeterli:
+<br />
+⚡ Tüketim (kWh / 100 km)
+<br />
+📏 Sürüş mesafesi (km)
+<br />
+💰 Elektrik birim fiyatı (₺ / kWh)
+<br />
+Aracınızın toplam elektrik tüketimini ve buna bağlı şarj maliyetini saniyeler içinde öğrenebilirsiniz.
+<br /><br />
+📊 Elektrikli Araç Tüketimi Nasıl Hesaplanır?
+<br />
+Elektrikli otomobiller, genellikle "kWh / 100 km" birimiyle ifade edilen tüketim değeri sunar. Bu değer, 100 kilometrede ne kadar elektrik tükettiğini gösterir.
+<br />
+Örnek:
+<br />
+Tüketim: 15 kWh / 100 km
+<br />
+Mesafe: 200 km
+<br />
+Elektrik Fiyatı: 1.5 ₺ / kWh
+<br />
+Bu durumda:
+<br />
+Toplam Tüketim: (15 ÷ 100) × 200 = 30 kWh
+<br />
+Toplam Maliyet: 30 × 1.5 = 45 ₺
+<br />
+Bu hesaplama ile tahmini maliyetinizi net olarak görebilirsiniz.
+<br /><br />
+🚗 Kimler Kullanmalı?
+<br />
+Bu araç özellikle şu kişiler için faydalıdır:
+<br />
+Elektrikli araç sahipleri
+<br />
+Elektrikli otomobil satın almayı düşünenler
+<br />
+Şarj istasyonu kullanıcıları
+<br />
+Filo ve şirket aracı yöneticileri
+<br /><br />
+❓ Sık Sorulan Sorular
+<br />
+⚡ Elektrikli araba 100 km’de ne kadar elektrik harcar?
+Araç modeline göre değişmekle birlikte ortalama 13 ila 20 kWh arasında değişir.
+<br />
+💰 100 km elektrikli araç ne kadara şarj olur?
+Elektrik fiyatına göre bu değer genellikle 20 ile 40 ₺ arasında olur.
+<br />
+🔌 Şarj maliyeti neden değişir?
+Ev tipi prizler, hızlı şarj istasyonları veya halka açık şarj noktalarında farklı birim fiyatlar uygulanır.
