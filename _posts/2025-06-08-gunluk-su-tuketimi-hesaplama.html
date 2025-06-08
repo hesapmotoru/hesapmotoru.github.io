@@ -1,0 +1,50 @@
+---           
+title: Günlük Su Tüketimi Hesaplama
+date: '2025-06-08 02:10:04 Europe/Istanbul'
+updated: '2025-06-08 02:10:04 Europe/Istanbul'
+categories:
+  - Sağlık
+type: Document
+permalink: /:title
+---
+<label for="weight">Kilonuz (kg):</label><br>
+<input type="number" id="weight"><br>
+
+<button onclick="calculateWater()">Hesapla</button>
+
+<div class="result" id="result"></div>
+
+<script>
+function calculateWater() {
+  const weight = parseFloat(document.getElementById("weight").value);
+
+  if (!weight || weight <= 0) {
+    document.getElementById("result").innerText = "Lütfen geçerli bir kilo girin.";
+    return;
+  }
+
+  // Ortalama su ihtiyacı: 35 ml x kg
+  const dailyWaterMl = weight * 35;
+  const dailyWaterLiters = (dailyWaterMl / 1000).toFixed(2);
+
+  document.getElementById("result").innerText =
+    `Günlük önerilen su tüketimi: ${dailyWaterLiters} litre (${dailyWaterMl.toFixed(0)} ml)`;
+}
+</script>
+<br/>
+Günlük Ne Kadar Su İçmeliyim?
+<br/>
+Vücudun temel işlevlerini sağlıklı bir şekilde yerine getirebilmesi için günlük su tüketimi oldukça önemlidir. Su, metabolizmanın düzgün çalışması, toksinlerin atılması ve hücrelerin yenilenmesi gibi birçok hayati görevi destekler.
+<br/><br/>
+Su Tüketimi Nasıl Hesaplanır?
+<br/>
+Günlük su ihtiyacı genellikle kilo başına 30-35 ml olacak şekilde hesaplanır. Örneğin 70 kilo olan bir kişi, günlük ortalama **2.4 litre (2400 ml)** su içmelidir. Bu değer; yaş, aktivite düzeyi, iklim ve sağlık durumuna göre artabilir.
+<br/><br/>
+Neden Su İçmek Önemlidir?
+<br/>
+- Cildi nemli ve sağlıklı tutar  <br/>
+- Böbrek fonksiyonlarını destekler  <br/>
+- Enerji seviyesini yükseltir  <br/>
+- Sindirimi kolaylaştırır <br/>
+<br/>
+Sen de kilonu yazarak günlük ne kadar su içmen gerektiğini hemen öğrenebilir, sağlıklı yaşam için ilk adımı atabilirsin!
