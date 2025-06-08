@@ -1,0 +1,99 @@
+---           
+title: Çalışma Süresi Hesaplama
+date: '2025-06-08 08:10:04 Europe/Istanbul'
+updated: '2025-06-08 08:10:04 Europe/Istanbul'
+categories:
+  - Zamn
+type: Document
+permalink: /:title
+---
+<label for="baslangic">Mesai Başlangıç Saati:</label>
+<input type="time" id="baslangic"><br><br>
+<br />
+<label for="bitis">Mesai Bitiş Saati:</label>
+<input type="time" id="bitis"><br><br>
+<br />
+<label for="gunSayisi">Haftalık Çalışma Günü Sayısı:</label>
+<input type="number" id="gunSayisi" min="1" max="7" value="5"><br><br>
+<br />
+<button onclick="hesapla()">Hesapla</button><br><br>
+<br />
+<strong>Sonuç:</strong>
+<div id="sonuc"></div>
+
+<script>
+function hesapla() {
+  const baslangic = document.getElementById("baslangic").value;
+  const bitis = document.getElementById("bitis").value;
+  const gunSayisi = parseInt(document.getElementById("gunSayisi").value, 10);
+
+  if (!baslangic || !bitis || isNaN(gunSayisi)) {
+    document.getElementById("sonuc").innerText = "Lütfen tüm alanları doldurun.";
+    return;
+  }
+
+  const [basSaat, basDakika] = baslangic.split(":").map(Number);
+  const [bitSaat, bitDakika] = bitis.split(":").map(Number);
+
+  const basDak = basSaat * 60 + basDakika;
+  const bitDak = bitSaat * 60 + bitDakika;
+
+  let toplamDakika = bitDak - basDak;
+  if (toplamDakika < 0) toplamDakika += 24 * 60; // gece devri varsa
+
+  const gunlukSaat = toplamDakika / 60;
+  const haftalikSaat = gunlukSaat * gunSayisi;
+  const aylikSaat = haftalikSaat * 4.33; // ortalama 4.33 hafta / ay
+  const yillikSaat = haftalikSaat * 52;
+
+  document.getElementById("sonuc").innerHTML = `
+    <ul>
+      <li><strong>Günlük Çalışma Süresi:</strong> ${gunlukSaat.toFixed(2)} saat</li>
+      <li><strong>Haftalık Çalışma Süresi:</strong> ${haftalikSaat.toFixed(2)} saat</li>
+      <li><strong>Aylık Çalışma Süresi (ortalama):</strong> ${aylikSaat.toFixed(2)} saat</li>
+      <li><strong>Yıllık Çalışma Süresi:</strong> ${yillikSaat.toFixed(2)} saat</li>
+    </ul>
+  `;
+}
+</script>
+<br />
+
+Günlük, Haftalık, Aylık ve Yıllık Çalışma Süresi Hesaplama<br />
+Çalışma Süresi Hesaplama Aracı, mesai başlangıç ve bitiş saatlerine göre günlük çalışma süresini, girilen haftalık çalışma günü sayısına göre de haftalık, aylık ve yıllık toplam çalışma süresini hesaplayan pratik bir araçtır.
+<br />
+Bu araç sayesinde iş planlarınızı oluşturabilir, personel çalışma süresi takibi yapabilir veya kendi mesai sürenizi kolayca analiz edebilirsiniz.
+<br /><br />
+Ne İşe Yarar?<br />
+Bu hesaplama aracı ile;
+<br />
+Günlük kaç saat çalıştığınızı öğrenebilirsiniz,
+<br />
+Haftalık toplam çalışma sürenizi hesaplayabilirsiniz,
+<br />
+Aylık ve yıllık bazda toplam mesai saatlerinizi görebilirsiniz,
+<br />
+Gece vardiyası gibi özel mesai aralıklarını da doğru şekilde hesaplayabilirsiniz.
+<br /><br />
+Nasıl Kullanılır?
+<br />
+Mesai başlangıç saatini girin.
+<br />
+Mesai bitiş saatini girin.
+<br />
+Haftada kaç gün çalıştığınızı belirtin.
+<br />
+"Hesapla" butonuna tıklayın.
+<br />
+Anlık olarak günlük, haftalık, aylık ve yıllık toplam çalışma süresi bilgileri ekrana gelir.
+<br /><br />
+Kimler Kullanabilir?
+<br />
+Ofis çalışanları
+<br />
+Fabrika işçileri
+<br />
+İnsan kaynakları uzmanları
+<br />
+Freelance çalışanlar
+<br />
+Çalışma süresi takibi yapmak isteyen herkes
