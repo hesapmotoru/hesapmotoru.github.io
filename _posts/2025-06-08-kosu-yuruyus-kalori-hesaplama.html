@@ -1,0 +1,68 @@
+---           
+title: Koşu / Yürüyüş Kalori Hesaplama
+date: '2025-06-08 04:10:04 Europe/Istanbul'
+updated: '2025-06-08 04:10:04 Europe/Istanbul'
+categories:
+  - Sağlık
+type: Document
+permalink: /:title
+---
+<label for="weight">Kilo (kg):</label><br>
+<input type="number" id="weight"><br>
+
+<label for="duration">Süre (dakika):</label><br>
+<input type="number" id="duration"><br>
+
+<label for="activity">Aktivite Türü:</label><br>
+<select id="activity">
+  <option value="walking">Yürüyüş (5 km/s)</option>
+  <option value="running">Koşu (8 km/s)</option>
+</select><br>
+
+<button onclick="calculateCalories()">Hesapla</button>
+
+<div class="result" id="result"></div>
+
+<script>
+function calculateCalories() {
+  const weight = parseFloat(document.getElementById("weight").value);
+  const duration = parseFloat(document.getElementById("duration").value);
+  const activity = document.getElementById("activity").value;
+
+  if (!weight || !duration) {
+    document.getElementById("result").innerText = "Lütfen tüm alanları doldurun.";
+    return;
+  }
+
+  let MET;
+
+  if (activity === "walking") {
+    MET = 3.5; // hafif tempolu yürüyüş
+  } else {
+    MET = 8.3; // normal tempolu koşu
+  }
+
+  // Kalori = MET x Ağırlık (kg) x Süre (saat)
+  const hours = duration / 60;
+  const calories = MET * weight * hours;
+
+  document.getElementById("result").innerText =
+    "Yakılan kalori: " + calories.toFixed(2) + " kcal";
+}
+</script>
+<br />
+Koşu ve Yürüyüşte Kaç Kalori Yakılır?
+<br />
+Koşu ve yürüyüş, kalori yakmak ve formda kalmak için en etkili egzersizler arasında yer alır. Ancak yakılan kalori miktarı, kişisel özelliklere ve egzersizin süresine göre değişiklik gösterir.
+<br /><br />
+Kalori Hesaplama Nasıl Yapılır?
+<br />
+Bu hesaplamada MET (Metabolik Eşdeğer) değeri, kişinin kilosu ve egzersiz süresi esas alınır. Yürüyüş için ortalama MET değeri 3.5 iken, koşu için bu değer 8.3 civarındadır.
+<br /><br />
+Neden Kalori Hesabı Yapılmalı?
+<br />
+- Kilo vermek isteyenler için günlük kalori takibi önemlidir.  <br />
+- Hedef odaklı spor yapanlar için verimli egzersiz planı oluşturur.  <br />
+- Sağlıklı yaşam tarzı sürdürmek isteyenler için motivasyon sağlar.<br />
+<br />
+Sen de kaç kalori yaktığını kolayca öğrenmek için bu aracı kullanabilir, sağlıklı yaşam hedeflerine bir adım daha yaklaşabilirsin.
