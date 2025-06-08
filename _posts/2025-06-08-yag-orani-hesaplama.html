@@ -1,0 +1,80 @@
+---           
+title: Yağ Oranı Hesaplama
+date: '2025-06-08 02:10:04 Europe/Istanbul'
+updated: '2025-06-08 02:10:04 Europe/Istanbul'
+categories:
+  - Sağlık
+type: Document
+permalink: /:title
+---
+<label for="gender">Cinsiyet:</label><br>
+<select id="gender">
+  <option value="male">Erkek</option>
+  <option value="female">Kadın</option>
+</select><br>
+
+<label for="waist">Bel çevresi (cm):</label><br>
+<input type="number" id="waist"><br>
+
+<label for="neck">Boyun çevresi (cm):</label><br>
+<input type="number" id="neck"><br>
+
+<div id="hipInput" style="display:none;">
+  <label for="hip">Kalça çevresi (cm):</label><br>
+  <input type="number" id="hip"><br>
+</div>
+
+<label for="height">Boy (cm):</label><br>
+<input type="number" id="height"><br>
+
+<button onclick="calculateFat()">Hesapla</button>
+
+<div class="result" id="result"></div>
+
+<script>
+document.getElementById("gender").addEventListener("change", function() {
+  document.getElementById("hipInput").style.display = this.value === "female" ? "block" : "none";
+});
+
+function calculateFat() {
+  const gender = document.getElementById("gender").value;
+  const waist = parseFloat(document.getElementById("waist").value);
+  const neck = parseFloat(document.getElementById("neck").value);
+  const height = parseFloat(document.getElementById("height").value);
+  const hip = parseFloat(document.getElementById("hip").value);
+
+  if (!waist || !neck || !height || (gender === "female" && !hip)) {
+    document.getElementById("result").innerText = "Lütfen tüm alanları doldurun.";
+    return;
+  }
+
+  let fatPercentage;
+
+  if (gender === "male") {
+    fatPercentage = 495 / (1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(height)) - 450;
+  } else {
+    fatPercentage = 495 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck) + 0.22100 * Math.log10(height)) - 450;
+  }
+
+  document.getElementById("result").innerText =
+    "Vücut yağ oranınız: " + fatPercentage.toFixed(2) + "%";
+}
+</script>
+
+Vücut Yağ Oranı Nedir?
+<br/>
+Vücut yağ oranı, toplam vücut ağırlığınızın ne kadarının yağ dokusundan oluştuğunu gösterir. Bu oran, genel sağlık durumu, fitness seviyesi ve metabolik risklerin belirlenmesinde önemli bir göstergedir.
+<br/><br/>
+Yağ Oranı Hesaplama Nasıl Yapılır?
+<br/>
+Yağ oranı hesaplaması, bel, boyun (ve kadınlar için kalça) çevresi ile boy uzunluğu gibi ölçülerle yapılır. Bu hesaplama, U.S. Navy yöntemine dayalıdır ve yaklaşık bir doğruluk sunar.
+<br/><br/>
+Neden Önemlidir?
+<br/>
+- Fazla yağ oranı kalp hastalıkları, diyabet ve yüksek tansiyon riskini artırabilir.<br/>
+- Düşük yağ oranı ise hormonal dengesizliklere ve bağışıklık sorunlarına yol açabilir.<br/>
+- Sporcular ve kilo kontrolü yapanlar için ideal yağ oranı takibi çok önemlidir.<br/>
+<br/>
+Hemen **vücut yağ oranınızı hesaplayın** ve ideal değerlere ne kadar yakın olduğunuzu öğrenin!
+
+
