@@ -1,0 +1,79 @@
+---           
+title: Ortalama Hesaplama
+date: 2025-06-08 08:00:00 UTC
+updated: 2025-06-08 08:00:00 UTC
+categories:
+  - Matematik
+type: Document
+permalink: /:title
+---
+<div id="inputContainer" class="container">
+  <input type="number" class="numberInput" placeholder="Sayı">
+  <input type="number" class="numberInput" placeholder="Sayı">
+</div>
+
+<button onclick="addInput()">+ Sayı Ekle</button>
+<button onclick="calculateAverage()">Ortalama Hesapla</button>
+
+<p id="result"></p>
+
+<script>
+function addInput() {
+  const container = document.getElementById("inputContainer");
+  const input = document.createElement("input");
+  input.type = "number";
+  input.placeholder = "Sayı";
+  input.className = "numberInput";
+  container.appendChild(input);
+}
+
+function calculateAverage() {
+  const inputs = document.getElementsByClassName("numberInput");
+  let sum = 0;
+  let count = 0;
+
+  for (let input of inputs) {
+    const value = parseFloat(input.value);
+    if (!isNaN(value)) {
+      sum += value;
+      count++;
+    }
+  }
+
+  const result = document.getElementById("result");
+  if (count > 0) {
+    const average = sum / count;
+    result.textContent = `Ortalama: ${average.toFixed(2)}`;
+  } else {
+    result.textContent = "Lütfen en az bir geçerli sayı girin.";
+  }
+}
+</script>
+<br /><br />
+🔢 Ortalama Hesaplama Aracı – Hızlı ve Kolay Ortalama Bulma<br />
+Online ortalama hesaplama aracı sayesinde sayıların ortalamasını saniyeler içinde hesaplayabilirsiniz. Özellikle öğrenci, öğretmen ve analiz yapan kullanıcılar için geliştirilmiş bu araç, hem zamandan tasarruf sağlar hem de doğru sonuçlara anında ulaşmanızı mümkün kılar.
+<br /><br />
+✅ Ortalama Hesaplama Aracının Özellikleri<br />
+Minimum 2 sayı ile işlem yapabilirsiniz.
+<br /><br />
++ butonuna tıklayarak yeni kutular ekleyebilir, istediğiniz kadar sayı girebilirsiniz.
+<br /><br />
+Tüm geçerli sayılar üzerinden anında ortalama hesaplanır.
+<br /><br />
+Mobil ve masaüstü uyumludur, tarayıcı üzerinden çalışır, kuruluma gerek yoktur.
+<br /><br />
+💡 Kimler Kullanabilir?<br />
+Öğrenciler: Sınav veya not ortalaması hesaplamak için
+<br /><br />
+Eğitimciler: Sınıf içi ortalamaları analiz etmek için
+<br /><br />
+Herkes: Günlük hesaplamalarda pratik çözüm arayanlar için
+<br /><br />
+🚀 Nasıl Kullanılır?<br />
+Sayı kutularına verilerinizi girin.
+<br /><br />
+Gerekirse yeni kutu ekleyin.
+<br /><br />
+“Ortalama Hesapla” butonuna basın.
+<br /><br />
+Sonuç ekranda anında gösterilecektir.
