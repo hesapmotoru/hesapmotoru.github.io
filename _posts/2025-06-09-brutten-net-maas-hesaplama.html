@@ -1,0 +1,118 @@
+---           
+title: Brütten Net Maaş Hesaplama
+date: '2025-06-09 02:10:04 Europe/Istanbul'
+updated: '2025-06-09 02:10:04 Europe/Istanbul'
+categories:
+  - Finans
+type: Document
+permalink: /:title
+---
+<label for="grossSalary">Brüt Maaş:</label><br/>
+<input type="number" id="grossSalary" placeholder="Brüt Maaş"/>
+
+<label for="extraIncome">Ekstra Kazanç</label><br/>
+    <input type="number" id="extraIncome" placeholder="Ekstra Kazanç (Prim vb.)"/>
+
+<label for="incomeTax">Gelir Vergisi</label><br/>
+    <input type="number" id="incomeTax" placeholder="Gelir Vergisi (%)"/>
+
+<label for="insurancePremium">Sigorta Primi</label><br/>
+    <input type="number" id="insurancePremium" placeholder="Sigorta Primi (%)"/>
+
+<label for="unemploymentInsurance">İşsizlik Primi:</label><br/>
+    <input type="number" id="unemploymentInsurance" placeholder="İşsizlik Primi (%)"/>
+
+<label for="overtimeHours">Fazla Mesai Saati</label><br/>
+    <input type="number" id="overtimeHours" placeholder="Fazla Mesai Saati"/>
+
+<label for="otherDeductions">Diğer Kesintiler(Ücret olarak giriniz)</label><br/>
+    <input type="number" id="otherDeductions" placeholder="Diğer Kesintiler"/>
+
+    <input type="checkbox" id="unionDues"> Sendika Üyelik Kesintisi Uygula
+
+    <button onclick="calculateNetSalary()">Hesapla</button>
+    <p id="netSalary"></p>
+
+    <script>
+        function calculateNetSalary() {
+            let grossSalary = parseFloat(document.getElementById("grossSalary").value);
+            let extraIncome = parseFloat(document.getElementById("extraIncome").value) || 0;
+            let totalGrossSalary = grossSalary + extraIncome;
+            
+            let incomeTax = parseFloat(document.getElementById("incomeTax").value) / 100;
+            let insurancePremium = parseFloat(document.getElementById("insurancePremium").value) / 100;
+            let unemploymentInsurance = parseFloat(document.getElementById("unemploymentInsurance").value) / 100;
+            let overtimeHours = parseFloat(document.getElementById("overtimeHours").value) || 0;
+            let otherDeductions = parseFloat(document.getElementById("otherDeductions").value) || 0;
+            let stampTax = 0.00759; // Damga vergisi %0.759
+            
+            let unionDues = document.getElementById("unionDues").checked ? (totalGrossSalary / 30) : 0; // 1 günlük yevmiye kesintisi
+            
+            let hourlyWage = totalGrossSalary / 225; // Saatlik ücret hesaplama
+            let overtimePay = overtimeHours * (hourlyWage * 1.5); // Fazla mesai ücreti
+            
+            let totalDeductions = (totalGrossSalary * incomeTax) + 
+                                (totalGrossSalary * insurancePremium) + 
+                                (totalGrossSalary * unemploymentInsurance) + 
+                                (totalGrossSalary * stampTax) +
+                                unionDues +
+                                otherDeductions;
+            
+            let netSalary = (totalGrossSalary - totalDeductions) + overtimePay;
+            document.getElementById("netSalary").innerText = "Net Maaş: " + netSalary.toFixed(2) + " TL";
+        }
+    </script>
+<br />
+Brüt Maaştan Net Maaş Hesaplama Aracı 
+<br />
+Bu hesaplama aracı tam doğruluk vermeyi tahaddüt etmez. Yaklaşık tahmini değerler vermektedir. Bu uygulama sadece hesaplama mantığını göstermek için yapılmıştır.
+<br/>
+Maaş hesaplamaları, çalışanlar için önemli bir konudur. Brüt maaş üzerinden yapılan kesintiler net maaşın belirlenmesinde kritik rol oynar. Bu araç, brüt maaştan net maaş hesaplamanızı kolaylaştırmak için geliştirilmiştir.
+<br /><br />
+Nasıl Çalışır?
+<br />
+Bu hesaplama aracı, kullanıcıdan belirli girdileri alarak net maaşı hesaplar. Kullanıcı aşağıdaki bilgileri manuel olarak girebilir:
+<br />
+Brüt Maaş: İşveren tarafından ödenen toplam maaş.
+<br />
+Ekstra Kazançlar (Prim vb.): Çalışana ek olarak verilen prim veya diğer kazançlar.
+<br />
+Gelir Vergisi (%): Brüt maaş üzerinden kesilen gelir vergisi oranı.
+<br />
+Sigorta Primi (%): Çalışanın ödediği sigorta primi oranı.
+<br />
+İşsizlik Primi (%): İşsizlik sigortası kesintisi.
+<br />
+Fazla Mesai Saati: Fazla mesai yapıldıysa, kaç saat yapıldığı belirtilir.
+<br />
+Diğer Kesintiler: Kredi kesintileri, özel sigorta, yemek kartı gibi ekstra kesintiler manuel girilebilir.
+<br />
+Sendika Üyelik Kesintisi: Eğer çalışan bir sendikaya üyeyse, 1 günlük yevmiye kadar bir kesinti uygulanır.
+<br /><br />
+Hesaplama Mantığı
+<br />
+Toplam Brüt Maaş: Brüt maaşa ekstra kazançlar eklenir.
+<br />
+Fazla Mesai Ücreti: Saatlik ücret hesaplanarak fazla mesai ücreti eklenir.
+<br />
+Toplam Kesintiler hesaplanır:
+<br />
+Gelir vergisi, sigorta primi, işsizlik primi, damga vergisi gibi yasal kesintiler uygulanır.
+<br />
+Varsa sendika üyelik kesintisi eklenir.
+<br />
+Kullanıcı tarafından girilen diğer kesintiler düşülür.
+<br />
+Net Maaş: Tüm kesintiler brüt maaştan çıkarıldıktan sonra fazla mesai ücreti eklenerek net maaş elde edilir.
+<br /><br />
+Örnek Hesaplama
+<br />
+Örneğin, brüt maaşı 20.000 TL olan bir çalışanın gelir vergisi %15, sigorta primi %14, işsizlik primi %1 ve damga vergisi %0.759 olduğunu varsayalım. Ek olarak 2.000 TL prim alıyor ve 10 saat fazla mesai yapıyorsa:
+<br />
+Fazla mesai ücreti: (22.000 / 225) × 1.5 × 10 = 1.466 TL
+<br />
+Toplam kesintiler: 22.000 TL üzerinden hesaplanan vergiler + varsa sendika ve diğer kesintiler
+<br />
+Net maaş = (Brüt maaş + prim) - kesintiler + fazla mesai ücreti
+<br />
+Bu araç sayesinde, manuel hesaplama yapmadan net maaşınızı kolayca öğrenebilirsiniz. Kullanıcı dostu arayüzü sayesinde tüm verileri girerek hızlıca hesaplama yapabilirsiniz.
