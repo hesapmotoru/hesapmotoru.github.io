@@ -9,28 +9,29 @@ permalink: /:title
 ---
 <label for="grossSalary">Brüt Maaş:</label><br/>
 <input type="number" id="grossSalary" placeholder="Brüt Maaş"/>
-
+<br/>
 <label for="extraIncome">Ekstra Kazanç</label><br/>
     <input type="number" id="extraIncome" placeholder="Ekstra Kazanç (Prim vb.)"/>
-
+<br/>
 <label for="incomeTax">Gelir Vergisi</label><br/>
     <input type="number" id="incomeTax" placeholder="Gelir Vergisi (%)"/>
-
+<br/>
 <label for="insurancePremium">Sigorta Primi</label><br/>
     <input type="number" id="insurancePremium" placeholder="Sigorta Primi (%)"/>
-
+<br/>
 <label for="unemploymentInsurance">İşsizlik Primi:</label><br/>
     <input type="number" id="unemploymentInsurance" placeholder="İşsizlik Primi (%)"/>
-
+<br/>
 <label for="overtimeHours">Fazla Mesai Saati</label><br/>
     <input type="number" id="overtimeHours" placeholder="Fazla Mesai Saati"/>
-
+<br/>
 <label for="otherDeductions">Diğer Kesintiler(Ücret olarak giriniz)</label><br/>
     <input type="number" id="otherDeductions" placeholder="Diğer Kesintiler"/>
-
+<br/>
     <input type="checkbox" id="unionDues"> Sendika Üyelik Kesintisi Uygula
-
+<br/>
     <button onclick="calculateNetSalary()">Hesapla</button>
+<br/>
     <p id="netSalary"></p>
 
     <script>
