@@ -1,6 +1,7 @@
 ---
 ---
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <section class="categories">
 	{% assign categories = site.categories | sort %}
 	{% for category in categories %}
@@ -28,3 +29,48 @@
     <span id="notification-content"></span>
     <button id="notification-close" style="float:right; background:none; border:none; font-weight:bold; cursor:pointer;">✕</button>
 </div>
+
+
+{% assign recent_posts = "" | split: "" %}
+{% assign categories = site.categories | sort %}
+{% for category in categories %}
+  {% assign posts = category[1] %}
+  {% assign tutorials = posts | where: "type", "Document" %}
+  {% for tutorial in tutorials %}
+    {% if tutorial.date > site.time | date: "%s" | minus: 2592000 %}
+      {% assign recent_posts = recent_posts | push: tutorial %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% assign recent_posts = recent_posts | slice: 0,3 %}
+
+<script>
+  var recentPosts = [
+    {% for post in recent_posts %}
+      { "title": "{{ post.title | escape }}", "url": "{{ site.baseurl }}{{ post.url }}" }{% if forloop.last == false %},{% endif %}
+    {% endfor %}
+  ];
+</script>
+
+
+<script>
+$(document).ready(function(){
+    if(!Cookies.get('notification_seen')){
+        if(recentPosts.length > 0){
+            var html = '<ul style="margin:0; padding-left:20px;">';
+            recentPosts.forEach(function(post){
+                html += '<li><a href="'+post.url+'" style="text-decoration:none; color:#333;">'+post.title+'</a></li>';
+            });
+            html += '</ul>';
+            $('#notification-content').html(html);
+            $('#notification-bar').slideDown();
+        }
+    }
+
+    $('#notification-close').click(function(){
+        $('#notification-bar').slideUp();
+        Cookies.set('notification_seen', 'yes', { expires: 30 });
+    });
+});
+</script>
