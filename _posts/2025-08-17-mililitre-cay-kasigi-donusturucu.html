@@ -1,0 +1,24 @@
+---
+title: Mililitre → Çay Kaşığı Dönüştürücü
+date: '2025-08-17 00:08:00 Europe/Istanbul'
+categories:
+  - Dönüştürücü
+type: Document
+permalink: /:title
+---
+<label>Hacim (ml):</label>
+<input type="number" id="mlValue">
+<button onclick="convertMlToTsp()">Hesapla</button>
+<p id="mlResult"></p>
+
+<script>
+function convertMlToTsp() {
+  const ml = parseFloat(document.getElementById('mlValue').value);
+  const tsp = ml / 4.92892;
+  document.getElementById('mlResult').innerText = `${ml} ml ≈ ${tsp.toFixed(2)} çay kaşığı`;
+}
+</script>
+
+Mililitre → Çay Kaşığı Dönüştürücü, mutfakta tariflerde küçük ölçüleri hızlıca çevirmek isteyen kullanıcılar için tasarlanmıştır. Özellikle sıvı malzemeler için pratik bir ölçüm aracı sağlar ve tariflerde hata payını azaltır.  
+<br />
+Örnek:  10 ml ≈ 2,03 çay kaşığı.
