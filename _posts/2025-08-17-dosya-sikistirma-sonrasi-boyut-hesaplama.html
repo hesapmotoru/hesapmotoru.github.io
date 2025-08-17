@@ -1,0 +1,27 @@
+---
+title: Dosya Sıkıştırma Sonrası Boyut Hesaplama
+date: '2025-08-17 00:01:00 Europe/Istanbul'
+categories:
+  - Bilgisayar
+type: Document
+permalink: /:title
+---
+<label>Orijinal Dosya Boyutu (MB):</label>
+<input type="number" id="originalSize">
+<label>Sıkıştırma Oranı (%):</label>
+<input type="number" id="compressionRate">
+<button onclick="calcCompressed()">Hesapla</button>
+<p id="compressedResult"></p>
+
+<script>
+function calcCompressed() {
+  const original = parseFloat(document.getElementById('originalSize').value);
+  const rate = parseFloat(document.getElementById('compressionRate').value);
+  const compressed = original * (1 - rate/100);
+  document.getElementById('compressedResult').innerText = `Sıkıştırılmış Dosya Boyutu: ${compressed.toFixed(2)} MB`;
+}
+</script>
+
+Dosya Sıkıştırma Hesaplayıcı, büyük dosyaların boyutunu azaltmayı planlayan kullanıcılar için tasarlanmıştır. Orijinal dosya boyutunu ve planlanan sıkıştırma oranını girerek, dosyanın sıkıştırıldıktan sonra tahmini boyutunu hızlıca öğrenebilirsiniz. Bu sayede depolama alanınızı daha verimli kullanabilir ve dosya paylaşımında beklenmedik gecikmelerin önüne geçebilirsiniz.  
+
+Kullanım Örneği: 100 MB’lık bir dosyayı %30 oranında sıkıştırırsanız, sıkıştırılmış dosya boyutu yaklaşık 70 MB olacaktır.
