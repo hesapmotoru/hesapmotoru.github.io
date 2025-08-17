@@ -32,12 +32,13 @@
 
 	<body class="{{ page.body_class }}">
 
-<div id="notification-popup" style="
+<div id="notification-bar" style="
     display:none;
     position:fixed;
     bottom:20px;
     right:20px;
     max-width:300px;
+    width:90%;
     background:#fffbea;
     border:1px solid #ffd700;
     border-radius:10px;
@@ -45,12 +46,14 @@
     padding:15px 20px;
     z-index:9999;
     font-family:sans-serif;
+    font-size:14px;
+    line-height:1.4;
 ">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
         <strong style="font-size:14px;">Yeni Yazılar</strong>
-        <button id="popup-close" style="background:none; border:none; font-weight:bold; font-size:16px; cursor:pointer;">✕</button>
+        <button id="notification-close" style="background:none; border:none; font-weight:bold; font-size:16px; cursor:pointer;">✕</button>
     </div>
-    <ul id="popup-content" style="margin:10px 0 0 0; padding-left:15px; font-size:13px;"></ul>
+    <ul id="notification-content" style="margin:0; padding-left:15px; list-style-type:disc; font-size:13px;"></ul>
 </div>
 
 
