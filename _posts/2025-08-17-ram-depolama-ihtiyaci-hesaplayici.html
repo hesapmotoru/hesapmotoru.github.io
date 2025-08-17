@@ -1,0 +1,28 @@
+---
+title: RAM ve Depolama İhtiyacı Hesaplayıcı
+date: '2025-08-17 00:02:00 Europe/Istanbul'
+categories:
+  - Bilgisayar
+type: Document
+permalink: /:title
+---
+<label>Uygulama Sayısı:</label>
+<input type="number" id="appCount">
+<label>Oyun Sayısı:</label>
+<input type="number" id="gameCount">
+<button onclick="calcRAMStorage()">Hesapla</button>
+<p id="ramStorageResult"></p>
+
+<script>
+function calcRAMStorage() {
+  const apps = parseInt(document.getElementById('appCount').value);
+  const games = parseInt(document.getElementById('gameCount').value);
+  const ram = apps*0.5 + games*2; // GB
+  const storage = apps*1 + games*20; // GB
+  document.getElementById('ramStorageResult').innerText = `Tahmini RAM: ${ram} GB, Depolama: ${storage} GB`;
+}
+</script>
+
+RAM ve Depolama İhtiyacı Hesaplayıcı, bilgisayar veya mobil cihazlar için kullanıcıların ihtiyaç duyacağı tahmini RAM ve depolama kapasitesini belirlemenizi sağlar. Kullanılan uygulama ve oyun sayısına göre hesaplama yapılır. Böylece cihaz seçiminde veya yükseltmelerde doğru kararlar alabilir, performans sorunlarının önüne geçebilirsiniz.  
+
+Kullanım Örneği: 10 uygulama ve 3 oyun için tahmini RAM ihtiyacı 5 GB, depolama ihtiyacı yaklaşık 70 GB’dır.
