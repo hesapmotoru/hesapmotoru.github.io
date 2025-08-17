@@ -1,0 +1,29 @@
+---           
+title: İnternet Hızı Gereksinimi Hesaplama
+date: '2025-08-18 00:29:00 Europe/Istanbul'
+categories:
+  - Bilgisayar
+type: Document
+permalink: /:title
+---
+<label>Video Çözünürlüğü:</label>
+<select id="videoQuality">
+  <option value="1">480p</option>
+  <option value="3">720p</option>
+  <option value="5">1080p</option>
+  <option value="8">4K</option>
+</select>
+<button onclick="calcInternetSpeed()">Hesapla</button>
+<p id="internetResult"></p>
+
+<script>
+function calcInternetSpeed() {
+  const quality = parseFloat(document.getElementById('videoQuality').value);
+  const speedMbps = quality * 2; // Basit formül
+  document.getElementById('internetResult').innerText = `Gerekli İnternet Hızı: ${speedMbps} Mbps`;
+}
+</script>
+
+İnternet Hızı Gereksinimi Hesaplama uygulaması video izleme veya oyun oynama gibi aktiviteler için minimum internet hızını tahmini olarak hesaplar. Video çözünürlüğünü seçin ve gereken Mbps değerini öğrenin.
+<br />
+Kullanım Örneği: 1080p video için önerilen hız yaklaşık 5 Mbps’dir.
