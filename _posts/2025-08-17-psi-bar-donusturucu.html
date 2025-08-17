@@ -1,0 +1,24 @@
+---
+title: PSI → Bar Dönüştürücü
+date: '2025-08-17 00:12:00 Europe/Istanbul'
+categories:
+  - Dönüştürücü
+type: Document
+permalink: /:title
+---
+<label>Basınç (PSI):</label>
+<input type="number" id="psiValue">
+<button onclick="convertPsiToBar()">Hesapla</button>
+<p id="psiResult"></p>
+
+<script>
+function convertPsiToBar() {
+  const psi = parseFloat(document.getElementById('psiValue').value);
+  const bar = psi * 0.0689476;
+  document.getElementById('psiResult').innerText = `${psi} PSI ≈ ${bar.toFixed(3)} bar`;
+}
+</script>
+
+PSI → Bar Dönüştürücü, otomobil lastik basınçları, tüpler ve endüstriyel basınç ölçümlerinde kullanışlıdır. Kullanıcılar, PSI cinsinden ölçülen değerleri bar birimine hızlıca çevirebilir ve doğru basınç ayarlarını sağlayabilir.  
+<br /><br />
+Kullanım Örneği: 35 PSI ≈ 2,413 bar.
