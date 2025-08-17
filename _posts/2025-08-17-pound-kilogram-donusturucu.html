@@ -1,0 +1,24 @@
+---
+title: Pound → Kilogram Dönüştürücü (Hassas)
+date: '2025-08-17 00:11:00 Europe/Istanbul'
+categories:
+  - Dönüştürücü
+type: Document
+permalink: /:title
+---
+<label>Ağırlık (lb):</label>
+<input type="number" id="lbValue">
+<button onclick="convertLbToKg()">Hesapla</button>
+<p id="lbResult"></p>
+
+<script>
+function convertLbToKg() {
+  const lb = parseFloat(document.getElementById('lbValue').value);
+  const kg = lb * 0.453592;
+  document.getElementById('lbResult').innerText = `${lb} lb ≈ ${kg.toFixed(3)} kg`;
+}
+</script>
+
+Pound → Kilogram Dönüştürücü, yurtdışı alışverişlerinde, sağlık ölçümlerinde ve ağırlık takibinde kullanışlıdır. Hassas dönüşüm ile küçük farklar bile doğru şekilde hesaplanır ve günlük kullanımda güvenilir sonuç verir.  
+<br /><br />
+Kullanım Örneği: 150 lb ≈ 68,039 kg.
