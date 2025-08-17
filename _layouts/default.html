@@ -32,22 +32,22 @@
 
 	<body class="{{ page.body_class }}">
 
-
-
-<!-- /body açıldıktan hemen sonra -->
 <div id="notification-bar" style="display:none; position:fixed; top:0; left:0; width:100%; background:#fffae6; border-bottom:1px solid #ffd700; padding:15px; z-index:9999;">
     <span id="notification-content"></span>
     <button id="notification-close" style="float:right; background:none; border:none; font-weight:bold; cursor:pointer;">✕</button>
 </div>
 
-{% assign recent_posts = "" | split: "" %}
+
+% assign recent_posts = "" | split: "" %}
 {% assign categories = site.categories | sort %}
 {% for category in categories %}
   {% assign posts = category[1] %}
   {% assign tutorials = posts | where: "type", "Document" %}
   {% for tutorial in tutorials %}
-    {% assign post_age = site.time | date: "%s" | minus: tutorial.date | date: "%s" %}
-    {% if post_age < 2592000 %}
+    {% assign post_seconds = tutorial.date | date: "%s" %}
+    {% assign now_seconds = site.time | date: "%s" %}
+    {% assign diff = now_seconds | minus: post_seconds %}
+    {% if diff < 2592000 %}
       {% assign recent_posts = recent_posts | push: tutorial %}
     {% endif %}
   {% endfor %}
@@ -62,7 +62,7 @@
     {% endfor %}
   ];
 </script>
-
+		
 <script>
 $(document).ready(function(){
     if(!Cookies.get('notification_seen')){
@@ -83,7 +83,6 @@ $(document).ready(function(){
     });
 });
 </script>
-
 		
 		<header>
 			<div class="wrapper">
