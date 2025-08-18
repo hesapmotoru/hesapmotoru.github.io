@@ -1,0 +1,42 @@
+---
+title: Zaman Dilimi Dönüştürücü
+date: '2025-08-17 00:23:00 Europe/Istanbul'
+categories:
+  - Zaman
+type: Document
+permalink: /:title
+---
+<label>Tarih ve Saat:</label>
+<input type="datetime-local" id="baseDate">
+<label>Kaynak Zaman Dilimi:</label>
+<select id="fromZone">
+  <option value="Europe/Istanbul">İstanbul</option>
+  <option value="Europe/London">Londra</option>
+  <option value="America/New_York">New York</option>
+</select>
+<label>Hedef Zaman Dilimi:</label>
+<select id="toZone">
+  <option value="Europe/London">Londra</option>
+  <option value="America/New_York">New York</option>
+  <option value="Asia/Tokyo">Tokyo</option>
+</select>
+<button onclick="convertTimeZone()">Dönüştür</button>
+<p id="zoneResult"></p>
+
+<script>
+function convertTimeZone() {
+  const dateVal = document.getElementById('baseDate').value;
+  const fromZone = document.getElementById('fromZone').value;
+  const toZone = document.getElementById('toZone').value;
+  if (!dateVal) return;
+
+  const baseDate = new Date(dateVal);
+  const options = { timeZone: toZone, hour: '2-digit', minute: '2-digit', year: 'numeric', month: 'long', day: 'numeric' };
+  const converted = baseDate.toLocaleString("tr-TR", options);
+
+  document.getElementById('zoneResult').innerText = `Dönüştürülen saat: ${converted}`;
+}
+</script>
+
+**Zaman Dilimi Dönüştürücü**, farklı ülkeler arasındaki saat farkını kolayca hesaplamanızı sağlar.  
+Özellikle iş toplantıları ve online etkinliklerde büyük kolaylık sunar.
