@@ -1,0 +1,28 @@
+---
+title: Günün Yüzdesi Hesaplama
+date: '2025-08-18 00:14:00 Europe/Istanbul'
+categories:
+  - Zaman
+type: Document
+permalink: /:title
+---
+<button onclick="calculateDayPercent()">Hesapla</button>
+<p id="dayPercentResult"></p>
+
+<script>
+function calculateDayPercent() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+
+  const total = end - start;
+  const passed = now - start;
+
+  const percent = ((passed / total) * 100).toFixed(2);
+  document.getElementById('dayPercentResult').innerText =
+    `Bugünün %${percent}’i geçti.`;
+}
+</script>
+
+**Günün Yüzdesi Hesaplama**, günün şu an itibarıyla ne kadarının geçtiğini gösterir.  
+Motivasyon amaçlı veya zaman takibi için kullanılabilir.
