@@ -1,0 +1,68 @@
+---
+title: Yıl Bazında Yüzde Kaçı Bitti Hesaplayıcı
+date: '2025-08-17 00:25:00 Europe/Istanbul'
+categories:
+  - Zaman
+type: Document
+permalink: /:title
+---
+<label>İstenen Tarih/Saat (boş bırakılırsa şimdi):</label>
+<input type="datetime-local" id="inputDateTime">
+<button onclick="calculateYearPercent()">Hesapla</button>
+<p id="yearPercentResult"></p>
+
+<script>
+function calculateYearPercent() {
+  // Kullanıcının girdiği tarih/saat veya şimdi
+  const input = document.getElementById('inputDateTime').value;
+  const now = input ? new Date(input) : new Date();
+
+  // Yılın başı (yerel zamanda) ve bir sonraki yılın başı
+  const yearStart = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0);
+  const nextYearStart = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0, 0);
+
+  const elapsedMs = now - yearStart;
+  const totalMs = nextYearStart - yearStart;
+
+  // Güvenlik: negatif değer kontrolü (ör. geçersiz tarih)
+  if (isNaN(elapsedMs) || isNaN(totalMs) || totalMs <= 0) {
+    document.getElementById('yearPercentResult').innerText = 'Geçersiz tarih/girdi.';
+    return;
+  }
+
+  const percent = (elapsedMs / totalMs) * 100;
+  const percentRounded = percent.toFixed(6); // hassas gösterim
+
+  // Gün/saat/dk/sn bilgisi
+  const remainingMs = totalMs - elapsedMs;
+  const daysPassed = Math.floor(elapsedMs / (1000*60*60*24));
+  const daysRemaining = Math.ceil(remainingMs / (1000*60*60*24));
+  const hoursPassed = Math.floor((elapsedMs % (1000*60*60*24)) / (1000*60*60));
+  const minsPassed = Math.floor((elapsedMs % (1000*60*60)) / (1000*60));
+  const secsPassed = Math.floor((elapsedMs % (1000*60)) / 1000);
+
+  // Sonucu oluştur
+  const formattedNow = now.toLocaleString('tr-TR');
+  const resultText = [
+    `Tarih/Saat: ${formattedNow}`,
+    `Yılın %${percentRounded}’i geçti.`,
+    `Geçen süre: ${daysPassed} gün, ${hoursPassed} saat, ${minsPassed} dakika, ${secsPassed} saniye.`,
+    `Kalan yaklaşık: ${daysRemaining} gün.`,
+    `Not: Hesaplama yerel saat (tarayıcı zaman dilimi) kullanılarak yapıldı. Artan hassasiyet için giriş alanına belirli bir tarih/saat girebilirsiniz.`
+  ].join('\n');
+
+  document.getElementById('yearPercentResult').innerText = resultText;
+}
+</script>
+
+**Yıl Bazında Yüzde Kaçı Bitti Hesaplayıcı** — Bu araç, verilen bir tarih/saat (veya boş bırakılırsa "şimdi") için içinde bulunduğumuz yılın kaçının geçtiğini yüzdelik olarak hassas şekilde hesaplar. Hesaplama sırasında bulunduğunuz yılın başlangıcından (1 Ocak 00:00:00) bir sonraki yılın başlangıcına (1 Ocak 00:00:00) kadar geçen toplam süre esas alınır; böylece artık yıllar (366 günlük yıllar) otomatik olarak dikkate alınır.  
+
+Araç şu bilgileri verir:
+- Seçilen tarih/saat (veya şu anki tarih/saat),
+- Yılın yüzde olarak ne kadarının geçtiği (6 ondalık basamağa kadar gösterim),
+- Geçen süre (gün, saat, dakika, saniye),
+- Kalan yaklaşık gün sayısı.
+
+Kullanım Örneği:
+- Şu an 17 Ağustos 2025, 12:00 ise araç “Yılın %XX.XXXXX’i geçti” gibi kesin bir oran ve geçen/ kalan süreyi gösterir.  
+- İstersen belirli bir tarih/saat girip (ör. bir raporun kesildiği an) o an için yılın yüzde kaçının geçtiğini öğrenebilirsin.
