@@ -1,0 +1,33 @@
+---
+title: İş Günü Hesaplama
+date: '2025-08-17 00:24:00 Europe/Istanbul'
+categories:
+  - Zaman
+type: Document
+permalink: /:title
+---
+<label>Başlangıç Tarihi:</label>
+<input type="date" id="startDate">
+<label>Bitiş Tarihi:</label>
+<input type="date" id="endDate">
+<button onclick="calculateBusinessDays()">Hesapla</button>
+<p id="businessDaysResult"></p>
+
+<script>
+function calculateBusinessDays() {
+  const start = new Date(document.getElementById('startDate').value);
+  const end = new Date(document.getElementById('endDate').value);
+
+  let count = 0;
+  for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+    const day = d.getDay();
+    if (day !== 0 && day !== 6) count++;
+  }
+
+  document.getElementById('businessDaysResult').innerText =
+    `İş günü sayısı: ${count}`;
+}
+</script>
+
+**İş Günü Hesaplama**, belirli iki tarih arasındaki hafta içi günleri sayar.  
+Projeler, resmi belgeler veya çalışma planları için kaç iş günü olduğunu öğrenmek isteyenler için pratik bir araçtır.
