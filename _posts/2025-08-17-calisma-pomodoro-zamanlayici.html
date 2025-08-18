@@ -1,0 +1,38 @@
+---
+title: Çalışma / Pomodoro Zamanlayıcı
+date: '2025-08-17 00:21:00 Europe/Istanbul'
+categories:
+  - Zaman
+type: Document
+permalink: /:title
+---
+<label>Çalışma Süresi (dakika):</label>
+<input type="number" id="workTime" value="25">
+<label>Mola Süresi (dakika):</label>
+<input type="number" id="breakTime" value="5">
+<button onclick="startPomodoro()">Başlat</button>
+<p id="pomodoroResult"></p>
+
+<script>
+let timer;
+function startPomodoro() {
+  clearInterval(timer);
+  let work = parseInt(document.getElementById('workTime').value) * 60;
+  const breakT = parseInt(document.getElementById('breakTime').value) * 60;
+  let isWork = true;
+
+  timer = setInterval(() => {
+    if (work > 0) {
+      work--;
+      document.getElementById('pomodoroResult').innerText =
+        (isWork ? "Çalışma" : "Mola") + " süresi: " + Math.floor(work/60) + ":" + String(work%60).padStart(2,"0");
+    } else {
+      isWork = !isWork;
+      work = isWork ? parseInt(document.getElementById('workTime').value) * 60 : breakT;
+    }
+  }, 1000);
+}
+</script>
+
+**Pomodoro Zamanlayıcı**, çalışma ve mola sürelerinizi ayarlayarak verimli çalışmanıza yardımcı olur.  
+Özellikle öğrenciler ve masa başı çalışanlar için zaman yönetimini kolaylaştırır.
