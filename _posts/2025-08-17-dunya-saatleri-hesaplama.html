@@ -1,0 +1,29 @@
+---
+title: Dünya Saatleri Hesaplama
+date: '2025-08-17 00:22:00 Europe/Istanbul'
+categories:
+  - Zaman
+type: Document
+permalink: /:title
+---
+<label>Şehir Seçin:</label>
+<select id="city">
+  <option value="Europe/Istanbul">İstanbul</option>
+  <option value="Europe/London">Londra</option>
+  <option value="America/New_York">New York</option>
+  <option value="Asia/Tokyo">Tokyo</option>
+  <option value="Australia/Sydney">Sydney</option>
+</select>
+<button onclick="showWorldTime()">Hesapla</button>
+<p id="worldTimeResult"></p>
+
+<script>
+function showWorldTime() {
+  const city = document.getElementById('city').value;
+  const now = new Date().toLocaleString("tr-TR", { timeZone: city });
+  document.getElementById('worldTimeResult').innerText = `Seçilen şehirde saat: ${now}`;
+}
+</script>
+
+**Dünya Saatleri Hesaplama**, farklı şehirlerin anlık saatlerini gösterir.  
+Uluslararası toplantılar, seyahat planlamaları ve farklı ülkelerdeki tanıdıklarla iletişim için oldukça faydalıdır.
