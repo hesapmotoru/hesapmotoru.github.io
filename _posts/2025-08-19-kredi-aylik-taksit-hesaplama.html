@@ -1,0 +1,42 @@
+---
+title: Kredi Aylık Taksit Hesaplama
+date: '2025-08-19 00:00:00 Europe/Istanbul'
+categories:
+  - Finans
+type: Document
+permalink: /:title
+---
+<label>Kredi Tutarı (₺):</label>
+<input type="number" id="loanAmount" />
+<br />
+<label>Vade (Ay):</label>
+<input type="number" id="loanMonths" />
+<br />
+<label>Faiz Oranı (% Yıllık):</label>
+<input type="number" id="interestRate" />
+<br />
+<button onclick="calcLoan()">Hesapla</button>
+<p id="loanResult"></p>
+
+<script>
+function calcLoan() {
+  const amount = parseFloat(document.getElementById('loanAmount').value);
+  const months = parseInt(document.getElementById('loanMonths').value);
+  const rate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
+
+  if (isNaN(amount) || isNaN(months) || isNaN(rate)) {
+    document.getElementById('loanResult').innerText = "Lütfen tüm alanları doldurun.";
+    return;
+  }
+
+  // Aylık ödeme formülü: P * r * (1+r)^n / ((1+r)^n - 1)
+  const monthly = amount * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
+
+  document.getElementById('loanResult').innerText = 
+    `Aylık Taksit: ${monthly.toFixed(2)} ₺ | Toplam Ödeme: ${(monthly * months).toFixed(2)} ₺`;
+}
+</script>
+
+Kredi Aylık Taksit Hesaplama aracı, çekmek istediğiniz kredi için aylık ödemeniz gereken tutarı ve toplam geri ödemeyi hesaplamanıza yardımcı olur. Tutarı, vadeyi ve faiz oranını girerek kolayca sonucu öğrenebilirsiniz.  
+<br /><br/>
+Kullanım Örneği: 100.000₺ kredi, 24 ay vade ve %24 yıllık faiz oranıyla aylık taksit yaklaşık 5.280₺ olacaktır.
