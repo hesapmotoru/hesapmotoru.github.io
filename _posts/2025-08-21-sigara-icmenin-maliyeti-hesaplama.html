@@ -1,0 +1,56 @@
+---
+title: Sigara İçmenin Maliyeti Hesaplama
+date: '2025-08-21 00:00:00 Europe/Istanbul'
+categories:
+  - Sağlık
+type: Document
+permalink: /:title
+---
+
+<label>Günde İçilen Sigara Paketi:</label>
+<input type="number" id="packs" min="0" step="0.1" />
+<label>Bir Paket Fiyatı (₺):</label>
+<input type="number" id="price" min="0" step="0.1" />
+<button onclick="calcCig()">Hesapla</button>
+<p id="cigResult"></p>
+
+<script>
+function calcCig() {
+  const packs = parseFloat(document.getElementById('packs').value);
+  const price = parseFloat(document.getElementById('price').value);
+
+  if (!packs || !price) {
+    document.getElementById('cigResult').innerText = "Lütfen tüm alanları doldurun.";
+    return;
+  }
+
+  const daily = packs * price;
+  const monthly = daily * 30;
+  const yearly = daily * 365;
+
+  document.getElementById('cigResult').innerText =
+    `Günlük: ₺${daily.toFixed(2)}\nAylık: ₺${monthly.toFixed(2)}\nYıllık: ₺${yearly.toFixed(2)}`;
+}
+</script>
+
+### Sigara Maliyeti Hesaplama Nedir?
+
+Sigara yalnızca sağlığa değil, aynı zamanda bütçeye de ciddi zarar verir. Günlük içilen sigara miktarı ve paket fiyatına göre ne kadar para harcandığını görmek, sigarayı bırakmak isteyenler için güçlü bir motivasyon kaynağıdır.  
+
+### Neden Önemlidir?
+
+- Ortalama bir sigara tiryakisi yılda **binlerce lira** harcar.  
+- Bu para; tatil, yatırım, eğitim veya sağlıklı yaşam için kullanılabilecekken boşa gider.  
+- Finansal kaybı gözle görmek, sigarayı bırakma konusunda farkındalığı artırır.  
+
+### Örnek Hesaplama:
+
+- Günde 1 paket sigara içen ve paketi **60 TL** olan bir kişi:  
+  - Günlük maliyet: 60 TL  
+  - Aylık maliyet: 1.800 TL  
+  - Yıllık maliyet: 21.900 TL  
+
+Bu miktar, neredeyse **bir tatil masrafı veya birikim hesabı** demektir.  
+
+### Kısacası:  
+Bu araç, hem sağlığınızı hem de cebinizi korumanız için sigaranın gerçek maliyetini gözler önüne serer.
