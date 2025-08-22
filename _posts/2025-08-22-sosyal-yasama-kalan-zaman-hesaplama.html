@@ -1,0 +1,88 @@
+---
+title: Sosyal Yaşama Kalan Zaman Hesaplama
+date: '2025-08-22 00:00:00 Europe/Istanbul'
+categories:
+  - Zaman
+type: Document
+permalink: /:title
+---
+
+<label>Günlük Uyku Süresi (saat):</label>
+<input type="number" id="sleep" value="8"><br />
+
+<label>Günlük Yemek Süresi (saat):</label>
+<input type="number" id="eating" value="2"><br />
+
+<label>Günlük Çalışma/Okul Süresi (saat):</label>
+<input type="number" id="work" value="9"><br />
+
+<label>Cumartesi Çalışıyor musunuz?</label>
+<select id="saturday">
+  <option value="1">Evet</option>
+  <option value="0">Hayır</option>
+</select><br />
+
+<label>Pazar Çalışıyor musunuz?</label>
+<select id="sunday">
+  <option value="1">Evet</option>
+  <option value="0">Hayır</option>
+</select><br />
+
+<button onclick="calcSocialLife()">Hesapla</button>
+<p id="socialResult"></p>
+
+<script>
+function calcSocialLife() {
+  const sleep = parseFloat(document.getElementById('sleep').value);
+  const eating = parseFloat(document.getElementById('eating').value);
+  const work = parseFloat(document.getElementById('work').value);
+  const satWork = parseInt(document.getElementById('saturday').value);
+  const sunWork = parseInt(document.getElementById('sunday').value);
+
+  const dailyUsed = sleep + eating + work;
+  const dailyLeft = 24 - dailyUsed;
+
+  let weeklyLeft = 0;
+
+  // Pazartesi - Cuma (5 gün)
+  weeklyLeft += dailyLeft * 5;
+
+  // Cumartesi
+  if (satWork === 1) {
+    weeklyLeft += dailyLeft; 
+  } else {
+    weeklyLeft += (24 - (sleep + eating)); // sadece uyku + yemek
+  }
+
+  // Pazar
+  if (sunWork === 1) {
+    weeklyLeft += dailyLeft; 
+  } else {
+    weeklyLeft += (24 - (sleep + eating));
+  }
+
+  document.getElementById('socialResult').innerText =
+    `Günlük sosyal yaşama ayırabileceğiniz süre: ${dailyLeft.toFixed(1)} saat
+Haftalık toplam sosyal yaşam süresi: ${weeklyLeft.toFixed(1)} saat`;
+}
+</script>
+
+Açıklama
+<br/>
+Hayatımızda sosyal yaşama ne kadar zaman kaldığını merak edenler için bu araç oldukça faydalıdır.  <br/>
+Uyku, yemek ve iş/okul için ayırdığınız zamanı girdikten sonra, geriye kalan saatleri görebilirsiniz.  <br/>
+<br/>
+Ayrıca bu hesaplayıcı **cumartesi ve pazar günlerini ayrı ayrı seçebilmenize** olanak tanır. <br/> 
+- Eğer cumartesi ve pazar günleri çalışıyorsanız, sistem onları da iş günü gibi hesaba katar.  <br/>
+- Eğer birini veya her ikisini tatil olarak seçerseniz, o günlerde yalnızca uyku ve yemek süresi düşülerek daha fazla serbest zaman hesaplanır.  
+<br/>
+✅ Bu sayede haftalık toplam sosyal yaşam sürenizi daha gerçekçi şekilde öğrenebilirsiniz.  
+<br/>
+Örnek:  <br/>
+- 8 saat uyku  <br/>
+- 2 saat yemek  <br/>
+- 9 saat iş/okul  <br/>
+- Cumartesi **çalışıyor**, Pazar **tatil**  
+<br/><br/>
+👉 Günlük serbest zaman: 5 saat  <br/>
+👉 Haftalık serbest zaman: yaklaşık **52 saat**  <br/>
