@@ -1,0 +1,59 @@
+---
+title: Uyku ve Uyanıklık Süresi Hesaplama Aracı
+date: '2025-08-23 00:00:00 Europe/Istanbul'
+categories:
+  - Zaman
+type: Document
+permalink: /:title
+---
+<label>Doğum Tarihiniz:</label>
+<input type="date" id="birthDate" />
+<br /><br />
+<label>Günlük Ortalama Uyku (saat):</label>
+<input type="number" id="sleepHours" value="8" min="0" max="24" /> saat
+<br /><br />
+<button onclick="calcLifeSleep()">Hesapla</button>
+<p id="lifeSleepResult"></p>
+
+<script>
+function calcLifeSleep() {
+  const birthDate = new Date(document.getElementById('birthDate').value);
+  const sleepHours = parseFloat(document.getElementById('sleepHours').value);
+  if (!birthDate || isNaN(sleepHours)) {
+    document.getElementById('lifeSleepResult').innerText = "Lütfen geçerli değerler giriniz.";
+    return;
+  }
+
+  const now = new Date();
+  const livedMs = now - birthDate;
+  const livedDays = livedMs / (1000 * 60 * 60 * 24);
+  const livedYears = livedDays / 365.25;
+
+  // Şimdiye kadar uyunan süre
+  const totalSleepDays = livedDays * (sleepHours / 24);
+  const totalSleepYears = totalSleepDays / 365.25;
+
+  // Şimdiye kadar uyanık geçirilen süre
+  const totalAwakeYears = livedYears - totalSleepYears;
+
+  // Ortalama ömür varsayımı (80 yıl)
+  const avgLife = 80;
+  const remainingYears = avgLife - livedYears;
+  const futureSleepYears = remainingYears * (sleepHours / 24);
+  const futureAwakeYears = remainingYears - futureSleepYears;
+
+  document.getElementById('lifeSleepResult').innerHTML = `
+    <b>Yaşınız:</b> ${livedYears.toFixed(1)} yıl <br/>
+    <b>Şimdiye kadar uyuduğunuz süre:</b> ${totalSleepYears.toFixed(1)} yıl (${((sleepHours/24)*100).toFixed(1)}% hayatınızın) <br/>
+    <b>Şimdiye kadar uyanık geçirdiğiniz süre:</b> ${totalAwakeYears.toFixed(1)} yıl <br/><br/>
+    <b>Ortalama ömür varsayımı (${avgLife} yıl):</b><br/>
+    - Kalan yaşam süresi: ${remainingYears.toFixed(1)} yıl <br/>
+    - Bunun yaklaşık ${futureSleepYears.toFixed(1)} yılını uyuyarak,<br/>
+    - ${futureAwakeYears.toFixed(1)} yılını uyanık geçirmeniz bekleniyor.
+  `;
+}
+</script>
+
+**Yaşamdan Uyku Süresi Hesaplama** aracı, hayatımızın ne kadarını uykuda ne kadarını uyanık geçirdiğimizi görmemizi sağlar. Ortalama olarak insanlar yaşamlarının üçte birini uykuda geçirir. Bu uygulama, günlük uyku sürenize göre yaşadığınız süre boyunca toplam uyuduğunuz zamanı ve gelecekte uyuyacağınız süreyi hesaplar.  
+<br/>
+Örneğin, günde 8 saat uyuyan bir kişi 80 yıllık ömrünün yaklaşık **26 yılını uykuda**, geri kalan **54 yılını ise uyanık** geçirir. Böylece zamanınızı daha bilinçli kullanmanız için farkındalık oluşturur.
