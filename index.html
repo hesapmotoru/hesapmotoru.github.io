@@ -2,26 +2,39 @@
 ---
 
 <section class="categories">
-	{% assign categories = site.categories | sort %}
-	{% for category in categories %}
-		{% assign name = category[0] %}
-		{% assign posts = category[1] %}
-		{% assign size = posts | size %}
-		<section class="category">
-				<h3>
-					{{ name | replace: "-", " " }}
-				</h3>
+  {% assign categories = site.categories | sort %}
+  {% for category in categories %}
+    {% assign name = category[0] %}
+    {% assign posts = category[1] %}
+    <section class="category">
+      <h3>{{ name | replace: "-", " " }}</h3>
+      <ul>
+        {% assign tutorials = posts | where: "type", "Document" | sort: "title" %}
+        {% for tutorial in tutorials limit: 15 %}
+          {% assign post_age = site.time | date: "%s" | minus: tutorial.date | date: "%s" %}
+          {% assign days_old = post_age | divided_by: 86400 %}
 
-			<ul>
-				{% assign tutorials = posts | where: "type", "Document" | sort: "title"  %}
-				{% for tutorial in tutorials limit: 15 %}
-					<li><a href="{{ site.baseurl }}{{ tutorial.url }}">{% include document-icon.html icon=tutorial.type %}{{ tutorial.title }}</a></li>
-				{% endfor %}
-				
-			</ul>
-		</section>
-	{% endfor %}
-
-	
+          <li>
+            <a href="{{ site.baseurl }}{{ tutorial.url }}">
+              {% include document-icon.html icon=tutorial.type %}
+              {{ tutorial.title }}
+            </a>
+            {% if days_old < 14 %}
+              <span class="new-label">🟢 Yeni</span>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
 </section>
+
+<style>
+.new-label {
+  color: #0f0;
+  font-size: 0.85em;
+  margin-left: 6px;
+  font-weight: 600;
+}
+</style>
 
