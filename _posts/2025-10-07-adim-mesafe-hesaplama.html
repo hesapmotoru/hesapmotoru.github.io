@@ -1,0 +1,53 @@
+---
+title: Adım Sayısına Göre Mesafe Hesaplama
+date: '2025-10-07 19:58:00 Europe/Istanbul'
+updated: '2025-10-07 19:58:00 Europe/Istanbul'
+categories:
+  - Sağlık
+type: Document
+permalink: /:title
+---
+<label for="stepCount">Adım Sayısını Girin:</label>
+<input type="number" id="stepCount" placeholder="Adım Sayısı">
+<label for="stepLength">Adım Uzunluğunu Girin (cm):</label>
+<input type="number" id="stepLength" placeholder="Adım Uzunluğu (cm)">
+<button onclick="calculateDistance()">Mesafeyi Hesapla</button>
+<h2 id="result"></h2>
+
+<script>
+function calculateDistance() {
+  const stepCount = parseFloat(document.getElementById('stepCount').value);
+  const stepLength = parseFloat(document.getElementById('stepLength').value);
+
+  if (isNaN(stepCount) || isNaN(stepLength) || stepCount <= 0 || stepLength <= 0) {
+    alert("Lütfen geçerli bir adım sayısı ve adım uzunluğu girin.");
+    return;
+  }
+
+  const distanceInKm = (stepCount * stepLength) / 100000; // cm -> km
+  document.getElementById('result').innerText = `Katedilen Mesafe: ${distanceInKm.toFixed(2)} km`;
+}
+</script>
+
+<br />
+
+## Adım Sayısına Göre Mesafe Hesaplama
+
+### Uygulamanın Amacı
+Adım sayısı ve adım uzunluğu kullanılarak yürüyüş veya koşu sırasında katedilen mesafeyi hesaplamak, fiziksel aktivite takibinde oldukça önemlidir.  
+Bu **adım mesafe hesaplayıcı**, günlük yürüyüş veya spor aktivitelerinde kaç kilometre yol katedildiğini kolayca öğrenmenizi sağlar. Özellikle akıllı bileklik ya da saat kullanmayan kişiler için pratik bir alternatiftir.
+
+<br />
+
+### Kullanım Talimatları
+**1. Adım Sayısını Girin:** Günlük attığınız adım sayısını "Adım Sayısı" alanına yazın.  
+**2. Adım Uzunluğunu Girin:** Ortalama adım uzunluğunuzu santimetre (cm) cinsinden girin.  
+**3. Mesafeyi Hesaplayın:** "Mesafeyi Hesapla" butonuna bastığınızda, katedilen toplam mesafe kilometre (km) olarak ekranda görüntülenecektir.  
+
+> Örnek: 8000 adım ve 70 cm adım uzunluğu girildiğinde sonuç yaklaşık **5.6 km** olacaktır.
+
+<br />
+
+### Hesaplama Yöntemi
+Adım sayısına göre mesafe hesaplamak için kullanılan temel formül şu şekildedir:
+
