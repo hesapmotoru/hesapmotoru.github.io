@@ -1,6 +1,3 @@
----
----
-
 <section class="categories">
   {% assign categories = site.categories | sort %}
   {% for category in categories %}
@@ -11,15 +8,17 @@
       <ul>
         {% assign tutorials = posts | where: "type", "Document" | sort: "title" %}
         {% for tutorial in tutorials limit: 15 %}
-          {% assign post_age = site.time | date: "%s" | minus: tutorial.date | date: "%s" %}
-          {% assign days_old = post_age | divided_by: 86400 %}
+          {% assign post_date = tutorial.date | date: "%s" %}
+          {% assign now_date = site.time | date: "%s" %}
+          {% assign diff = now_date | minus: post_date %}
+          {% assign days_old = diff | divided_by: 86400 %}
 
           <li>
-            <a href="{{ site.baseurl }}{{ tutorial.url }}">
+            <a href="{{ site.baseurl }}{{ tutorial.url }}" class="{% if days_old < 7 %}new-post{% endif %}">
               {% include document-icon.html icon=tutorial.type %}
               {{ tutorial.title }}
             </a>
-            {% if days_old < 14 %}
+            {% if days_old < 7 %}
               <span class="new-label">🟢 Yeni</span>
             {% endif %}
           </li>
@@ -31,10 +30,14 @@
 
 <style>
 .new-label {
-  color: #0f0;
+  color: #00c853;
   font-size: 0.85em;
-  margin-left: 6px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.new-post {
+  color: #00c853;
   font-weight: 600;
 }
 </style>
-
