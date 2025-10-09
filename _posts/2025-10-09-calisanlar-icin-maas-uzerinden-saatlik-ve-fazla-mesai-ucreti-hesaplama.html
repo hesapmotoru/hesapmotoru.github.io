@@ -1,0 +1,90 @@
+---
+title: Çalışanlar Maaş Üzeirinden Saatlik ve Fazla Mesai Ücreti Hesaplama
+date: '2025-10-09 12:58:00 Europe/Istanbul'
+updated: '2025-10-09 12:58:00 Europe/Istanbul'
+categories:
+  - Finans
+type: Document
+permalink: /:title
+---
+Çalışanlar Maaş Üzeirinden Saatlik ve Fazla Mesai Ücreti Hesaplama aracı, aylık maaşınıza göre saatlik ücretinizi, fazla mesai kazancınızı ve toplam alacağınız maaşı kolayca hesaplayabilirsiniz. Bu araç, çalışanların maaş detaylarını anlamasını kolaylaştırmak için tasarlandı. Üstelik fazla mesai ücreti otomatik olarak 1.5 kat oranında hesaplanır.
+
+💡 Hesaplama Nasıl Yapılır?
+Türkiye’de birçok işyerinde aylık çalışma süresi ortalama 225 saat kabul edilir.  
+Bu hesaplama aracı:
+1. Maaşınızı 225’e bölerek saatlik ücretinizi bulur.  
+2. Fazla mesai için 1.5 katsayısı uygular.  
+3. Girdiğiniz fazla mesai saatiyle çarparak **toplam fazla mesai kazancınızı** verir.  
+4. Son olarak, maaşınıza ekleyerek **toplam alınacak maaşı** gösterir.
+
+
+🔢 Maaş Hesaplama Aracı
+
+<div class="calculator-container" style="border:1px solid #ddd;padding:20px;border-radius:10px;max-width:400px;margin:auto;background:#fafafa;">
+<h1 style="font-size:1.4em;text-align:center;">Maaş ve Fazla Mesai Ücreti Hesaplayıcı</h1>
+
+<label for="salary">Aylık Maaş (₺):</label>
+<input type="number" id="salary" placeholder="Maaşınızı Girin" style="width:100%;padding:8px;margin:5px 0;" required>
+<br>
+
+<label for="overtimeHours">Fazla Mesai Saati:</label>
+<input type="number" id="overtimeHours" placeholder="Fazla mesai saati" style="width:100%;padding:8px;margin:5px 0;" required>
+<br>
+
+<button onclick="calculateHourlyWage()" style="width:100%;padding:10px;background:#2c7be5;color:white;border:none;border-radius:5px;cursor:pointer;">Hesapla</button>
+
+<h3 id="result" style="margin-top:15px;text-align:center;"></h3>
+<h4 id="overtimeResult" style="text-align:center;color:#2c7be5;"></h4>
+<h4 id="totalResult" style="text-align:center;color:#28a745;"></h4>
+</div>
+
+<script>
+function calculateHourlyWage() {
+    const salary = parseFloat(document.getElementById('salary').value);
+    const overtimeHours = parseFloat(document.getElementById('overtimeHours').value);
+
+    if (!isNaN(salary) && salary > 0) {
+        const hourlyWage = salary / 225; // Saatlik ücret
+        const overtimeRate = hourlyWage * 1.5; // Fazla mesai saatlik ücret
+
+        document.getElementById('result').innerText = 
+            `Saatlik Ücretiniz: ₺${hourlyWage.toFixed(2)}\nFazla Mesai Saatlik Ücreti: ₺${overtimeRate.toFixed(2)}`;
+
+        if (!isNaN(overtimeHours) && overtimeHours > 0) {
+            const totalOvertimePay = overtimeRate * overtimeHours;
+            const totalWithOvertime = salary + totalOvertimePay;
+
+            document.getElementById('overtimeResult').innerText = 
+                `Toplam Fazla Mesai Ücreti (${overtimeHours} saat): ₺${totalOvertimePay.toFixed(2)}`;
+
+            document.getElementById('totalResult').innerText = 
+                `Fazla Mesai Dahil Toplam Maaş: ₺${totalWithOvertime.toFixed(2)}`;
+        } else {
+            document.getElementById('overtimeResult').innerText = '';
+            document.getElementById('totalResult').innerText = '';
+        }
+    } else {
+        document.getElementById('result').innerText = 'Lütfen geçerli bir maaş girin.';
+        document.getElementById('overtimeResult').innerText = '';
+        document.getElementById('totalResult').innerText = '';
+    }
+}
+</script>
+
+📈 Neden Bu Hesaplama Önemli?
+
+Birçok çalışan, maaş bordrosunda fazla mesai ücretlerinin nasıl hesaplandığını bilmez.  
+Bu araç sayesinde hem işveren hem çalışan:
+- Saatlik ücretini net olarak görebilir,  
+- Fazla mesai ücretinin doğru hesaplanıp hesaplanmadığını kontrol edebilir,  
+- Ay sonu maaş tahminini kolayca yapabilir.  
+
+
+🧮 Örnek Hesaplama
+
+| Aylık Maaş | Fazla Mesai (Saat) | Saatlik Ücret | Fazla Mesai Saat Ücreti | Toplam Fazla Mesai Ücreti | Toplam Maaş |
+|-------------|--------------------|----------------|--------------------------|----------------------------|--------------|
+| ₺30.000 | 10 | ₺133.33 | ₺200.00 | ₺2.000 | ₺32.000 |
+
+
+Bu sayfayı yer imlerine ekleyerek gelecekteki maaş değişimlerinizi ve fazla mesai farklarını da kolayca karşılaştırabilirsiniz.
