@@ -1,0 +1,150 @@
+---
+title: Kaç Ayda Alırım ?
+date: '2025-11-09 23:00:00 Europe/Istanbul'
+updated: '2025-11-09 23:10:00 Europe/Istanbul'
+categories:
+  - Finans
+type: Document
+permalink: /:title
+---
+🧮 Kaç Ayda Alırım? Gelir ve Giderine Göre Alım Gücü Hesaplayıcı
+<br /><br />
+Günümüz ekonomik koşullarında birçok kişi “Bu ürünü kaç ayda alabilirim?” sorusuna net bir cevap arıyor.<br />
+Kaç Ayda Alırım Hesaplayıcısı, gelirini, giderini ve peşinatını girerek bir ürünün kaç ayda alınabileceğini canlı olarak hesaplamanı sağlar.
+<br /><br />
+<label>Alınacak Ürün:</label>
+<select id="urun">
+<option value="Ev">Ev</option>
+<option value="Araba">Araba</option>
+<option value="Bilgisayar">Bilgisayar</option>
+<option value="Telefon">Telefon</option>
+<option value="Diğer">Diğer</option>
+</select>
+
+<label>Ürün Fiyatı (₺):</label>
+<input type="number" id="fiyat" placeholder="Ürün fiyatını girin">
+
+<label>Aylık Gelir (₺):</label>
+<input type="number" id="gelir" placeholder="Aylık gelirini girin">
+
+<label>Aylık Gider (₺):</label>
+<input type="number" id="gider" placeholder="Aylık giderini girin">
+
+<label>Peşinat (₺) <small>(Opsiyonel)</small>:</label>
+<input type="number" id="pesinat" placeholder="Varsa peşinat girin">
+
+<label>Her Ay Kenara Ayrılacak Miktar (₺) <small>(Opsiyonel)</small>:</label>
+<input type="number" id="kenara" placeholder="Opsiyonel, günlük ihtiyaç veya tasarruf için">
+
+<div class="kalan" id="kalanPara">Cepte Kalan Para: ₺0</div>
+<div class="result" id="sonuc"></div>
+
+<script>
+const urunEl=document.getElementById("urun");
+const fiyatEl=document.getElementById("fiyat");
+const gelirEl=document.getElementById("gelir");
+const giderEl=document.getElementById("gider");
+const pesinatEl=document.getElementById("pesinat");
+const kenaraEl=document.getElementById("kenara");
+const sonuc=document.getElementById("sonuc");
+const kalanParaEl=document.getElementById("kalanPara");
+
+function hesapla(){
+let urun=urunEl.value;
+let fiyat=parseFloat(fiyatEl.value)||0;
+let gelir=parseFloat(gelirEl.value)||0;
+let gider=parseFloat(giderEl.value)||0;
+let pesinat=parseFloat(pesinatEl.value)||0;
+let kenara=parseFloat(kenaraEl.value)||0;
+
+// Kalan gelir
+let kalanGelir = gelir - gider;
+
+// Cepte kalan = kalan gelir - kenara ayrılan para
+let cepteKalan = kalanGelir - kenara;
+if(cepteKalan<0) cepteKalan=0;
+
+// Canlı göster
+kalanParaEl.innerHTML="Cepte Kalan Para: ₺"+cepteKalan.toLocaleString('tr-TR');
+
+// Kontroller
+if(fiyat<=0 || gelir<=0 || gider<0){
+sonuc.innerHTML="Lütfen gelir, gider ve ürün fiyatını girin.";
+return;
+}
+if(kalanGelir<=0){
+sonuc.innerHTML="Giderleriniz gelirinizden fazla veya eşit. Tasarruf edilemiyor.";
+return;
+}
+
+// Kalan ürün fiyatı
+let kalanFiyat=Math.max(0,fiyat-pesinat);
+if(kalanFiyat<=0){
+sonuc.innerHTML="Peşinatınız bu ürünü almaya yeterli!";
+return;
+}
+
+// Kaç ayda alınır = kalan ürün / cepte kalan para
+if(cepteKalan<=0){
+sonuc.innerHTML="Cepte kalan para yok. Ürünü almak mümkün değil.";
+return;
+}
+
+let ay=Math.ceil(kalanFiyat/cepteKalan);
+sonuc.innerHTML=urun+" almak için yaklaşık <strong>"+ay+" ay</strong> gerekir.";
+}
+
+// inputlara canlı event
+[urunEl,fiyatEl,gelirEl,giderEl,pesinatEl,kenaraEl].forEach(el=>{
+el.addEventListener('input',hesapla);
+});
+
+// ilk hesaplama
+hesapla();
+</script>
+<br /><br />
+Bu araç; ev, araba, bilgisayar, telefon gibi yüksek tutarlı ürünlerde tasarruf planlaması yapmak isteyen herkes için idealdir.
+<br /><br />
+🔹 Nasıl Çalışır?
+<br /><br />
+Hesaplama oldukça basit:
+<br /><br />
+Almak istediğin ürünü ve fiyatını gir.
+<br /><br />
+Aylık gelirini ve giderlerini belirt.
+<br /><br />
+Dilersen peşinat ekleyebilirsin.
+<br /><br />
+Her ay kenara ayırmak istediğin miktarı da gir (örneğin kira, tasarruf, temel ihtiyaç vb.).
+<br /><br />
+Araç, gelir – gider – kenara ayrılan miktar üzerinden cepte kalan parayı canlı olarak gösterir.
+<br /><br />
+Ardından bu tutarla ürünün kaç ayda alınabileceğini otomatik olarak hesaplar.
+<br /><br />
+Sonuç: Kaç ayda hedefe ulaşabileceğini kolayca öğrenirsin.
+<br /><br />
+💡 Örnek Hesaplama
+<br /><br />
+Ürün: Telefon (30.000 ₺)
+<br /><br />
+Aylık Gelir: 25.000 ₺
+<br /><br />
+Aylık Gider: 18.000 ₺
+<br /><br />
+Kenara Ayrılan: 2.000 ₺
+<br /><br />
+Peşinat: 5.000 ₺
+<br /><br />
+Bu durumda:<br />
+Cepte kalan para 5.000 ₺ olur.<br />
+Kalan ürün bedeli (25.000 ₺) / 5.000 ₺ = 5 ayda ürün alınabilir.
+<br /><br />
+📊 Neden Kullanmalı
+<br /><br />
+Gelirine göre gerçekçi bir alım planı yapmanı sağlar.
+<br /><br />
+Aylık bütçeni canlı olarak izleyebilirsin.
+<br /><br />
+Peşinatlı veya peşinatsız senaryoları karşılaştırabilirsin.
+<br /><br />
+Cepte kalan paranı görerek tasarruf planını geliştirebilirsin.
