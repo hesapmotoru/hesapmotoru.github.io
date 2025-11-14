@@ -1,0 +1,116 @@
+--
+title: Varış Süresi Hesaplama
+date: '2025-11-14 20:00:00 Europe/Istanbul'
+updated: '2025-11-14 20:00:00 Europe/Istanbul'
+categories:
+  - Zaman
+type: Document
+permalink: /varis-suresi-hesaplama
+---
+<label>Ortalama Hız (km/s)</label>
+<input id="hiz" type="number" placeholder="Örn: 90">
+
+<label>Mesafe (km)</label>
+<input id="mesafe" type="number" placeholder="Örn: 450">
+
+<label>Mola Sayısı</label>
+<input id="molaSayisi" type="number" value="0">
+
+<label>Her Molada Geçen Süre (dakika)</label>
+<input id="molaSuresi" type="number" value="0">
+
+<button onclick="hesapla()">Hesapla</button>
+
+<div id="sonuc" class="result"></div>
+
+<script>
+function hesapla(){
+var hiz=parseFloat(document.getElementById('hiz').value);
+var mesafe=parseFloat(document.getElementById('mesafe').value);
+var molaSayisi=parseFloat(document.getElementById('molaSayisi').value);
+var molaSuresi=parseFloat(document.getElementById('molaSuresi').value);
+
+if(!hiz||!mesafe){
+document.getElementById('sonuc').textContent="Lütfen hız ve mesafeyi girin.";
+return;
+}
+
+var yolSuresi=mesafe/hiz; // saat
+var toplamMolaSaat=(molaSayisi*(molaSuresi/60)); // dakikayı saate çevir
+var toplamSure=yolSuresi+toplamMolaSaat;
+
+var saat=Math.floor(toplamSure);
+var dakika=Math.round((toplamSure-saat)*60);
+
+document.getElementById('sonuc').textContent="Tahmini Varış Süresi: "+saat+" saat "+dakika+" dakika";
+}
+</script>
+<br />
+Ortalama hız, mesafe ve mola sürelerini girerek hedefe kaç saatte ulaşacağınızı hesaplayabilirsiniz.
+<br />
+Varış Süresi Hesaplama: Ortalama Hız, Mesafe ve Molaya Göre Seyahat Süresi Hesaplama
+<br />
+Seyahat planlarken en önemli sorulardan biri “Hedefe kaç saatte varırım?” sorusudur. Ortalama hız, toplam mesafe ve yol boyunca verilecek molalar; toplam varış süresini doğrudan etkiler. Bu nedenle doğru bir hesaplama yapmak, hem yolculuğu daha güvenli hâle getirir hem de zaman yönetimini kolaylaştırır.
+<br />
+Bu sayfada, hız ve mesafe değerlerinizi girip mola bilgilerini ekleyerek gerçekçi bir varış süresi tahmini elde edebilirsiniz.
+<br />
+🚗 Varış Süresi Nasıl Hesaplanır?
+<br />
+Varış süresi hesaplaması temelde şu formüle dayanır:
+<br />
+1) Yol Süresi (saat) = Mesafe (km) / Ortalama Hız (km/s)
+<br />
+Örneğin:<br />
+450 km yol → 90 km/s ortalama hız → 450 / 90 = 5 saat
+<br />
+2) Toplam Mola Süresi (saat) = Mola Sayısı × Mola Süresi (dakika / 60)
+<br />
+Örneğin:<br />
+2 mola × 15 dakika → 30 dakika → 0,5 saat
+<br />
+3) Toplam Varış Süresi
+<br />
+Toplam Süre = Yol Süresi + Mola Süresi
+<br />
+Bu formül, şehirler arası seyahatlerden uzun yol planlamalarına kadar her senaryoda geçerlidir.
+<br />
+🧮 Neden Ortalama Hız Kullanılır?
+<br />
+Gerçek yolculukta araç hiçbir zaman sabit hızda ilerlemez. Trafik, yol çalışması, rüzgâr, araç yoğunluğu ve yol durumu gibi pek çok faktör ortalama hızı belirler. Bu yüzden hesaplamalarda en güvenilir yöntem, sabit hız yerine ortalama hız almaktır.
+<br />
+🎯 Mola Süresi Hesaplamaya Neden Dahil Edilir?
+<br />
+Uzun yolculuklarda mola vermek hem güvenlik hem de konfor için gereklidir.<br />
+Özellikle:
+<br />
+2–3 saatte bir dinlenmek
+<br />
+Araç kontrolleri yapmak
+<br />
+Tuvalet ve yemek molaları toplam varış süresini uzatır. Bu süreyi hesaba katmamak ciddi zaman farklarına yol açabilir.
+<br />
+📱 Bu Araç Size Ne Sağlar?
+<br />
+Ortalama hız + mesafe → Yol süresi
+<br />
+Mola sayısı + mola süresi → Ek zaman
+<br />
+Toplam varış süresi → Gerçekçi tahmin
+<br />
+Hızlı, kolay ve ücretsiz kullanım
+<br />
+Mobil uyumlu yapı
+<br />
+Seyahat planlamalarınızı daha bilinçli yapabilir, toplantı saatleri veya check-in zamanlarını buna göre ayarlayabilirsiniz.
+<br />
+✔ Kullanım Senaryoları
+<br />
+Şehirler arası yolculuk süresi hesaplama
+<br />
+Tatil veya iş seyahati planlama
+<br />
+Kargo / motosiklet / kurye tahmini zaman hesabı
+<br />
+Uzun sürüşlerde mola planı oluşturma
+<br />
+Araç kiralama ve rota organizasyonu
