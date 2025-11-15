@@ -1,0 +1,243 @@
+---
+title: TOKİ Sosyal Konut Peşinat ve Taksit Hesaplama
+date: 2025-11-15T14:00:00+03:00
+categories:
+  - Zaman
+type: Document
+permalink: /toki-sosyal-konut-pesinat-ve-taksit-hesaplama
+---
+<p class="small">Ev fiyatını ve peşinat yüzdesini girin. Kalan borç, 120 veya 240 ay seçeneğine göre taksitlendirilecek. Taksitler, 6 ayda bir memur maaş artış oranına göre **kalan borç üzerinden** güncellenecektir.</p>
+
+<p>Uyarı 6 Aylık Memur Maaş Artış Oranı (%) tekseferlik eklenmiştir. Bu zam oranı 6 ayda bir değişeceği için ödenecek taksit ve bakiye bilgisi değişiklik gösterebilir.</p>
+
+<div class="row">
+<div class="col">
+<label>Evin Fiyatı (TL)</label><br />
+<input id="price" type="text" placeholder="Örn: 4.000.000" oninput="formatTLInput(this)">
+<br />
+<label>Peşinat (%)</label><br />
+<input id="depositPercent" type="text" placeholder="Örn: 10" value="10" oninput="formatTLInput(this)">
+<br />
+<label>Vade (Ay)</label><br />
+<select id="months">
+<option value="120">120 Ay</option>
+<option value="240">240 Ay</option>
+</select>
+<br />
+<label>6 Aylık Memur Maaş Artış Oranı (%)</label><br />
+<input id="increaseRate" type="text" placeholder="Varsayılan 11,54" value="11.54" oninput="formatTLInput(this)">
+<br />
+<button class="btn" id="calc">Hesapla</button>
+</div>
+</div>
+
+<div class="row">
+<div class="col">
+<div id="output" class="result">
+<div class="kv"><div>Aylık Taksit (ilk ay)</div><div id="monthly">-</div></div>
+<div class="kv"><div>Peşinat Tutarı</div><div id="deposit">-</div></div>
+<div class="kv"><div>Kalan Anapara (ilk ay sonrası)</div><div id="remaining">-</div></div>
+<div class="kv"><div>Toplam Ödenecek (tahmini)</div><div id="total">-</div></div>
+<div class="note">Tüm aylar tablo ve grafikle gösterilmektedir.</div>
+</div>
+</div>
+</div>
+
+<div class="table card">
+<h3 style="margin:12px 12px 0">Ödeme Takvimi</h3>
+<table id="schedule" role="table">
+<thead>
+<tr>
+<th>Ay</th>
+<th>Aylık Taksit (TL)</th>
+<th>Kalan Borç (TL)</th>
+<th>Ay Sonrası Kalan Borç (TL)</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+
+<div class="card">
+<canvas id="chart" height="300"></canvas>
+</div>
+</div>
+
+<script>
+function formatTLInput(el){
+  // sadece rakam ve virgül kabul et, noktaları kaldır
+  let val = el.value.replace(/\./g,'').replace(/[^\d,]/g,'');
+  if(val===''){el.value=''; return;}
+  // noktaları otomatik ekle
+  let num = parseFloat(val.replace(',', '.'));
+  if(!isNaN(num)){
+    el.value = num.toLocaleString('tr-TR',{maximumFractionDigits:2});
+  }
+}
+
+function formatTL(v){return v.toLocaleString('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:0})}
+
+document.getElementById('calc').addEventListener('click', function(){
+  // Noktalı veya virgüllü değerleri parse et
+  var price = parseFloat(document.getElementById('price').value.replace(/\./g,'').replace(',','.'))||0;
+  var depositPct = parseFloat(document.getElementById('depositPercent').value.replace(/\./g,'').replace(',','.'))||0;
+  var months = parseInt(document.getElementById('months').value,10)||120;
+  var rate = parseFloat(document.getElementById('increaseRate').value.replace(/\./g,'').replace(',','.'))||0;
+
+  if(price<=0){alert('Lütfen geçerli ev fiyatı girin.');return;}
+  if(depositPct<0||depositPct>100){alert('Peşinat yüzde 0-100 arasında olmalıdır.');return;}
+
+  var deposit = price*(depositPct/100);
+  var rem = price - deposit;
+  var schedule = [];
+  var totalPaid = deposit;
+
+  for(var i=1;i<=months;i++){
+    var beforeIncrease = rem;
+
+    // Artış sadece 7. ay ve 6 ay aralıklarla
+    if(i>6 && (i-1)%6===0){
+      rem = rem * (1 + rate/100);
+    }
+
+    var afterIncrease = rem;
+    var remMonths = months - i + 1;
+    var currentTaksit = rem / remMonths;
+    var afterPayment = rem - currentTaksit;
+    if(afterPayment<0) afterPayment = 0;
+
+    schedule.push({m:i, monthly:currentTaksit, remainingBefore:afterIncrease, remainingAfter:afterPayment});
+    totalPaid += currentTaksit;
+
+    rem = afterPayment; // bir sonraki aya geç
+  }
+
+  // sonuçları göster
+  document.getElementById('monthly').textContent=formatTL(Math.round(schedule[0].monthly));
+  document.getElementById('deposit').textContent=formatTL(Math.round(deposit));
+  document.getElementById('remaining').textContent=formatTL(Math.round(schedule[0].remainingAfter));
+  document.getElementById('total').textContent=formatTL(Math.round(totalPaid));
+
+  // tabloyu doldur (tüm aylar)
+  var tbody=document.querySelector('#schedule tbody');
+  tbody.innerHTML='';
+  var chartLabels=[], chartData=[];
+  for(var j=0;j<schedule.length;j++){
+    var r=schedule[j];
+    var tr=document.createElement('tr');
+    tr.innerHTML = '<td>'+r.m+'</td><td>'+formatTL(Math.round(r.monthly))+'</td><td>'+formatTL(Math.round(r.remainingBefore))+'</td><td>'+formatTL(Math.round(r.remainingAfter))+'</td>';
+    tbody.appendChild(tr);
+
+    chartLabels.push(r.m);
+    chartData.push(Math.round(r.remainingAfter));
+  }
+
+ 
+
+});
+</script>
+
+
+TOKİ Sosyal Konut Taksit Hesaplama ve Güncel Ödeme Planı – 2025 Rehberi
+<br />
+Türkiye’de sosyal konut projelerine olan ilgi her geçen gün artarken, TOKİ taksit hesaplama, memur zammına göre konut güncellemesi, sabit ödeme – artan ödeme farkı, konut borcu ne kadar artar? gibi sorular da en çok araştırılan konular arasında yer alıyor.
+Bu yazıda hem 2025 TOKİ güncelleme sistemi hem de uygulamamızda yer alan hesaplama mantığı herkesin anlayabileceği şekilde anlatılmaktadır.
+<br />
+TOKİ Taksitleri Nasıl Hesaplanıyor?<br />
+TOKİ projelerinde taksitler çoğunlukla her 6 ayda bir açıklanan memur maaş artış oranına göre güncellenir.
+<br />
+Yani;
+<br />
+İlk 6 ay taksidiniz sabittir.
+<br />
+6 aylık memur maaş artışı açıklandığında taksitiniz bu oran kadar artırılır.
+<br />
+20 yıl, 25 yıl gibi uzun vadelerde bu artışlar toplam borcu önemli oranda etkiler.
+<br />
+Örneğin:
+<br />
+İlk taksit: 15.000 TL
+<br />
+6 ay sonra memur zammı %10 açıklanırsa yeni taksit:
+<br />
+→ 16.500 TL
+<br />
+Uygulamadaki Hesaplama Mantığı
+<br />
+Uygulamamız, kullanıcıya pratik bir simülasyon sunar.
+<br />
+Başlangıç borcu giriyorsunuz.
+<br />
+Aylık taksit tutarını yazıyorsunuz.
+<br />
+Tek seferlik zam oranı giriyorsunuz. (Örneğin %10)
+<br />
+Sistem 6 ay dolduğunda bu zammı uygulayarak güncel taksit ve borç tablonuzu oluşturuyor.
+<br />
+Neden tek seferlik zam alıyoruz?
+<br />
+Aslında memur maaş artışları her yıl farklı çıkar:
+<br />
+Bazen %10,
+<br />
+Bazen %7,
+<br />
+Bazen %22 olduğu dönemler oldu.
+<br />
+20 yıl boyunca 40 kez yapılacak güncellemeyi tek tek kullanıcıya girmek hem zor hem gerçekçi değil.
+Bu yüzden uygulama tek bir zam oranıyla 6 aylık simülasyon yapar.
+<br />
+Bu size borcun gelecekte nasıl büyüyebileceği konusunda bir öngörü sağlar.
+<br />
+Önemli Uyarı
+<br />
+Gerçek memur zamları her yıl değiştiği için uygulama %100 doğru sonuç vermez, fakat gerçeğe yakın bir hesaplama sağlar.
+<br />
+TOKİ Taksitleri Neden Artar?
+<br />
+TOKİ projelerinde fiyatlar ve taksitler, maliyet artışlarını dengelemek için güncellenir. Bu güncellemeler:
+<br />
+Memur maaş artış oranı
+<br />
+ÜFE/TÜFE değişimi
+<br />
+Toplu sözleşme zammı
+<br />
+Enflasyon farkı gibi faktörlere bağlıdır.
+<br />
+Örnek: 4.000.000 TL Başlangıç Borcu Nasıl Değişir?
+<br />
+Kullanıcı örneği:
+<br />
+Başlangıç borcu: 4.000.000 TL
+<br />
+Aylık taksit: 15.000 TL
+<br />
+Zam: %10
+<br />
+ay sonunda taksit 16.500 TL olur.
+<br />
+20 yıl sonunda toplam ödeme ise artışlara bağlı olarak 4 milyon → 40 milyon TL seviyesine kadar çıkabilir.
+<br />
+Bu rakamlar yüksek enflasyon dönemleri için normal karşılanmaktadır.
+<br />
+TOKİ Sosyal Konut Taksit Planı Nasıl Oluşturulur?
+<br />
+Uygulamamız sayesinde:
+<br />
+Borcu gir
+<br />
+Taksiti gir
+<br />
+Zam oranını yaz
+<br />
+“Hesapla” butonuna bas
+<br />
+“Aylık ödeme tablosu ve 6 aylık güncellemeler” otomatik hazırlanır
+<br />
+Bu Uygulama Kimler İçin Geliştirildi?
+<br />
+TOKİ borçluları<br />
+Sosyal konut sahibi olmak isteyenler<br />
+6 aylık güncelleme sonrası ne kadar ödeyeceğini merak edenler<br />
+Toplam borç artışının ne olacağını hesaplamak isteyenler
