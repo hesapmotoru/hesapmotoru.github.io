@@ -1,0 +1,83 @@
+---
+title: Fiyat Değişim Oranı Hesaplama
+date: 2025-01-12T21:42:00+03:00
+categories:
+  - Finans
+type: Document
+permalink: /fiyat-degisim-orani-hesaplama
+---
+<p>
+Bu araç sayesinde bir ürün, hizmet veya herhangi bir fiyatın
+<strong>eski fiyatı ile yeni fiyatı arasındaki yüzde değişim oranını</strong>
+kolayca hesaplayabilirsiniz.  
+Fiyatın yüzde kaç arttığını veya yüzde kaç azaldığını net ve anlaşılır
+şekilde görmek için kullanılır.
+</p>
+
+<h2>Fiyat Değişimini Hesaplayın</h2>
+
+<label>Eski Fiyat (₺)</label>
+<input type="number" id="eskiFiyat" step="0.01">
+
+<label>Yeni Fiyat (₺)</label>
+<input type="number" id="yeniFiyat" step="0.01">
+
+<button onclick="hesapla()">HESAPLA</button>
+
+<div class="result" id="sonuc"></div>
+
+<h2>Fiyat Değişim Oranı Nedir?</h2>
+<p>
+Fiyat değişim oranı, bir fiyatın belirli bir zaman içinde
+ne kadar arttığını veya azaldığını yüzde (%) cinsinden ifade eder.
+Bu hesaplama, fiyat karşılaştırmalarında en sık kullanılan yöntemlerden biridir.
+</p>
+
+<p>
+Örneğin bir ürünün fiyatı 100 TL iken 130 TL olduysa,
+bu fiyatın %30 arttığı anlamına gelir.
+Aynı şekilde 100 TL’den 80 TL’ye düşen bir fiyat,
+%20 oranında azalmış demektir.
+</p>
+
+<h2>Fiyat Değişim Hesaplama Nerelerde Kullanılır?</h2>
+<ul>
+<li>Ürün fiyatlarındaki artış oranını görmek</li>
+<li>Geçmiş ve güncel fiyatları karşılaştırmak</li>
+<li>Kira, aidat veya abonelik ücretlerindeki değişimi hesaplamak</li>
+<li>Maaş, ücret veya hizmet bedeli karşılaştırmaları yapmak</li>
+<li>Enflasyon kaynaklı fiyat değişimlerini analiz etmek</li>
+</ul>
+
+<h2>Bu Hesaplama Neden Önemlidir?</h2>
+<p>
+Sadece fiyat farkını bilmek çoğu zaman yeterli olmaz.
+Asıl önemli olan, bu farkın yüzde olarak ne ifade ettiğidir.
+Fiyat değişim oranı sayesinde küçük veya büyük artışlar
+objektif şekilde değerlendirilir ve yanlış algıların önüne geçilir.
+</p>
+
+</div>
+
+<script>
+function hesapla() {
+    const eski = parseFloat(document.getElementById("eskiFiyat").value);
+    const yeni = parseFloat(document.getElementById("yeniFiyat").value);
+    const sonuc = document.getElementById("sonuc");
+
+    if (isNaN(eski) || isNaN(yeni) || eski <= 0) {
+        sonuc.innerText = "Lütfen geçerli fiyatlar girin.";
+        return;
+    }
+
+    let oran = ((yeni - eski) / eski) * 100;
+
+    if (oran > 0) {
+        sonuc.innerText = `Fiyat %${oran.toFixed(2)} oranında artmıştır.`;
+    } else if (oran < 0) {
+        sonuc.innerText = `Fiyat %${Math.abs(oran).toFixed(2)} oranında azalmıştır.`;
+    } else {
+        sonuc.innerText = "Fiyatta herhangi bir değişim olmamıştır.";
+    }
+}
+</script>
