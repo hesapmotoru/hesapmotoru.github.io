@@ -1,0 +1,83 @@
+---
+title: Gazbeton Adedi Hesaplama
+date: 2026-01-18T08:30:00+03:00
+categories:
+  - İnşaat
+type: Document
+permalink: /gazbeton-adedi-hesaplama
+---
+
+<label>Duvar Alanı (m²)</label><br />
+<input type="number" id="alan" placeholder="Örn: 120"><br /><br />
+
+<label>Gazbeton Uzunluk (cm)</label><br />
+<input type="number" id="uzunluk" placeholder="Örn: 60"><br /><br />
+
+<label>Gazbeton Yükseklik (cm)</label><br />
+<input type="number" id="yukseklik" placeholder="Örn: 25"><br /><br />
+
+<button onclick="hesapla()">HESAPLA</button>
+
+<div class="result" id="sonuc"></div>
+
+<br /><br />
+
+Bu gazbeton adedi hesaplama aracı ile, yapılacak duvar alanına göre kaç adet gazbeton blok gerektiğini kolayca hesaplayabilirsiniz. İnşaat ve tadilat işlerinde doğru malzeme planlaması yapmak için kullanılır.
+
+<br /><br />
+
+<strong>Gazbeton Nedir?</strong><br /><br />
+Gazbeton, hafif yapısı, ısı ve ses yalıtımı özellikleri sayesinde yapı sektöründe sıkça tercih edilen bir duvar malzemesidir. Taşıyıcı olmayan iç ve dış duvarlarda yaygın olarak kullanılır.
+
+<br /><br />
+
+<strong>Gazbeton Adedi Nasıl Hesaplanır?</strong><br /><br />
+Hesaplama şu formüle dayanır:<br /><br />
+Duvar Alanı (m²) ÷ Tek Gazbeton Alanı (m²)
+
+<br /><br />
+
+Tek bir gazbetonun alanı:<br />
+(Uzunluk × Yükseklik) ÷ 10.000
+
+<br /><br />
+
+Örnek:<br />
+60 × 25 cm gazbeton → 0,15 m²<br />
+120 m² duvar için → 120 ÷ 0,15 = 800 adet gazbeton gerekir.
+
+<br /><br />
+
+<strong>Gazbeton Hesaplama Nerelerde Kullanılır?</strong><br /><br />
+Konut ve bina inşaatlarında<br />
+Bölme duvar uygulamalarında<br />
+Tadilat ve yenileme projelerinde<br />
+Malzeme maliyeti hesaplamalarında<br />
+Gazbeton siparişi öncesinde
+
+<br /><br />
+
+<strong>Bu Hesaplama Neden Önemlidir?</strong><br /><br />
+Eksik gazbeton işin yarım kalmasına, fazla gazbeton ise gereksiz maliyete yol açar. Doğru hesaplama ile zaman ve bütçe kontrolü sağlanır.
+
+<script>
+function hesapla() {
+    const alan = parseFloat(document.getElementById("alan").value);
+    const uzunluk = parseFloat(document.getElementById("uzunluk").value);
+    const yukseklik = parseFloat(document.getElementById("yukseklik").value);
+    const sonuc = document.getElementById("sonuc");
+
+    if (
+        isNaN(alan) || isNaN(uzunluk) || isNaN(yukseklik) ||
+        alan <= 0 || uzunluk <= 0 || yukseklik <= 0
+    ) {
+        sonuc.innerText = "Lütfen tüm alan ve gazbeton ölçülerini doğru girin.";
+        return;
+    }
+
+    const gazbetonAlan = (uzunluk * yukseklik) / 10000;
+    const adet = alan / gazbetonAlan;
+
+    sonuc.innerText = "Gerekli gazbeton adedi: " + Math.ceil(adet) + " adet";
+}
+</script>
