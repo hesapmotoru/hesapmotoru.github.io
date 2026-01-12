@@ -1,0 +1,88 @@
+---
+title: HP kW Dönüştürücü
+date: 2025-01-12T22:32:00+03:00
+categories:
+  - Dönüştürücü
+type: Document
+permalink: /hp-kw-donustucu
+---
+HP kW Dönüştürücü (HorsePower = Beygir Gücü, kW = kilowatt) otomobil, motosiklet, elektrikli araç ve motor gücü hesaplamaları için kullanılan bir hesaplama aracıdır.
+<br /><br />
+HP → kW Dönüştürme<br />
+<label>Horsepower (HP)</label><br>
+<input type="number" id="hp" placeholder="Örn: 150" step="any"><br/>
+<br/>
+<button onclick="hpToKw()">HP → kW</button><br/>
+<p id="hpResult"></p>
+<br/><br/>
+kW → HP Dönüştürme
+<br/><br/>
+<label>Kilowatt (kW)</label><br/>
+<input type="number" id="kw" placeholder="Örn: 110" step="any"><br/>
+<br/>
+<button onclick="kwToHp()">kW → HP</button>
+<br/>
+<p id="kwResult"></p>
+<br/>
+<script>
+function hpToKw(){
+  var hp = parseFloat(document.getElementById("hp").value);
+
+  if(isNaN(hp) || hp <= 0){
+    document.getElementById("hpResult").textContent = "Lütfen geçerli bir HP değeri girin.";
+    return;
+  }
+
+  var kw = hp * 0.7457;
+  document.getElementById("hpResult").textContent =
+    hp + " HP = " + kw.toFixed(2) + " kW";
+}
+
+function kwToHp(){
+  var kw = parseFloat(document.getElementById("kw").value);
+
+  if(isNaN(kw) || kw <= 0){
+    document.getElementById("kwResult").textContent = "Lütfen geçerli bir kW değeri girin.";
+    return;
+  }
+
+  var hp = kw * 1.341;
+  document.getElementById("kwResult").textContent =
+    kw + " kW = " + hp.toFixed(2) + " HP";
+}
+</script>
+<br/>
+HP ↔ kW Hesaplama Nedir?<br/><br/>
+Horsepower (HP) ve Kilowatt (kW), motor gücünü ifade eden iki farklı ölçü birimidir. Türkiye’de otomobiller genellikle HP ile ifade edilirken, elektrikli araçlar ve endüstriyel motorlarda kW kullanılır.
+<br/><br/>
+HP → kW Dönüşüm Formülü<<br/>
+kW = HP × 0,7457<br/>
+Örnek:
+<br/>
+150 HP → 111,86 kW<br/>
+100 HP → 74,57 kW
+<br/><br/>
+kW → HP Dönüşüm Formülü
+<br/>
+HP = kW × 1,341
+<br/>
+Örnek:
+<br/>
+110 kW → 147,51 HP<br/>
+75 kW → 100,58 HP
+<br/><br/>
+Horsepower (HP) Nedir?
+<br/>
+Horsepower (beygir gücü), motorların ürettiği gücü ifade eder. İçten yanmalı motorlarda ve otomotiv sektöründe yaygın olarak kullanılır.
+<br/><br/>
+Kilowatt (kW) Nedir?
+<br/>
+Kilowatt, Uluslararası Birim Sistemi’nde (SI) güç birimidir. Elektrik motorları, elektrikli araçlar ve enerji hesaplamalarında standarttır.
+<br/><br/>
+Bu Dönüştürücü Nerelerde Kullanılır?
+<br/>
+Araç motor gücü karşılaştırmaları<br/>
+Elektrikli ve hibrit araç incelemeleri<br/>
+Elektrik motoru gücü hesaplama<br/>
+Jeneratör kapasitesi belirleme<br/>
+Teknik katalog ve proje hesapları
