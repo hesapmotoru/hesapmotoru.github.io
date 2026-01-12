@@ -1,0 +1,69 @@
+---
+title: Şap Miktarı Hesaplama
+date: 2026-01-17T08:30:00+03:00
+categories:
+  - İnşaat & Mühendislik
+type: Document
+permalink: /sap-miktari-hesaplama
+---
+
+<label>Alan (m²)</label><br />
+<input type="number" id="alan" placeholder="Örn: 100"><br /><br />
+
+<label>Şap Kalınlığı (cm)</label><br />
+<input type="number" id="kalinlik" placeholder="Örn: 5"><br /><br />
+
+<button onclick="hesapla()">HESAPLA</button>
+
+<div class="result" id="sonuc"></div>
+
+<br /><br />
+
+Bu şap miktarı hesaplama aracı ile, uygulanacak alan ve şap kalınlığına göre ihtiyaç duyulan toplam şap hacmini (m³) kolayca hesaplayabilirsiniz. İnşaat ve tadilat işlerinde doğru malzeme planlaması yapmak için pratik bir çözümdür.
+
+<br /><br />
+
+<strong>Şap Nedir?</strong><br /><br />
+Şap, betonarme döşeme üzerine uygulanan ve zemini düzleştirmek amacıyla kullanılan ince beton tabakasıdır. Seramik, parke, laminat veya diğer zemin kaplamalarından önce uygulanır.
+
+<br /><br />
+
+<strong>Şap Miktarı Nasıl Hesaplanır?</strong><br /><br />
+Şap hacmi hesaplanırken şu formül kullanılır:<br /><br />
+Alan (m²) × Kalınlık (cm) ÷ 100 = Şap Hacmi (m³)
+
+<br /><br />
+
+Örneğin 100 m² alan için 5 cm kalınlığında şap uygulanacaksa:<br />
+100 × 5 ÷ 100 = 5 m³ şap gerekir.
+
+<br /><br />
+
+<strong>Şap Miktarı Hesaplama Nerelerde Kullanılır?</strong><br /><br />
+Zemin kaplama öncesi hazırlıkta<br />
+Ev, daire ve ofis tadilatlarında<br />
+İnşaat maliyet hesabında<br />
+Malzeme ve işçilik planlamasında<br />
+Şap beton siparişi verirken
+
+<br /><br />
+
+<strong>Bu Hesaplama Neden Önemlidir?</strong><br /><br />
+Eksik şap, zeminde seviye bozukluklarına neden olur. Fazla şap ise gereksiz maliyet oluşturur. Doğru hesaplama sayesinde hem zamandan hem bütçeden tasarruf edilir.
+
+<script>
+function hesapla() {
+    const alan = parseFloat(document.getElementById("alan").value);
+    const kalinlik = parseFloat(document.getElementById("kalinlik").value);
+    const sonuc = document.getElementById("sonuc");
+
+    if (isNaN(alan) || isNaN(kalinlik) || alan <= 0 || kalinlik <= 0) {
+        sonuc.innerText = "Lütfen geçerli alan ve kalınlık değerleri girin.";
+        return;
+    }
+
+    const hacim = (alan * kalinlik) / 100;
+
+    sonuc.innerText = "Gerekli şap miktarı: " + hacim.toFixed(2) + " m³";
+}
+</script>
