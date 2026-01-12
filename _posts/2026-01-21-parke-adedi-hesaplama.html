@@ -1,0 +1,95 @@
+---
+title: Parke Adedi Hesaplama
+date: 2026-01-21T08:30:00+03:00
+categories:
+  - İnşaat & Mühendislik
+type: Document
+permalink: /parke-adedi-hesaplama
+---
+
+<label>Kaplanacak Alan (m²)</label><br />
+<input type="number" id="alan" placeholder="Örn: 30"><br /><br />
+
+<label>Parke Uzunluk (cm)</label><br />
+<input type="number" id="uzunluk" placeholder="Örn: 120"><br /><br />
+
+<label>Parke Genişlik (cm)</label><br />
+<input type="number" id="genislik" placeholder="Örn: 20"><br /><br />
+
+<label>Fire Payı (%)</label><br />
+<input type="number" id="fire" value="10"><br /><br />
+
+<button onclick="hesapla()">HESAPLA</button>
+
+<div class="result" id="sonuc"></div>
+
+<br /><br />
+
+Bu parke adedi hesaplama aracı ile, zemin kaplaması yapılacak alana göre kaç adet parke gerektiğini kolayca hesaplayabilirsiniz. Ev, ofis ve iş yeri parke döşemeleri için kullanılır.
+
+<br /><br />
+
+<strong>Parke Adedi Nasıl Hesaplanır?</strong><br /><br />
+Parke hesaplaması şu adımlarla yapılır:<br /><br />
+1) Tek parkenin alanı hesaplanır<br />
+2) Toplam alan bu değere bölünür<br />
+3) Fire payı eklenir
+
+<br /><br />
+
+Tek bir parkenin alanı:<br />
+(Uzunluk × Genişlik) ÷ 10.000
+
+<br /><br />
+
+Örnek:<br />
+120 × 20 cm parke → 0,24 m²<br />
+30 m² alan → 30 ÷ 0,24 = 125 adet<br />
+%10 fire ile → yaklaşık 138 adet parke gerekir.
+
+<br /><br />
+
+<strong>Fire Payı Neden Eklenir?</strong><br /><br />
+Kesim kayıpları<br />
+Kırılma ve hasarlar<br />
+Desen ve hizalama farkları<br />
+Gelecekteki onarımlar<br />
+Bu nedenle parke döşemelerinde genellikle %8 – %10 fire payı önerilir.
+
+<br /><br />
+
+<strong>Parke Hesaplama Nerelerde Kullanılır?</strong><br /><br />
+Ev içi zemin kaplamaları<br />
+Ofis ve iş yeri döşemeleri<br />
+Tadilat ve yenileme işleri<br />
+Malzeme satın alma planlaması<br />
+Maliyet hesaplamaları
+
+<br /><br />
+
+<strong>Bu Hesaplama Neden Önemlidir?</strong><br /><br />
+Eksik parke işin yarım kalmasına, fazla parke ise gereksiz maliyete yol açar. Doğru hesaplama ile bütçe ve zaman kontrolü sağlanır.
+
+<script>
+function hesapla() {
+    const alan = parseFloat(document.getElementById("alan").value);
+    const uzunluk = parseFloat(document.getElementById("uzunluk").value);
+    const genislik = parseFloat(document.getElementById("genislik").value);
+    const fire = parseFloat(document.getElementById("fire").value);
+    const sonuc = document.getElementById("sonuc");
+
+    if (
+        isNaN(alan) || isNaN(uzunluk) || isNaN(genislik) || isNaN(fire) ||
+        alan <= 0 || uzunluk <= 0 || genislik <= 0 || fire < 0
+    ) {
+        sonuc.innerText = "Lütfen tüm değerleri doğru girin.";
+        return;
+    }
+
+    const tekAlan = (uzunluk * genislik) / 10000;
+    let adet = alan / tekAlan;
+    adet = adet + (adet * fire / 100);
+
+    sonuc.innerText = "Gerekli parke adedi: " + Math.ceil(adet) + " adet";
+}
+</script>
