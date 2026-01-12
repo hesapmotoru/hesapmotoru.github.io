@@ -6,15 +6,30 @@ categories:
 type: Document
 permalink: /hp-kw-donusturucu
 ---
-HP kW Dönüştürücü
-<label>Horsepower (HP)</label><br />
-<input type="number" id="hp" step="0.01" oninput="hpToKw()"><br /><br />
-<br/><br/>
-kW HP Dönüştürücü<br/>
-<label>Kilowatt (kW)</label><br />
-<input type="number" id="kw" step="0.01" oninput="kwToHp()"><br /><br />
+HP → kW Dönüştürücü
+<br /><br />
+<label>Beygir Gücü (HP)</label>
+<br />
+<input type="number" id="hpDeger" step="0.01">
+<br /><br />
+<button onclick="hpToKw()">HP → kW Hesapla</button>
+<br /><br />
+<div id="hpKwSonuc"></div>
 
-<div id="sonuc"></div><br /><br />
+<br /><br /><hr /><br />
+
+<b>kW → HP Dönüştürücü</b>
+<br /><br />
+
+<label>Kilowatt (kW)</label>
+<br />
+<input type="number" id="kwDeger" step="0.01">
+<br /><br />
+<button onclick="kwToHp()">kW → HP Hesapla</button>
+<br /><br />
+<div id="kwHpSonuc"></div>
+
+<br /><br />
 
 Horsepower (HP) ile Kilowatt (kW) arasında dönüşüm yapmak özellikle otomobil, motosiklet, elektrikli motor ve jeneratör gibi teknik alanlarda sıkça ihtiyaç duyulan bir hesaplamadır.<br /><br />
 
@@ -41,34 +56,28 @@ Otomotiv ve mühendislik hesaplamaları<br /><br />
 
 <script>
 function hpToKw() {
-    const hp = parseFloat(document.getElementById("hp").value);
-    const kwInput = document.getElementById("kw");
-    const sonuc = document.getElementById("sonuc");
+    const hp = parseFloat(document.getElementById("hpDeger").value);
+    const sonuc = document.getElementById("hpKwSonuc");
 
-    if (isNaN(hp)) {
-        kwInput.value = "";
-        sonuc.innerText = "";
+    if (isNaN(hp) || hp <= 0) {
+        sonuc.innerText = "Lütfen geçerli bir HP değeri girin.";
         return;
     }
 
-    const kw = hp * 0.7457;
-    kwInput.value = kw.toFixed(2);
+    const kw = hp * 0.7355;
     sonuc.innerText = hp + " HP = " + kw.toFixed(2) + " kW";
 }
 
 function kwToHp() {
-    const kw = parseFloat(document.getElementById("kw").value);
-    const hpInput = document.getElementById("hp");
-    const sonuc = document.getElementById("sonuc");
+    const kw = parseFloat(document.getElementById("kwDeger").value);
+    const sonuc = document.getElementById("kwHpSonuc");
 
-    if (isNaN(kw)) {
-        hpInput.value = "";
-        sonuc.innerText = "";
+    if (isNaN(kw) || kw <= 0) {
+        sonuc.innerText = "Lütfen geçerli bir kW değeri girin.";
         return;
     }
 
-    const hp = kw * 1.341;
-    hpInput.value = hp.toFixed(2);
+    const hp = kw * 1.3596;
     sonuc.innerText = kw + " kW = " + hp.toFixed(2) + " HP";
 }
 </script>
