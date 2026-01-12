@@ -6,6 +6,16 @@ categories:
 type: Document
 permalink: /fiyat-degisim-orani-hesaplama
 ---
+<label>Eski Fiyat (₺)</label>
+<input type="number" id="eskiFiyat" step="0.01"/>
+
+<label>Yeni Fiyat (₺)</label>
+<input type="number" id="yeniFiyat" step="0.01"/>
+
+<button onclick="hesapla()">HESAPLA</button>
+
+<div class="result" id="sonuc"></div>
+
 <p>
 Bu araç sayesinde bir ürün, hizmet veya herhangi bir fiyatın
 <strong>eski fiyatı ile yeni fiyatı arasındaki yüzde değişim oranını</strong>
@@ -13,18 +23,6 @@ kolayca hesaplayabilirsiniz.
 Fiyatın yüzde kaç arttığını veya yüzde kaç azaldığını net ve anlaşılır
 şekilde görmek için kullanılır.
 </p>
-
-<h2>Fiyat Değişimini Hesaplayın</h2>
-
-<label>Eski Fiyat (₺)</label>
-<input type="number" id="eskiFiyat" step="0.01">
-
-<label>Yeni Fiyat (₺)</label>
-<input type="number" id="yeniFiyat" step="0.01">
-
-<button onclick="hesapla()">HESAPLA</button>
-
-<div class="result" id="sonuc"></div>
 
 <h2>Fiyat Değişim Oranı Nedir?</h2>
 <p>
@@ -57,7 +55,6 @@ Fiyat değişim oranı sayesinde küçük veya büyük artışlar
 objektif şekilde değerlendirilir ve yanlış algıların önüne geçilir.
 </p>
 
-</div>
 
 <script>
 function hesapla() {
