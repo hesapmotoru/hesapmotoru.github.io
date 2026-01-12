@@ -1,0 +1,97 @@
+---
+title: Beton Miktarı Hesaplama
+date: 2025-01-16T08:30:00+03:00
+categories:
+  - İnşaat & Mühendislik
+type: Document
+permalink: /beton-miktari-hesaplama
+---
+
+<label>Alan Uzunluğu (metre)</label>
+<br />
+<input type="number" id="uzunluk" step="0.01">
+<br /><br />
+
+<label>Alan Genişliği (metre)</label>
+<br />
+<input type="number" id="genislik" step="0.01">
+<br /><br />
+
+<label>Beton Kalınlığı (cm)</label>
+<br />
+<input type="number" id="kalinlik" step="0.1">
+<br /><br />
+
+<button onclick="hesapla()">HESAPLA</button>
+<br /><br />
+
+<div id="sonuc"></div>
+
+<br /><br />
+
+Bu beton miktarı hesaplama aracı sayesinde döşeme, temel, şap veya zemin betonu için
+ihtiyaç duyulan yaklaşık beton hacmini kolayca hesaplayabilirsiniz.
+İnşaat öncesi beton miktarını bilmek, hem maliyet planlaması hem de iş sürecinin
+aksamaması açısından büyük önem taşır.
+
+<br /><br />
+
+<b>Beton Miktarı Nasıl Hesaplanır?</b>
+<br /><br />
+
+Beton hacmi hesaplanırken alanın uzunluğu ve genişliği metre cinsinden alınır.
+Beton kalınlığı ise genellikle santimetre olarak belirlenir ve metreye çevrilir.
+Formül şu şekildedir:
+<br /><br />
+Uzunluk × Genişlik × Kalınlık = Beton Hacmi (m³)
+
+<br /><br />
+
+<b>1 m³ Beton Nerelerde Kullanılır?</b>
+<br /><br />
+
+1 metreküp beton yaklaşık olarak:
+<br />
+- 10 cm kalınlığında 10 m² alan kaplar<br />
+- 5 cm kalınlığında 20 m² alan kaplar<br />
+- 15 cm kalınlığında yaklaşık 6,5 m² alan kaplar
+
+<br /><br />
+
+Hesaplanan değer yaklaşık bir sonuçtur.
+Uygulama sırasında oluşabilecek fireler için %5 – %10 fazla beton sipariş edilmesi önerilir.
+
+<br /><br />
+
+<b>Beton Hesaplaması Neden Önemlidir?</b>
+<br /><br />
+
+Eksik beton siparişi işin yarım kalmasına,
+fazla beton siparişi ise gereksiz maliyetlere yol açar.
+Bu nedenle beton miktarını önceden doğruya yakın hesaplamak,
+sağlıklı bir inşaat süreci için kritik öneme sahiptir.
+
+<script>
+function hesapla() {
+    const uzunluk = parseFloat(document.getElementById("uzunluk").value);
+    const genislik = parseFloat(document.getElementById("genislik").value);
+    const kalinlikCm = parseFloat(document.getElementById("kalinlik").value);
+    const sonuc = document.getElementById("sonuc");
+
+    if (
+        isNaN(uzunluk) || uzunluk <= 0 ||
+        isNaN(genislik) || genislik <= 0 ||
+        isNaN(kalinlikCm) || kalinlikCm <= 0
+    ) {
+        sonuc.innerText = "Lütfen tüm alanları geçerli değerlerle doldurun.";
+        return;
+    }
+
+    const kalinlikM = kalinlikCm / 100;
+    const betonHacmi = uzunluk * genislik * kalinlikM;
+
+    sonuc.innerText =
+        "Toplam beton hacmi: " + betonHacmi.toFixed(2) + " m³\n" +
+        "Fire payı ile önerilen miktar: " + (betonHacmi * 1.1).toFixed(2) + " m³";
+}
+</script>
