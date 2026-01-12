@@ -1,0 +1,93 @@
+---
+title: Duvar Boya Miktarı Hesaplama
+date: 2026-01-20T08:30:00+03:00
+categories:
+  - İnşaat
+type: Document
+permalink: /duvar-boya-miktari-hesaplama
+---
+
+<label>Toplam Duvar Alanı (m²)</label><br />
+<input type="number" id="alan" placeholder="Örn: 85"><br /><br />
+
+<label>Boyanın Kaplama Alanı (m² / litre)</label><br />
+<input type="number" id="kaplama" placeholder="Örn: 10"><br /><br />
+
+<label>Kat Sayısı</label><br />
+<input type="number" id="kat" value="2"><br /><br />
+
+<label>Fire Payı (%)</label><br />
+<input type="number" id="fire" value="10"><br /><br />
+
+<button onclick="hesapla()">HESAPLA</button>
+
+<div class="result" id="sonuc"></div>
+
+<br /><br />
+
+Bu duvar boya miktarı hesaplama aracı ile, boyanacak alan için kaç litre boya gerektiğini kolayca hesaplayabilirsiniz. Ev, ofis ve iş yeri boyama planlamalarında pratik bir çözümdür.
+
+<br /><br />
+
+<strong>Duvar Boya Miktarı Nasıl Hesaplanır?</strong><br /><br />
+Boya hesaplaması şu formüle dayanır:<br /><br />
+Toplam Alan ÷ Boya Kaplama Alanı × Kat Sayısı
+
+<br /><br />
+
+Örnek:<br />
+85 m² duvar alanı<br />
+1 litre boya → 10 m²<br />
+2 kat boya<br />
+85 ÷ 10 × 2 = 17 litre boya
+
+<br /><br />
+
+Fire payı eklendiğinde:<br />
+17 + %10 = yaklaşık 19 litre boya gerekir.
+
+<br /><br />
+
+<strong>Fire Payı Neden Eklenir?</strong><br /><br />
+Duvar emiciliği<br />
+Rulo ve fırça kayıpları<br />
+Renk değişimleri<br />
+Zemin pürüzleri<br />
+Bu nedenle genellikle %5 – %10 fire payı önerilir.
+
+<br /><br />
+
+<strong>Duvar Boya Hesaplama Nerelerde Kullanılır?</strong><br /><br />
+Ev içi boya işleri<br />
+Ofis ve iş yeri boyama<br />
+Tadilat ve yenileme projeleri<br />
+Maliyet planlaması<br />
+Malzeme satın alma süreci
+
+<br /><br />
+
+<strong>Bu Hesaplama Neden Önemlidir?</strong><br /><br />
+Eksik boya işin yarım kalmasına, fazla boya ise gereksiz maliyete neden olur. Doğru hesaplama, zaman ve bütçe tasarrufu sağlar.
+
+<script>
+function hesapla() {
+    const alan = parseFloat(document.getElementById("alan").value);
+    const kaplama = parseFloat(document.getElementById("kaplama").value);
+    const kat = parseFloat(document.getElementById("kat").value);
+    const fire = parseFloat(document.getElementById("fire").value);
+    const sonuc = document.getElementById("sonuc");
+
+    if (
+        isNaN(alan) || isNaN(kaplama) || isNaN(kat) || isNaN(fire) ||
+        alan <= 0 || kaplama <= 0 || kat <= 0 || fire < 0
+    ) {
+        sonuc.innerText = "Lütfen tüm değerleri doğru girin.";
+        return;
+    }
+
+    let litre = (alan / kaplama) * kat;
+    litre = litre + (litre * fire / 100);
+
+    sonuc.innerText = "Gerekli boya miktarı: " + litre.toFixed(1) + " litre";
+}
+</script>
