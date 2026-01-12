@@ -1,0 +1,74 @@
+---
+title: HP kW Dönüştürücü
+date: 2025-01-12T22:43:00+03:00
+categories:
+  - Dönüştürücü
+type: Document
+permalink: /hp-kw-donusturucu
+---
+HP kW Dönüştürücü
+<label>Horsepower (HP)</label><br />
+<input type="number" id="hp" step="0.01" oninput="hpToKw()"><br /><br />
+<br/><br/>
+kW HP Dönüştürücü<br/>
+<label>Kilowatt (kW)</label><br />
+<input type="number" id="kw" step="0.01" oninput="kwToHp()"><br /><br />
+
+<div id="sonuc"></div><br /><br />
+
+Horsepower (HP) ile Kilowatt (kW) arasında dönüşüm yapmak özellikle otomobil, motosiklet, elektrikli motor ve jeneratör gibi teknik alanlarda sıkça ihtiyaç duyulan bir hesaplamadır.<br /><br />
+
+Bu araç sayesinde beygir gücü (HP) değerini anında kilowatt (kW) cinsine veya kilowatt değerini horsepower karşılığına kolayca çevirebilirsiniz. Hesaplama otomatik yapılır ve ek bir işlem gerekmez.<br /><br />
+
+HP Nedir?<br /><br />
+Horsepower (HP), motorların ürettiği gücü ifade eden bir ölçü birimidir. Otomobillerde ve motorlu araçlarda performans göstergesi olarak yaygın şekilde kullanılır.<br /><br />
+
+kW Nedir?<br /><br />
+Kilowatt (kW), Uluslararası Birimler Sistemi’nde (SI) yer alan güç ölçü birimidir. Elektrikli araçlar, motorlar ve resmi teknik dokümanlarda genellikle kW cinsinden ifade edilir.<br /><br />
+
+HP ve kW Arasındaki Dönüşüm Nasıl Yapılır?<br /><br />
+1 HP ≈ 0.7457 kW<br />
+1 kW ≈ 1.341 HP<br /><br />
+
+Bu dönüşüm oranları kullanılarak motor gücü karşılaştırmaları doğru ve standart şekilde yapılabilir.<br /><br />
+
+HP kW Dönüştürücü Nerelerde Kullanılır?<br /><br />
+Araç motor gücü karşılaştırmaları<br />
+Elektrikli motor ve jeneratör hesaplamaları<br />
+Ruhsat ve teknik belge incelemeleri<br />
+Araç alım-satım öncesi güç analizi<br />
+Otomotiv ve mühendislik hesaplamaları<br /><br />
+
+<script>
+function hpToKw() {
+    const hp = parseFloat(document.getElementById("hp").value);
+    const kwInput = document.getElementById("kw");
+    const sonuc = document.getElementById("sonuc");
+
+    if (isNaN(hp)) {
+        kwInput.value = "";
+        sonuc.innerText = "";
+        return;
+    }
+
+    const kw = hp * 0.7457;
+    kwInput.value = kw.toFixed(2);
+    sonuc.innerText = hp + " HP = " + kw.toFixed(2) + " kW";
+}
+
+function kwToHp() {
+    const kw = parseFloat(document.getElementById("kw").value);
+    const hpInput = document.getElementById("hp");
+    const sonuc = document.getElementById("sonuc");
+
+    if (isNaN(kw)) {
+        hpInput.value = "";
+        sonuc.innerText = "";
+        return;
+    }
+
+    const hp = kw * 1.341;
+    hpInput.value = hp.toFixed(2);
+    sonuc.innerText = kw + " kW = " + hp.toFixed(2) + " HP";
+}
+</script>
