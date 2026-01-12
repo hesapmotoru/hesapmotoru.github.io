@@ -1,0 +1,93 @@
+---
+title: Tuğla Adedi Hesaplama
+date: 2025-01-15T08:30:00+03:00
+categories:
+  - İnşaat & Mühendislik
+type: Document
+permalink: /tugla-adedi-hesaplama
+---
+
+<label>Duvar Genişliği (metre)</label>
+<br />
+<input type="number" id="genislik" step="0.01">
+<br /><br />
+
+<label>Duvar Yüksekliği (metre)</label>
+<br />
+<input type="number" id="yukseklik" step="0.01">
+<br /><br />
+
+<label>1 m² için Tuğla Adedi</label>
+<br />
+<input type="number" id="metrekareTugla" value="50">
+<br /><br />
+
+<button onclick="hesapla()">HESAPLA</button>
+<br /><br />
+
+<div id="sonuc"></div>
+
+<br /><br />
+
+Bu tuğla adedi hesaplama aracı sayesinde, yapılacak bir duvar için yaklaşık olarak kaç adet tuğlaya ihtiyaç
+duyulduğunu kolayca hesaplayabilirsiniz. İnşaat, tadilat ve yapı planlaması aşamasında malzeme miktarını
+önceden bilmek, hem maliyet hem de zaman açısından büyük avantaj sağlar.
+
+<br /><br />
+
+<b>Tuğla Adedi Hesaplama Nasıl Yapılır?</b>
+<br /><br />
+
+Öncelikle duvarın genişliği ve yüksekliği metre cinsinden girilir.
+Daha sonra 1 metrekarede kullanılan ortalama tuğla adedi belirtilir.
+Standart yatay delikli tuğlalarda bu değer genellikle 50 adet olarak kabul edilir.
+Hesaplama, toplam duvar alanı ile metrekare başına düşen tuğla sayısının çarpılmasıyla yapılır.
+
+<br /><br />
+
+<b>1 Metrekarede Kaç Tuğla Kullanılır?</b>
+<br /><br />
+
+Kullanılan tuğla tipine göre bu sayı değişebilir:
+<br />
+- Standart yatay delikli tuğla: yaklaşık 50 adet<br />
+- Gazbeton: yaklaşık 8 – 10 adet<br />
+- Briket: yaklaşık 12 – 15 adet
+
+<br /><br />
+
+Bu nedenle hesaplama sonucu yaklaşık bir değerdir.
+Fire payı ve işçilik farkları göz önünde bulundurularak %5 – %10 fazla tuğla alınması önerilir.
+
+<br /><br />
+
+<b>Tuğla Hesaplaması Neden Önemlidir?</b>
+<br /><br />
+
+Yanlış hesaplanan tuğla miktarı, inşaat sürecinde işin durmasına veya gereksiz maliyet oluşmasına neden olabilir.
+Bu araç sayesinde daha planlı, ekonomik ve kontrollü bir şekilde yapı sürecinizi yönetebilirsiniz.
+
+<script>
+function hesapla() {
+    const genislik = parseFloat(document.getElementById("genislik").value);
+    const yukseklik = parseFloat(document.getElementById("yukseklik").value);
+    const metrekareTugla = parseFloat(document.getElementById("metrekareTugla").value);
+    const sonuc = document.getElementById("sonuc");
+
+    if (
+        isNaN(genislik) || genislik <= 0 ||
+        isNaN(yukseklik) || yukseklik <= 0 ||
+        isNaN(metrekareTugla) || metrekareTugla <= 0
+    ) {
+        sonuc.innerText = "Lütfen tüm alanları geçerli değerlerle doldurun.";
+        return;
+    }
+
+    const alan = genislik * yukseklik;
+    const tuglaAdedi = alan * metrekareTugla;
+
+    sonuc.innerText =
+        "Toplam duvar alanı: " + alan.toFixed(2) + " m²\n" +
+        "Gerekli yaklaşık tuğla adedi: " + Math.ceil(tuglaAdedi) + " adet";
+}
+</script>
