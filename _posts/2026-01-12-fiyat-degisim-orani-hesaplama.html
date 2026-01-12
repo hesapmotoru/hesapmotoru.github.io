@@ -1,6 +1,6 @@
 ---
 title: Fiyat Değişim Oranı Hesaplama
-date: 2025-01-12T21:42:00+03:00
+date: 2025-01-12T21:50:00+03:00
 categories:
   - Finans
 type: Document
@@ -8,51 +8,31 @@ permalink: /fiyat-degisim-orani-hesaplama
 ---
 
 <label>Eski Fiyat (₺)</label>
-<input type="number" id="eskiFiyat" step="0.01"/>
-
+<input type="number" id="eskiFiyat" step="0.01">
 <label>Yeni Fiyat (₺)</label>
-<input type="number" id="yeniFiyat" step="0.01"/>
-
+<input type="number" id="yeniFiyat" step="0.01">
 <button onclick="hesapla()">HESAPLA</button>
-
 <div class="result" id="sonuc"></div>
 
-<p>
-Bu araç sayesinde bir ürün, hizmet veya herhangi bir fiyatın
-<strong>eski fiyatı ile yeni fiyatı arasındaki yüzde değişim oranını</strong>
-kolayca hesaplayabilirsiniz.  
-Fiyatın yüzde kaç arttığını veya yüzde kaç azaldığını net ve anlaşılır
+Bu araç sayesinde bir ürün, hizmet veya herhangi bir fiyatın eski fiyatı ile yeni fiyatı arasındaki yüzde değişim oranını kolayca hesaplayabilirsiniz. Fiyatın yüzde kaç arttığını veya yüzde kaç azaldığını net ve anlaşılır
 şekilde görmek için kullanılır.
-</p>
-
-<h2>Fiyat Değişim Oranı Nedir?</h2>
-<p>
-Fiyat değişim oranı, bir fiyatın belirli bir zaman içinde
-ne kadar arttığını veya azaldığını yüzde (%) cinsinden ifade eder.
-Bu hesaplama, fiyat karşılaştırmalarında en sık kullanılan yöntemlerden biridir.
-</p>
-
-<p>
-Örneğin bir ürünün fiyatı 100 TL iken 130 TL olduysa,
-bu fiyatın %30 arttığı anlamına gelir.
-Aynı şekilde 100 TL’den 80 TL’ye düşen bir fiyat,
-%20 oranında azalmış demektir.
-</p>
-
-<h2>Fiyat Değişim Hesaplama Nerelerde Kullanılır?</h2>
-<ul>
-<li>Ürün fiyatlarındaki artış oranını görmek</li>
-<li>Geçmiş ve güncel fiyatları karşılaştırmak</li>
-<li>Kira, aidat veya abonelik ücretlerindeki değişimi hesaplamak</li>
-<li>Maaş, ücret veya hizmet bedeli karşılaştırmaları yapmak</li>
-<li>Enflasyon kaynaklı fiyat değişimlerini analiz etmek</li>
-</ul>
-
-<h2>Bu Hesaplama Neden Önemlidir?</h2>
-<p>Sadece fiyat farkını bilmek çoğu zaman yeterli olmaz.
-Asıl önemli olan, bu farkın yüzde olarak ne ifade ettiğidir.
-Fiyat değişim oranı sayesinde küçük veya büyük artışlar
-objektif şekilde değerlendirilir ve yanlış algıların önüne geçilir.</p>
+<br />
+Fiyat Değişim Oranı Nedir?
+<br />
+Fiyat değişim oranı, bir fiyatın belirli bir zaman içinde ne kadar arttığını veya azaldığını yüzde (%) cinsinden ifade eder. Bu hesaplama, fiyat karşılaştırmalarında en sık kullanılan yöntemlerden biridir.
+<br />
+Örneğin bir ürünün fiyatı 100 TL iken 130 TL olduysa,bu fiyatın %30 arttığı anlamına gelir.Aynı şekilde 100 TL’den 80 TL’ye düşen bir fiyat,%20 oranında azalmış demektir.
+<br />
+Fiyat Değişim Hesaplama Nerelerde Kullanılır?<br />
+Ürün fiyatlarındaki artış oranını görmek<br />
+Geçmiş ve güncel fiyatları karşılaştırmak<br />
+Kira, aidat veya abonelik ücretlerindeki değişimi hesaplamak<br />
+Maaş, ücret veya hizmet bedeli karşılaştırmaları yapmak<br />
+Enflasyon kaynaklı fiyat değişimlerini analiz etmek<br />
+<br />
+Bu Hesaplama Neden Önemlidir?
+<br />
+Sadece fiyat farkını bilmek çoğu zaman yeterli olmaz.Asıl önemli olan, bu farkın yüzde olarak ne ifade ettiğidir.Fiyat değişim oranı sayesinde küçük veya büyük artışlar objektif şekilde değerlendirilir ve yanlış algıların önüne geçilir.
 
 <script>
 function hesapla() {
