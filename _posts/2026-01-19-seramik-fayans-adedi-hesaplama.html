@@ -1,0 +1,100 @@
+---
+title: Seramik / Fayans Adedi Hesaplama
+date: 2026-01-19T08:30:00+03:00
+categories:
+  - İnşaat
+type: Document
+permalink: /seramik-fayans-adedi-hesaplama
+---
+
+<label>Kaplanacak Alan (m²)</label><br />
+<input type="number" id="alan" placeholder="Örn: 25"><br /><br />
+
+<label>Seramik / Fayans Uzunluk (cm)</label><br />
+<input type="number" id="uzunluk" placeholder="Örn: 60"><br /><br />
+
+<label>Seramik / Fayans Genişlik (cm)</label><br />
+<input type="number" id="genislik" placeholder="Örn: 60"><br /><br />
+
+<label>Fire Payı (%)</label><br />
+<input type="number" id="fire" value="10"><br /><br />
+
+<button onclick="hesapla()">HESAPLA</button>
+
+<div class="result" id="sonuc"></div>
+
+<br /><br />
+
+Bu seramik ve fayans adedi hesaplama aracı ile, kaplanacak alana göre kaç adet seramik veya fayans gerektiğini hızlı ve doğru şekilde hesaplayabilirsiniz. Banyo, mutfak, balkon ve zemin kaplamaları için idealdir.
+
+<br /><br />
+
+<strong>Seramik / Fayans Nedir?</strong><br /><br />
+Seramik ve fayans, zemin ve duvar kaplamalarında kullanılan, suya ve neme dayanıklı yapı malzemeleridir. Ölçülerine göre adetle satıldıkları için doğru hesaplama büyük önem taşır.
+
+<br /><br />
+
+<strong>Seramik / Fayans Adedi Nasıl Hesaplanır?</strong><br /><br />
+Hesaplama şu adımlarla yapılır:<br /><br />
+1) Tek seramiğin alanı hesaplanır<br />
+2) Toplam alan bu değere bölünür<br />
+3) Fire payı eklenir
+
+<br /><br />
+
+Tek seramiğin alanı:<br />
+(Uzunluk × Genişlik) ÷ 10.000
+
+<br /><br />
+
+Örnek:<br />
+60 × 60 cm seramik → 0,36 m²<br />
+25 m² alan → 25 ÷ 0,36 = 69,4 adet<br />
+%10 fire ile → yaklaşık 77 adet
+
+<br /><br />
+
+<strong>Fire Payı Neden Eklenir?</strong><br /><br />
+Kesim hataları<br />
+Kırılmalar<br />
+Desen ve hizalama farkları<br />
+Gelecekteki onarımlar<br />
+Bu nedenle genellikle %5 – %10 fire payı önerilir.
+
+<br /><br />
+
+<strong>Seramik / Fayans Hesaplama Nerelerde Kullanılır?</strong><br /><br />
+Banyo ve mutfak kaplamaları<br />
+Zemin döşeme projeleri<br />
+Balkon ve teras uygulamaları<br />
+İnşaat ve tadilat işleri<br />
+Malzeme satın alma planlaması
+
+<br /><br />
+
+<strong>Bu Hesaplama Neden Önemlidir?</strong><br /><br />
+Eksik fayans işin yarım kalmasına, fazla fayans ise gereksiz maliyete neden olur. Doğru adet hesabı, bütçe ve zaman yönetimini kolaylaştırır.
+
+<script>
+function hesapla() {
+    const alan = parseFloat(document.getElementById("alan").value);
+    const uzunluk = parseFloat(document.getElementById("uzunluk").value);
+    const genislik = parseFloat(document.getElementById("genislik").value);
+    const fire = parseFloat(document.getElementById("fire").value);
+    const sonuc = document.getElementById("sonuc");
+
+    if (
+        isNaN(alan) || isNaN(uzunluk) || isNaN(genislik) || isNaN(fire) ||
+        alan <= 0 || uzunluk <= 0 || genislik <= 0 || fire < 0
+    ) {
+        sonuc.innerText = "Lütfen tüm değerleri doğru girin.";
+        return;
+    }
+
+    const tekAlan = (uzunluk * genislik) / 10000;
+    let adet = alan / tekAlan;
+    adet = adet + (adet * fire / 100);
+
+    sonuc.innerText = "Gerekli seramik / fayans adedi: " + Math.ceil(adet) + " adet";
+}
+</script>
