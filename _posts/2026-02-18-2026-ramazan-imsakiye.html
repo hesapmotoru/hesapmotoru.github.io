@@ -39,138 +39,9 @@ permalink: /2026-ramazan-imsakiye
 <br /><br />
 
 <script>
+/* GLOBAL olsun ki HTML onclick / change çalışsın */
+var imsakiye = {
 
-const imsakiye = {
-
-istanbul: [
-["1","06:22","18:57"],
-["2","06:20","18:59"],
-["3","06:19","19:00"],
-["4","06:17","19:02"],
-["5","06:15","19:03"],
-["6","06:13","19:05"],
-["7","06:12","19:06"],
-["8","06:10","19:08"],
-["9","06:08","19:09"],
-["10","06:06","19:11"],
-["11","06:04","19:12"],
-["12","06:02","19:14"],
-["13","06:00","19:15"],
-["14","05:58","19:17"],
-["15","05:56","19:18"],
-["16","05:54","19:20"],
-["17","05:52","19:21"],
-["18","05:50","19:23"],
-["19","05:48","19:24"],
-["20","05:46","19:26"],
-["21","05:44","19:27"],
-["22","05:42","19:29"],
-["23","05:40","19:30"],
-["24","05:38","19:32"],
-["25","05:36","19:33"],
-["26","05:34","19:35"],
-["27","05:32","19:36"],
-["28","05:30","19:38"],
-["29","05:28","19:39"]
-],
-
-ankara: [
-["1","06:07","18:42"],
-["2","06:06","18:44"],
-["3","06:04","18:45"],
-["4","06:02","18:47"],
-["5","06:00","18:48"],
-["6","05:59","18:50"],
-["7","05:57","18:51"],
-["8","05:55","18:53"],
-["9","05:53","18:54"],
-["10","05:51","18:56"],
-["11","05:49","18:57"],
-["12","05:47","18:59"],
-["13","05:45","19:00"],
-["14","05:43","19:02"],
-["15","05:41","19:03"],
-["16","05:39","19:05"],
-["17","05:37","19:06"],
-["18","05:35","19:08"],
-["19","05:33","19:09"],
-["20","05:31","19:11"],
-["21","05:29","19:12"],
-["22","05:27","19:14"],
-["23","05:25","19:15"],
-["24","05:23","19:17"],
-["25","05:21","19:18"],
-["26","05:19","19:20"],
-["27","05:17","19:21"],
-["28","05:15","19:23"],
-["29","05:13","19:24"]
-],
-
-izmir: [
-["1","06:31","19:06"],
-["2","06:29","19:08"],
-["3","06:27","19:09"],
-["4","06:25","19:11"],
-["5","06:23","19:12"],
-["6","06:21","19:14"],
-["7","06:20","19:15"],
-["8","06:18","19:17"],
-["9","06:16","19:18"],
-["10","06:14","19:20"],
-["11","06:12","19:21"],
-["12","06:10","19:23"],
-["13","06:08","19:24"],
-["14","06:06","19:26"],
-["15","06:04","19:27"],
-["16","06:02","19:29"],
-["17","06:00","19:30"],
-["18","05:58","19:32"],
-["19","05:56","19:33"],
-["20","05:54","19:35"],
-["21","05:52","19:36"],
-["22","05:50","19:38"],
-["23","05:48","19:39"],
-["24","05:46","19:41"],
-["25","05:44","19:42"],
-["26","05:42","19:44"],
-["27","05:40","19:45"],
-["28","05:38","19:47"],
-["29","05:36","19:48"]
-],
-
-bursa: [
-["1","06:20","18:55"],
-["2","06:18","18:57"],
-["3","06:16","18:58"],
-["4","06:14","19:00"],
-["5","06:12","19:01"],
-["6","06:10","19:03"],
-["7","06:09","19:04"],
-["8","06:07","19:06"],
-["9","06:05","19:07"],
-["10","06:03","19:09"],
-["11","06:01","19:10"],
-["12","05:59","19:12"],
-["13","05:57","19:13"],
-["14","05:55","19:15"],
-["15","05:53","19:16"],
-["16","05:51","19:18"],
-["17","05:49","19:19"],
-["18","05:47","19:21"],
-["19","05:45","19:22"],
-["20","05:43","19:24"],
-["21","05:41","19:25"],
-["22","05:39","19:27"],
-["23","05:37","19:28"],
-["24","05:35","19:30"],
-["25","05:33","19:31"],
-["26","05:31","19:33"],
-["27","05:29","19:34"],
-["28","05:27","19:36"],
-["29","05:25","19:37"]
-],
-
-  
 adiyaman: [
 ["1","05:44","18:16"],
 ["2","05:43","18:17"],
@@ -201,14 +72,20 @@ adiyaman: [
 ["27","05:08","18:42"],
 ["28","05:07","18:43"],
 ["29","05:05","18:44"]
+],
+
+istanbul: [
+["1","06:22","18:57"],
+["2","06:20","18:59"]
 ]
 
+/* diğer şehirleri buraya ekle — SON SATIRDA VİRGÜL YOK */
 };
 
 
 function normalizeCity(str){
-return str
-.toLowerCase()
+if(!str) return "";
+return str.toLowerCase()
 .replace(/ı/g,"i")
 .replace(/ş/g,"s")
 .replace(/ğ/g,"g")
@@ -220,7 +97,7 @@ return str
 
 function showImsakiye(city){
 
-const area = document.getElementById("tableArea");
+var area = document.getElementById("tableArea");
 if(!area) return;
 
 if(!imsakiye[city]){
@@ -228,21 +105,14 @@ area.innerHTML = "Bu şehir için veri bulunamadı.";
 return;
 }
 
-let html = `
-<table style="width:100%;max-width:520px;border-collapse:collapse;">
-<tr style="background:#eee;">
-<th style="padding:8px;">Gün</th>
-<th style="padding:8px;">İmsak</th>
-<th style="padding:8px;">Akşam</th>
-</tr>
-`;
+var html = "<table style='width:100%;max-width:520px;border-collapse:collapse;'>";
+html += "<tr style='background:#eee'><th>Gün</th><th>İmsak</th><th>Akşam</th></tr>";
 
-imsakiye[city].forEach(gun=>{
-html += `<tr>
-<td style="padding:6px;border-bottom:1px solid #ddd;">${gun[0]}</td>
-<td style="padding:6px;border-bottom:1px solid #ddd;">${gun[1]}</td>
-<td style="padding:6px;border-bottom:1px solid #ddd;">${gun[2]}</td>
-</tr>`;
+imsakiye[city].forEach(function(g){
+html += "<tr><td style='padding:6px;border-bottom:1px solid #ddd'>" + g[0] +
+"</td><td style='padding:6px;border-bottom:1px solid #ddd'>" + g[1] +
+"</td><td style='padding:6px;border-bottom:1px solid #ddd'>" + g[2] +
+"</td></tr>";
 });
 
 html += "</table>";
@@ -251,29 +121,31 @@ area.innerHTML = html;
 
 
 function changeCity(){
-const select = document.getElementById("citySelect");
+
+var select = document.getElementById("citySelect");
 if(!select) return;
 
-let city = normalizeCity(select.value);
+var city = normalizeCity(select.value);
 if(!city) return;
 
-const newUrl = window.location.pathname + "?sehir=" + encodeURIComponent(city);
-history.pushState({}, "", newUrl);
+var newUrl = window.location.pathname + "?sehir=" + encodeURIComponent(city);
+history.replaceState(null, "", newUrl);
 
 showImsakiye(city);
 }
 
 
-// DOM hazır olunca çalış (Jekyll uyumlu)
-document.addEventListener("DOMContentLoaded", function(){
+/* SAYFA TAM YÜKLENDİĞİNDE ÇALIŞ */
+window.addEventListener("load", function(){
 
-const select = document.getElementById("citySelect");
+var select = document.getElementById("citySelect");
 if(select){
 select.addEventListener("change", changeCity);
 }
 
-const params = new URLSearchParams(window.location.search);
-let city = params.get("sehir");
+/* URL parametresi */
+var params = new URLSearchParams(window.location.search);
+var city = params.get("sehir");
 
 if(city){
 city = normalizeCity(city);
@@ -282,6 +154,4 @@ showImsakiye(city);
 }
 
 });
-
-})();
 </script>
