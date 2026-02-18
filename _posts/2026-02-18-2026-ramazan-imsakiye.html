@@ -168,7 +168,7 @@ bursa: [
 ["27","05:29","19:34"],
 ["28","05:27","19:36"],
 ["29","05:25","19:37"]
-]
+],
 
   
 adiyaman: [
@@ -205,58 +205,83 @@ adiyaman: [
 
 };
 
-function changeCity(){
-    const city = document.getElementById("citySelect").value;
-    if(!city) return;
 
-    const newUrl = `${window.location.pathname}?sehir=${city}`;
-    window.history.pushState({}, "", newUrl);
-
-    showImsakiye(city);
+function normalizeCity(str){
+return str
+.toLowerCase()
+.replace(/ı/g,"i")
+.replace(/ş/g,"s")
+.replace(/ğ/g,"g")
+.replace(/ü/g,"u")
+.replace(/ö/g,"o")
+.replace(/ç/g,"c");
 }
+
 
 function showImsakiye(city){
 
-    const area = document.getElementById("tableArea");
+const area = document.getElementById("tableArea");
+if(!area) return;
 
-    if(!imsakiye[city]){
-        area.innerHTML = "Bu şehir için imsakiye henüz eklenmedi.";
-        return;
-    }
-
-    let html = `
-    <table style="width:100%;max-width:520px;border-collapse:collapse;">
-    <tr style="background:#eee;">
-    <th style="padding:8px;">Gün</th>
-    <th style="padding:8px;">İmsak</th>
-    <th style="padding:8px;">Akşam (İftar)</th>
-    </tr>
-    `;
-
-    imsakiye[city].forEach(gun=>{
-        html += `<tr>
-        <td style="padding:6px;border-bottom:1px solid #ddd;">${gun[0]}</td>
-        <td style="padding:6px;border-bottom:1px solid #ddd;">${gun[1]}</td>
-        <td style="padding:6px;border-bottom:1px solid #ddd;">${gun[2]}</td>
-        </tr>`;
-    });
-
-    html += "</table>";
-
-    area.innerHTML = html;
+if(!imsakiye[city]){
+area.innerHTML = "Bu şehir için veri bulunamadı.";
+return;
 }
 
-// URL parametresinden şehir oku
-window.onload = function(){
+let html = `
+<table style="width:100%;max-width:520px;border-collapse:collapse;">
+<tr style="background:#eee;">
+<th style="padding:8px;">Gün</th>
+<th style="padding:8px;">İmsak</th>
+<th style="padding:8px;">Akşam</th>
+</tr>
+`;
 
-    const params = new URLSearchParams(window.location.search);
-    let city = params.get("sehir");
+imsakiye[city].forEach(gun=>{
+html += `<tr>
+<td style="padding:6px;border-bottom:1px solid #ddd;">${gun[0]}</td>
+<td style="padding:6px;border-bottom:1px solid #ddd;">${gun[1]}</td>
+<td style="padding:6px;border-bottom:1px solid #ddd;">${gun[2]}</td>
+</tr>`;
+});
 
-    if(city){
-        city = city.toLowerCase().replace("ı","i").replace("ş","s").replace("ğ","g").replace("ü","u").replace("ö","o").replace("ç","c");
-        document.getElementById("citySelect").value = city;
-        showImsakiye(city);
-    }
-};
+html += "</table>";
+area.innerHTML = html;
+}
 
+
+function changeCity(){
+const select = document.getElementById("citySelect");
+if(!select) return;
+
+let city = normalizeCity(select.value);
+if(!city) return;
+
+const newUrl = window.location.pathname + "?sehir=" + encodeURIComponent(city);
+history.pushState({}, "", newUrl);
+
+showImsakiye(city);
+}
+
+
+// DOM hazır olunca çalış (Jekyll uyumlu)
+document.addEventListener("DOMContentLoaded", function(){
+
+const select = document.getElementById("citySelect");
+if(select){
+select.addEventListener("change", changeCity);
+}
+
+const params = new URLSearchParams(window.location.search);
+let city = params.get("sehir");
+
+if(city){
+city = normalizeCity(city);
+if(select) select.value = city;
+showImsakiye(city);
+}
+
+});
+
+})();
 </script>
